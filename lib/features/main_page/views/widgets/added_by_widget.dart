@@ -57,7 +57,7 @@ class AddedBy extends StatelessWidget {
             },
             separatorBuilder: (context, index) {
               return const Divider(
-                color: ColorManager.neutral200,
+                color: ColorManager.neutral50,
               );
             },
             itemCount: addedByList.length,

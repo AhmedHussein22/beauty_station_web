@@ -65,7 +65,7 @@ class UserData extends StatelessWidget {
                 ],
               ),
               Container(
-                width: 0.002.sw,
+                width: 0.001.sw,
                 height: 0.3.sh,
                 color: ColorManager.neutral200,
               ).verticalPadding(50),
@@ -127,7 +127,7 @@ class UserData extends StatelessWidget {
                         ),
                       ],
                     ).horizontalPadding(20),
-                    const Divider().verticalPadding(25),
+                    const Divider().verticalPadding(10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,

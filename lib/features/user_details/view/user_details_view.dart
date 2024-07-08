@@ -1,4 +1,6 @@
 import 'package:beauty_station_web/features/main_page/views/widgets/header.dart';
+import 'package:beauty_station_web/features/user_details/view/widgets/added_by.dart';
+import 'package:beauty_station_web/features/user_details/view/widgets/extra_info.dart';
 import 'package:beauty_station_web/features/user_details/view/widgets/media_data.dart';
 import 'package:beauty_station_web/features/user_details/view/widgets/user_data.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
@@ -21,7 +23,12 @@ class UserDetailsView extends StatelessWidget {
               ),
               const UserData(),
               20.verticalSpace,
-              const MediaData()
+              const MediaData(),
+              20.verticalSpace,
+              const ExtraInfo(),
+              20.verticalSpace,
+              const AddedBy(),
+              50.verticalSpace,
             ],
           ),
         ));

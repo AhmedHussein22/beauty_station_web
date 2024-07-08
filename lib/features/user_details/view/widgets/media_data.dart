@@ -21,7 +21,7 @@ class _MediaDataState extends State<MediaData> {
       "https://docs.google.com/spreadsheets/d/1377hrQTaeV0L9I0kt9ZldVlWdksApPiz/edit?gid=1036872227#gid=1036872227";
 
   final String contractIMG =
-      "https://www.shutterstock.com/image-vector/swoosh-letter-logo-design-business-260nw-1913663479.jpg";
+      "https://drive.google.com/file/d/1EzJH3ZODz4pGNSuKGz7o5NL03AKFeUVU/view?usp=drive_link";
 
   final String logoIMG =
       "https://drive.google.com/file/d/1Zt8Kyp8hhP3c14b0JhhtdsQccs8aOzu9/view";
@@ -60,8 +60,9 @@ class _MediaDataState extends State<MediaData> {
                     child: AnyLinkPreview(
                       link: portfolio,
                       showMultimedia: true,
-                      cache: const Duration(hours: 1),
+                      cache: const Duration(days: 7),
                       backgroundColor: Colors.grey[300],
+                      bodyMaxLines: 1,
                       errorWidget: Container(
                         color: Colors.grey[300],
                         child: const Text('Oops!'),
@@ -85,8 +86,9 @@ class _MediaDataState extends State<MediaData> {
                     height: 300.h,
                     child: AnyLinkPreview(
                       link: servicemenu,
-                      cache: const Duration(hours: 1),
+                      cache: const Duration(days: 7),
                       backgroundColor: Colors.grey[300],
+                      bodyMaxLines: 1,
                       errorWidget: Container(
                         color: Colors.grey[300],
                         child: const Text('Oops!'),
@@ -108,27 +110,16 @@ class _MediaDataState extends State<MediaData> {
                   SizedBox(
                     width: 300.w,
                     height: 300.h,
-                    child:
-
-                        // AnyLinkPreview.builder(
-                        //     link: contractIMG,
-                        //     itemBuilder: (context, metadata, imageProvider, _) {
-                        //       AppLogs.infoLog('metadata: $metadata');
-                        //       return Column(
-                        //         crossAxisAlignment: CrossAxisAlignment.start,
-                        //         children: [
-                        //           Image.network(metadata.url!),
-                        //         ],
-                        //       );
-                        //     })
-                        AnyLinkPreview(
+                    child: AnyLinkPreview(
                       link: contractIMG,
-                      showMultimedia: true,
-                      cache: const Duration(hours: 1),
+                      bodyMaxLines: 1,
+                      cache: const Duration(days: 7),
                       backgroundColor: Colors.grey[300],
+                      errorImage:
+                          'https://www.creativefabrica.com/wp-content/uploads/2022/11/03/Click-here-button-with-hand-pointer-clic-Graphics-44644519-1.jpg',
                       errorWidget: Container(
                         color: Colors.grey[300],
-                        child: Image.network(contractIMG),
+                        child: const Text('Oops!'),
                       ),
                     ).horizontalPadding(20).verticalPadding(20),
                   ),
@@ -150,8 +141,9 @@ class _MediaDataState extends State<MediaData> {
                     child: AnyLinkPreview(
                       link: portfolio,
                       showMultimedia: true,
-                      cache: const Duration(hours: 1),
+                      cache: const Duration(days: 7),
                       backgroundColor: Colors.grey[300],
+                      bodyMaxLines: 1,
                       errorWidget: Container(
                         color: Colors.grey[300],
                         child: const Text('Oops!'),

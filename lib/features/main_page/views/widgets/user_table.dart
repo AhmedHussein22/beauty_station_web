@@ -42,7 +42,11 @@ class UserTable extends StatelessWidget {
           ),
           20.verticalSpace,
           const TiTleForTable(),
-          20.verticalSpace,
+          15.verticalSpace,
+          const Divider(
+            color: ColorManager.neutral50,
+          ).horizontalPadding(40),
+          15.verticalSpace,
           ListView.separated(
               itemBuilder: (context, index) {
                 return DataForTable(
@@ -59,7 +63,7 @@ class UserTable extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               separatorBuilder: (context, index) {
                 return const Divider(
-                  color: ColorManager.neutral200,
+                  color: ColorManager.neutral50,
                 ).horizontalPadding(40).verticalPadding(10);
               })
         ],
