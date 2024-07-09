@@ -4,7 +4,6 @@ import 'package:beauty_station_web/utils/app_utils/app_logs.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../data/local_storage/hive_storage.dart';
 
 class NetworkService {
   static final NetworkService _singleton = NetworkService._internal();
@@ -22,16 +21,16 @@ class NetworkService {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options, handler) async {
-          String? token = HiveStorage.get(HiveKeys.apiTokenKey);
-          String lang = HiveStorage.get(HiveKeys.languageCode) ?? 'ar';
+          // String? token = HiveStorage.get(HiveKeys.apiTokenKey);
+          // String lang = HiveStorage.get(HiveKeys.languageCode) ?? 'ar';
           //debugPrint("User token : ****   $token");
           Map<String, String>? headers;
 
           headers = {
             'Content-Type': 'application/json',
             "accept": "application/json",
-            "Accept-Language": lang,
-            if (token != '' && token != null) AppStrings.authorizationKey: '${AppStrings.bearerKey} $token',
+            "Accept-Language": 'ar',
+            // if (token != '' && token != null) AppStrings.authorizationKey: '${AppStrings.bearerKey} $token',
           };
 
           options.headers = headers;

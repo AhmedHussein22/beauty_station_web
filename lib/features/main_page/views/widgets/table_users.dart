@@ -34,12 +34,13 @@ class _DataForTableState extends State<DataForTable> {
     return InkWell(
       onTap: () {
         context.beamToNamed(
-          '/UserDetails/${widget.name}',
+          '/UserDetails/${widget.name}-${widget.id}',
         );
       },
       onHover: _onhover,
       child: Row(
         children: [
+          //************ Table Users Data ID */
           SizedBox(
             width: 40.w,
             child: Center(
@@ -55,6 +56,7 @@ class _DataForTableState extends State<DataForTable> {
               ),
             ),
           ),
+          //************ Table Users Data Name */
           SizedBox(
             width: 100.w,
             child: CustomText(
@@ -67,6 +69,7 @@ class _DataForTableState extends State<DataForTable> {
                   fontWeight: FontWeight.bold),
             ),
           ),
+          //************ Table Users Data Number ID */
           SizedBox(
             width: 150.w,
             child: CustomText(
@@ -79,6 +82,7 @@ class _DataForTableState extends State<DataForTable> {
                   fontWeight: FontWeight.bold),
             ),
           ),
+          //************ Table Users Data Email Address */
           SizedBox(
             width: 180.w,
             child: CustomText(
@@ -91,6 +95,7 @@ class _DataForTableState extends State<DataForTable> {
                   fontWeight: FontWeight.bold),
             ),
           ),
+          //************ Table Users Data Phone Number */
           SizedBox(
             width: 120.w,
             child: CustomText(
@@ -103,6 +108,7 @@ class _DataForTableState extends State<DataForTable> {
                   fontWeight: FontWeight.bold),
             ),
           ),
+          //************ Table Users Data City */
           SizedBox(
             width: 80.w,
             child: CustomText(
@@ -116,6 +122,7 @@ class _DataForTableState extends State<DataForTable> {
                   fontWeight: FontWeight.bold),
             ),
           ),
+          //************ Table Users Data Nation */
           SizedBox(
             width: 200.w,
             child: CustomText(

@@ -1,7 +1,9 @@
 import 'package:beamer/beamer.dart';
 import 'package:beauty_station_web/config/theme/app_theme.dart';
+import 'package:beauty_station_web/features/main_page/controller/controller_bindding.dart';
 import 'package:beauty_station_web/features/main_page/views/main_page.dart';
 import 'package:beauty_station_web/features/user_details/view/user_details_view.dart';
+import 'package:beauty_station_web/utils/app_utils/app_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -28,7 +30,10 @@ class BeautyStationAppState extends State<BeautyStationApp> {
       transitionDelegate: const NoAnimationTransitionDelegate(),
       beamBackTransitionDelegate: const NoAnimationTransitionDelegate(),
       initialPath: '/Home',
-      buildListener: (context, beamerDelegate) {},
+      buildListener: (context, beamerDelegate) async {
+        AppLogs.infoLog(
+            'Beamer buildListener: ${beamerDelegate.currentPages[0].name}');
+      },
       locationBuilder: RoutesLocationBuilder(routes: {
         '/Home': (context, state, data) {
           return const BeamPage(
@@ -37,7 +42,6 @@ class BeautyStationAppState extends State<BeautyStationApp> {
             name: 'home',
             child: MainPage(),
           );
-          
         },
         '/UserDetails/:userName': (context, state, data) {
           final userName = state.pathParameters['userName']!;
@@ -47,17 +51,13 @@ class BeautyStationAppState extends State<BeautyStationApp> {
             name: userName,
             key: ValueKey('Projects_Page/$userName'),
             type: BeamPageType.scaleTransition,
-            child: const UserDetailsView(
-                ),
+            child: const UserDetailsView(),
           );
         },
       }).call);
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
-
-    // ]);
     return ScreenUtilInit(
         designSize: const Size(1600, 1200),
         minTextAdapt: true,
@@ -71,6 +71,7 @@ class BeautyStationAppState extends State<BeautyStationApp> {
             opaqueRoute: true,
             popGesture: true,
             fallbackLocale: const Locale("ar"),
+            initialBinding: ControllersBindings(),
             routeInformationParser: BeamerParser(),
             routerDelegate: routerDelegate,
             backButtonDispatcher:

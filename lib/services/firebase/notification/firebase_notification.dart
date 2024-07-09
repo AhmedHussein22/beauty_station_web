@@ -1,4 +1,3 @@
-import 'package:beauty_station_web/data/local_storage/hive_storage.dart';
 import 'package:beauty_station_web/services/firebase/notification/on_background_notification.dart';
 import 'package:beauty_station_web/services/firebase/notification/on_message_opened_app.dart';
 import 'package:fcm_config/fcm_config.dart';
@@ -14,7 +13,7 @@ class NotificationFirebase {
     await FCMConfig.instance.messaging.deleteToken();
     await FCMConfig.instance.messaging.getToken().then((token) async {
       debugPrint('FCM Token================>: $token');
-      await HiveStorage.set(HiveKeys.firebaseToken, token ?? '');
+      // await HiveStorage.set(HiveKeys.firebaseToken, token ?? '');
     });
   }
 
@@ -39,7 +38,8 @@ class NotificationFirebase {
     });
 
     //***************** If your own application is terminated ****************** */
-    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
 
     onMessageOpenedApp(
       message: initialMessage,

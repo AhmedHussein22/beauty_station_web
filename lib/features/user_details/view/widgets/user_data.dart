@@ -1,3 +1,4 @@
+import 'package:beauty_station_web/features/user_details/view/widgets/custome_data_view.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
 import 'package:beauty_station_web/resource/font_weight_manger.dart';
 import 'package:beauty_station_web/utils/app_utils/extentions.dart';
@@ -18,6 +19,7 @@ class UserData extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //************ User Data Title*/
             CustomText(
               title: 'بيانات المستخدم',
               color: ColorManager.neutral900,
@@ -29,6 +31,7 @@ class UserData extends StatelessWidget {
             Row(children: [
               Column(
                 children: [
+                  //************ User Data Image*/
                   CircleAvatar(
                     radius: 80.r,
                     backgroundColor: ColorManager.neutral400,
@@ -38,241 +41,131 @@ class UserData extends StatelessWidget {
                       color: ColorManager.neutralWhite,
                     ),
                   ).horizontalPadding(20).verticalPadding(20),
+                  //************ User Data Name*/
                   CustomText(
                     title: 'Beauty Station',
                     color: ColorManager.neutral900,
                     textStyle: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: 18.sp,
                       fontWeight: FontWeightManager.bold,
                     ),
                   ),
+                  //************ User Data Phone*/
                   CustomText(
                     title: '0554152145',
                     color: ColorManager.neutral900,
                     textStyle: TextStyle(
-                      fontSize: 12.sp,
+                      fontSize: 14.sp,
                       fontWeight: FontWeightManager.regular,
                     ),
                   ),
-                  CustomText(
-                    title: 'SalonY@gmail.com',
-                    color: ColorManager.neutral900,
-                    textStyle: TextStyle(
-                      fontSize: 12.sp,
+                  //************ User Data Email*/
+                  SelectableText(
+                    'SalonY@gmail.com',
+                    style: TextStyle(
+                      color: ColorManager.neutral900,
+                      fontSize: 14.sp,
                       fontWeight: FontWeightManager.regular,
                     ),
                   ),
                 ],
               ),
+              //************ Horizontal Divider*/
               Container(
                 width: 0.001.sw,
                 height: 0.3.sh,
                 color: ColorManager.neutral200,
               ).verticalPadding(50),
+              //************ User Data Details*/
               Expanded(
                 child: Column(
                   children: [
-                    Row(
+                    //************ User Data Info*/
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
-                          width: 0.1.sw,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                title: 'رقم الهويه',
-                                textStyle: TextStyle(
-                                  color: ColorManager.neutral400,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomText(
-                                title: '12548596',
-                                textStyle: TextStyle(
-                                  color: ColorManager.mainColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 0.1.sw,
-                          child: CustomText(
-                            title: 'مدينه : الرياض',
-                            textStyle: TextStyle(
-                              color: ColorManager.neutral400,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeightManager.regular,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 0.1.sw,
-                          child: CustomText(
-                            title: 'الجنسيه : سعودي',
-                            textStyle: TextStyle(
-                              color: ColorManager.neutral400,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeightManager.regular,
-                            ),
-                          ),
-                        ),
+                        //************ User Data National ID*/
+                        CustomeDataView(
+                            title: 'رقم الهويه',
+                            data: '12548596',
+                            icon: Icons.contacts_rounded,
+                            isLink: false,
+                            isSelectable: false),
+                        //************ User Data Address*/
+                        CustomeDataView(
+                            title: 'الموقع',
+                            data: 'الرياض - حي النسيم - شارع النسيم العام',
+                            icon: Icons.location_on,
+                            isLink: false,
+                            isSelectable: false),
+
+                        //********** User Data Nationalty */
+                        CustomeDataView(
+                            title: 'الجنسيه',
+                            data: 'سعودي',
+                            icon: Icons.flag_circle,
+                            isLink: false,
+                            isSelectable: false),
                       ],
                     ).horizontalPadding(20),
                     const Divider().verticalPadding(10),
-                    Row(
+                    //************ User Data working hours*/
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
-                          width: 0.2.sw,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                title: 'مواعيد العمل الرسميه',
-                                textStyle: TextStyle(
-                                  color: ColorManager.neutral400,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomText(
-                                title:
-                                    ' Sunday to Monday From 08:00 AM to 05:00 PM',
-                                textStyle: TextStyle(
-                                  color: ColorManager.mainColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                        //************ User Data working hours*/
+                        CustomeDataView(
+                          title: 'مواعيد العمل الرسميه',
+                          data: ' Sunday to Monday From 08:00 AM to 05:00 PM',
+                          icon: Icons.timelapse_sharp,
+                          isLink: false,
+                          isSelectable: false,
                         ),
-                        SizedBox(
-                          width: 0.2.sw,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                title: 'مواعيد العمل ايام الاجازات الرسميه',
-                                textStyle: TextStyle(
-                                  color: ColorManager.neutral400,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomText(
-                                title:
-                                    ' Sunday to Monday From 08:00 AM to 05:00 PM',
-                                textStyle: TextStyle(
-                                  color: ColorManager.mainColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+
+                        //************ User Data working hours holidays*/
+                        CustomeDataView(
+                          title: 'مواعيد العمل ايام الاجازات الرسميه',
+                          data: ' Sunday to Monday From 08:00 AM to 05:00 PM',
+                          icon: Icons.more_time_outlined,
+                          isLink: false,
+                          isSelectable: false,
                         ),
-                        SizedBox(
-                          width: 0.2.sw,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                title: 'مواعيد العمل ايام المناسبات',
-                                textStyle: TextStyle(
-                                  color: ColorManager.neutral400,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomText(
-                                title:
-                                    ' Sunday to Monday From 08:00 AM to 05:00 PM',
-                                textStyle: TextStyle(
-                                  color: ColorManager.mainColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                        //************ User Data working hours events*/
+                        CustomeDataView(
+                          title: 'مواعيد العمل ايام المناسبات',
+                          data: ' Sunday to Monday From 08:00 AM to 05:00 PM',
+                          icon: Icons.more_time_outlined,
+                          isLink: false,
+                          isSelectable: false,
                         ),
                       ],
                     ).horizontalPadding(20),
                     const Divider().verticalPadding(25),
+                    //************ User Data Bank Info*/
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
-                          width: 0.2.sw,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                title: 'اسم البنك',
-                                textStyle: TextStyle(
-                                  color: ColorManager.neutral400,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomText(
-                                title: 'بنك الراجحي',
-                                textStyle: TextStyle(
-                                  color: ColorManager.mainColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                        //************ User Data Bank Name*/
+                        const CustomeDataView(
+                          title: 'اسم البنك (اختياري)',
+                          data: 'بنك الراجحي',
+                          icon: Icons.account_balance,
+                          isLink: false,
+                          isSelectable: false,
                         ),
-                        SizedBox(
-                          width: 0.2.sw,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                title: 'رقم الحساب / الايبان IBAN',
-                                textStyle: TextStyle(
-                                  color: ColorManager.neutral400,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomText(
-                                title: 'SA123456789123456789123456789123456789',
-                                textStyle: TextStyle(
-                                  color: ColorManager.mainColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                        //************ User Data Bank IBAN*/
+                        const CustomeDataView(
+                          title: 'رقم الحساب / الايبان IBAN (اختياري) ',
+                          data: 'SA123456789123456789123456789123456789',
+                          icon: Icons.check_circle_rounded,
+                          isLink: false,
+                          isSelectable: false,
                         ),
                         Container(
                           width: 0.2.sw,
@@ -280,62 +173,27 @@ class UserData extends StatelessWidget {
                       ],
                     ).horizontalPadding(20),
                     const Divider().verticalPadding(25),
+                    //************ Store Data Info*/
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(
-                          width: 0.2.sw,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                title: 'رقم جوال خدمه العملاء',
-                                textStyle: TextStyle(
-                                  color: ColorManager.neutral400,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomText(
-                                title: '19525',
-                                textStyle: TextStyle(
-                                  color: ColorManager.mainColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                        //************ Store Data Customer service number*/
+                        const CustomeDataView(
+                          title: 'رقم جوال خدمه العملاء',
+                          data: '19525',
+                          icon: Icons.call,
+                          isLink: false,
+                          isSelectable: false,
                         ),
-                        SizedBox(
-                          width: 0.2.sw,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                title: 'البريد الالكتروني لخدمه العملاء',
-                                textStyle: TextStyle(
-                                  color: ColorManager.neutral400,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomText(
-                                title: 'salonHotCall@gmail.com',
-                                textStyle: TextStyle(
-                                  color: ColorManager.mainColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                        //************ Store Data customer service Email*/
+                        const CustomeDataView(
+                          title: 'البريد الالكتروني لخدمه العملاء',
+                          data: 'salonHotCall@gmail.com',
+                          icon: Icons.email,
+                          isLink: false,
+                          isSelectable: true,
                         ),
                         Container(
                           width: 0.2.sw,

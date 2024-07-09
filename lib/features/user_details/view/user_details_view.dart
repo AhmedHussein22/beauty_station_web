@@ -17,16 +17,21 @@ class UserDetailsView extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              //************ Header */
               Header(
                 width: 1.sw,
                 secPage: true,
               ),
+              //************ User Data */
               const UserData(),
               20.verticalSpace,
-              const MediaData(),
+              //************ Media Data */
+              MediaData(),
               20.verticalSpace,
+              //************ Extra Info */
               const ExtraInfo(),
               20.verticalSpace,
+              //************ Added By */
               const AddedBy(),
               50.verticalSpace,
             ],

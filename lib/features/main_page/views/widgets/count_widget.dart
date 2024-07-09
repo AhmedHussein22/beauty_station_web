@@ -54,6 +54,7 @@ class CountWidget extends StatelessWidget {
             ],
           ),
           20.horizontalSpace,
+          // ******* circle avatar *******
           const CircleAvatar(
               backgroundColor: ColorManager.offWhite,
               radius: 30,

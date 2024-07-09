@@ -11,6 +11,7 @@ class TiTleForTable extends StatelessWidget {
     return Row(
       children: [
         40.horizontalSpace,
+        //************ Table name */
         SizedBox(
           width: 100.w,
           child: const CustomText(
@@ -21,6 +22,7 @@ class TiTleForTable extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
         ),
+        //************ Table number ID */
         SizedBox(
           width: 150.w,
           child: const CustomText(
@@ -31,6 +33,7 @@ class TiTleForTable extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
         ),
+        //  Table email address */
         SizedBox(
           width: 180.w,
           child: const CustomText(
@@ -41,6 +44,7 @@ class TiTleForTable extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
         ),
+        //************ Table phone number */
         SizedBox(
           width: 120.w,
           child: const CustomText(
@@ -51,6 +55,7 @@ class TiTleForTable extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
         ),
+        //************ Table city */
         SizedBox(
           width: 80.w,
           child: const CustomText(
@@ -61,6 +66,7 @@ class TiTleForTable extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
         ),
+        //************ Table nation */
         SizedBox(
           width: 200.w,
           child: const CustomText(

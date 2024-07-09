@@ -1,4 +1,5 @@
-import 'package:beauty_station_web/features/main_page/data/users_model.dart';
+import 'package:beauty_station_web/features/main_page/data/users_beautician_data.dart';
+import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
 import 'package:beauty_station_web/features/main_page/views/widgets/table_title.dart';
 import 'package:beauty_station_web/features/main_page/views/widgets/table_users.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
@@ -10,12 +11,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class UserTable extends StatelessWidget {
   final String tableName;
   final double rPadding;
-  final List<Users> data;
-  const UserTable(
-      {super.key,
-      required this.tableName,
-      required this.rPadding,
-      required this.data});
+  final bool isSalon;
+  final List<SalonUserData>? salonData;
+  final List<BeauticianUserData>? beauticianData;
+  const UserTable({
+    super.key,
+    required this.tableName,
+    required this.rPadding,
+    required this.isSalon,
+    this.salonData,
+    this.beauticianData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +37,7 @@ class UserTable extends StatelessWidget {
           Row(
             children: [
               10.horizontalSpace,
+              //************ Table Name */
               CustomText(
                 title: tableName,
                 textStyle: const TextStyle(
@@ -41,24 +48,40 @@ class UserTable extends StatelessWidget {
             ],
           ),
           20.verticalSpace,
+          //************ Table Title */
           const TiTleForTable(),
           15.verticalSpace,
           const Divider(
             color: ColorManager.neutral50,
           ).horizontalPadding(40),
           15.verticalSpace,
+          //************ Table Users */
           ListView.separated(
               itemBuilder: (context, index) {
                 return DataForTable(
-                    id: data[0].data![index].id!,
-                    name: data[0].data![index].name!,
-                    numberId: data[0].data![index].numberID!,
-                    city: data[0].data![index].city!,
-                    nation: data[0].data![index].nation!,
-                    emailAddress: data[0].data![index].emailAddress!,
-                    phoneNumber: data[0].data![index].phoneNumber!);
+                    id: isSalon
+                        ? salonData![index].id!.toString()
+                        : beauticianData![index].id.toString(),
+                    name: isSalon
+                        ? salonData![index].salonName!
+                        : beauticianData![index].beauticianName!,
+                    numberId: isSalon
+                        ? salonData![index].commercialRecordNumber!.toString()
+                        : beauticianData![index].licenseNumber!.toString(),
+                    city: isSalon
+                        ? salonData![index].locationName!
+                        : beauticianData![index].locationName!,
+                    nation: isSalon
+                        ? 'لا يوجد'
+                        : beauticianData![index].nationality!,
+                    emailAddress: isSalon
+                        ? salonData![index].email!
+                        : beauticianData![index].email!,
+                    phoneNumber: isSalon
+                        ? salonData![index].mobileNumber!
+                        : beauticianData![index].mobileNumber!);
               },
-              itemCount: data[0].data!.length,
+              itemCount: isSalon ? salonData!.length : beauticianData!.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               separatorBuilder: (context, index) {

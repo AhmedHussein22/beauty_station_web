@@ -29,6 +29,7 @@ class AddedBy extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           24.verticalSpace,
+          //************ Added By title */
           const CustomText(
             title: 'تم التسجيل بواسطه',
             textStyle: TextStyle(
@@ -43,11 +44,13 @@ class AddedBy extends StatelessWidget {
               return ListTile(
                 iconColor: ColorManager.mainColor,
                 leading: const Icon(Icons.person),
+                //************ Added By name */
                 title: Text(addedByList[index].name,
                     style: const TextStyle(
                         color: ColorManager.mainColor,
                         fontSize: 14,
                         fontWeight: FontWeightManager.bold)),
+                //************ Added By count */
                 trailing: Text(addedByList[index].count.toString(),
                     style: const TextStyle(
                         color: ColorManager.mainColor,

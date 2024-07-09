@@ -45,7 +45,8 @@ class CustomText extends StatelessWidget {
       //textScaleFactor: 0.7,
       style: textStyle ??
           TextStyle(
-            decoration: underLine ? TextDecoration.underline : TextDecoration.none,
+            decoration:
+                underLine ? TextDecoration.underline : TextDecoration.none,
             fontSize: size.sp,
             fontWeight: fontWeight,
             fontFamily: fontFamily,

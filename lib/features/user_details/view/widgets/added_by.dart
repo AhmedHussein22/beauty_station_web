@@ -1,3 +1,4 @@
+import 'package:beauty_station_web/features/user_details/view/widgets/custome_data_view.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
 import 'package:beauty_station_web/resource/font_weight_manger.dart';
 import 'package:beauty_station_web/utils/app_utils/extentions.dart';
@@ -18,6 +19,7 @@ class AddedBy extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //************ Added By title */
             CustomText(
               title: 'تمت الاضافه بواسطه',
               color: ColorManager.neutral900,
@@ -28,96 +30,37 @@ class AddedBy extends StatelessWidget {
             ).horizontalPadding(20).verticalPadding(20),
             Row(children: [
               Expanded(
-                child: Column(
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        SizedBox(
-                          width: 0.2.sw,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                title: 'اسم المندوب',
-                                textStyle: TextStyle(
-                                  color: ColorManager.neutral400,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomText(
-                                title: 'احمد خالد',
-                                textStyle: TextStyle(
-                                  color: ColorManager.mainColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 0.1.sw,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                title: 'رقم الجوال',
-                                textStyle: TextStyle(
-                                  color: ColorManager.neutral400,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomText(
-                                title: '0555555555',
-                                textStyle: TextStyle(
-                                  color: ColorManager.mainColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 0.2.sw,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                title: 'التاريخ',
-                                textStyle: TextStyle(
-                                  color: ColorManager.neutral400,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeightManager.regular,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomText(
-                                title: '12/12/2021',
-                                textStyle: TextStyle(
-                                  color: ColorManager.mainColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ).horizontalPadding(20),
-                    50.verticalSpace
+                    //************ Added By Name */
+                    CustomeDataView(
+                      title: 'اسم المندوب',
+                      data: 'احمد خالد',
+                      icon: Icons.person,
+                      isLink: false,
+                      isSelectable: false,
+                    ),
+                    //************ Added By Phone */
+                    CustomeDataView(
+                      title: 'رقم الجوال',
+                      data: '0555555555',
+                      icon: Icons.phone,
+                      isLink: false,
+                      isSelectable: false,
+                    ),
+                    //************ Added By Date */
+                    CustomeDataView(
+                      title: 'التاريخ',
+                      data: '12/12/2021',
+                      icon: Icons.date_range,
+                      isLink: false,
+                      isSelectable: false,
+                    ),
                   ],
-                ),
+                ).horizontalPadding(20).onlyPadding(bPadding: 50),
               )
             ]).horizontalPadding(50),
           ],
