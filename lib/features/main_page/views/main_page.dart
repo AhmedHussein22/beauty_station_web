@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:beauty_station_web/features/main_page/controller/main_controller.dart';
 import 'package:beauty_station_web/features/main_page/views/widgets/added_by_widget.dart';
 import 'package:beauty_station_web/features/main_page/views/widgets/bar_chart_widget.dart';
@@ -28,8 +30,8 @@ class MainPage extends StatelessWidget {
       backgroundColor: ColorManager.offWhite,
       body: SingleChildScrollView(
         child: GetBuilder<MainController>(builder: (mainController) {
-          return mainController.beauticianUserData.isEmpty ||
-                  mainController.salonUserData.isEmpty
+          return mainController.salonUserData == null ||
+                  mainController.beauticianUserData == null
               ? SizedBox(
                   height: 0.5.sh,
                   child: const Center(
