@@ -1,3 +1,5 @@
+import 'package:beauty_station_web/features/main_page/data/users_beautician_data.dart';
+import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
 import 'package:beauty_station_web/features/user_details/view/widgets/custome_data_view.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
 import 'package:beauty_station_web/resource/font_weight_manger.dart';
@@ -5,16 +7,17 @@ import 'package:beauty_station_web/utils/app_utils/extentions.dart';
 import 'package:beauty_station_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ExtraInfo extends StatelessWidget {
-  const ExtraInfo({super.key});
-
-  Future<void> _launchUrl(url) async {
-    if (!await launchUrl(url)) {
-      throw Exception('Could not launch $url');
-    }
-  }
+  final SalonUserData salonUserData;
+  final bool isSalon;
+  final BeauticianUserData beauticianUserData;
+  const ExtraInfo({
+    super.key,
+    required this.salonUserData,
+    required this.beauticianUserData,
+    required this.isSalon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,7 @@ class ExtraInfo extends StatelessWidget {
             //************ Extra Info Data */
             Row(children: [
               Expanded(
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
@@ -46,7 +49,9 @@ class ExtraInfo extends StatelessWidget {
                     //************ Extra Info Commercial Registration No */
                     CustomeDataView(
                       title: 'رقم السجل التجاري / الخدمه',
-                      data: 'SA45124558562545215',
+                      data: isSalon
+                          ? salonUserData.commercialRecordNumber!
+                          : beauticianUserData.licenseNumber!,
                       icon: Icons.pin,
                       isLink: false,
                       isSelectable: false,
@@ -54,7 +59,9 @@ class ExtraInfo extends StatelessWidget {
                     //************ Extra Info website  */
                     CustomeDataView(
                       title: 'الموقع الالكتروني',
-                      data: 'http://www.salon.com',
+                      data: isSalon
+                          ? salonUserData.website!
+                          : beauticianUserData.website!,
                       icon: Icons.language,
                       isLink: true,
                       isSelectable: false,
@@ -62,7 +69,9 @@ class ExtraInfo extends StatelessWidget {
                     //************ Extra Info Social Media Link */
                     CustomeDataView(
                       title: 'الموقع التواصل الاجتماعي',
-                      data: 'http://www.instagram.com/salon',
+                      data: isSalon
+                          ? salonUserData.socialMediaAccounts!
+                          : beauticianUserData.socialMediaAccounts!,
                       icon: Icons.phone_android_rounded,
                       isLink: true,
                       isSelectable: false,

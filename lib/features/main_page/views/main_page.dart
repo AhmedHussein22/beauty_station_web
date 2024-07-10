@@ -1,5 +1,4 @@
 import 'package:beauty_station_web/features/main_page/controller/main_controller.dart';
-import 'package:beauty_station_web/features/main_page/data/users_model.dart';
 import 'package:beauty_station_web/features/main_page/views/widgets/added_by_widget.dart';
 import 'package:beauty_station_web/features/main_page/views/widgets/bar_chart_widget.dart';
 import 'package:beauty_station_web/features/main_page/views/widgets/count_widget.dart';
@@ -13,102 +12,131 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class MainPage extends StatefulWidget {
+class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
+  int calculateThePercentage(int theMianValue, int theSecValue) {
+    var resultOfPercentage = 0;
+    resultOfPercentage =
+        ((theMianValue / (theMianValue + theSecValue)) * 100).round();
+    return theMianValue == 0 ? 0 : resultOfPercentage;
+  }
 
-class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    MainController mainController = Get.find<MainController>();
     return Scaffold(
       backgroundColor: ColorManager.offWhite,
       body: SingleChildScrollView(
-        child: SizedBox(
-          width: double.infinity,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const DrawerWidget(),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    //************ Header */
-                    Header(
-                      width: 0.8.sw,
+        child: GetBuilder<MainController>(builder: (mainController) {
+          return mainController.beauticianUserData.isEmpty ||
+                  mainController.salonUserData.isEmpty
+              ? SizedBox(
+                  height: 0.5.sh,
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      color: ColorManager.mainColor,
                     ),
-                    26.verticalSpace,
-                    Row(
-                      children: [
-                        50.horizontalSpace,
-                        //************ Count Widgets Salon*/
-                        const CountWidget(
-                          totalUsers: '45',
-                          usersType: 'نوع صالون',
-                          persintageUsers: '50% من العملاء',
-                        ),
-                        20.horizontalSpace,
-                        //************ Count Widgets Beauty Expert*/
-                        const CountWidget(
-                          totalUsers: '20',
-                          usersType: 'نوع خبير تجميل',
-                          persintageUsers: '35% من العملاء',
-                        ),
-                      ],
-                    ),
-                    26.verticalSpace,
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const PieChartWidget(),
-                        30.horizontalSpace,
-                        const BarChartWidget(),
-                      ],
-                    ).horizontalPadding(50),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
+                  ),
+                )
+              : SizedBox(
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const DrawerWidget(),
+                      Expanded(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            //************ User Table Salon*/
-                            UserTable(
-                              tableName: 'عملاء الصالون',
-                              rPadding: 50,
-                              salonData: mainController.salonUserData,
-                              isSalon: true,
+                            //************ Header */
+                            Header(
+                              width: 0.8.sw,
                             ),
-                            //  User Table Beauty Expert*/
-                            UserTable(
-                              tableName: 'عملاء خبير التجميل',
-                              rPadding: 50,
-                              beauticianData: mainController.beauticianUserData,
-                              isSalon: false,
+                            26.verticalSpace,
+                            Row(
+                              children: [
+                                50.horizontalSpace,
+                                //************ Count Widgets Salon*/
+                                CountWidget(
+                                  totalUsers: mainController
+                                      .salonUserData.length
+                                      .toString(),
+                                  usersType: 'نوع صالون',
+                                  persintageUsers:
+                                      '${calculateThePercentage(mainController.salonUserData.length, mainController.beauticianUserData.length)}% من العملاء',
+                                ),
+                                20.horizontalSpace,
+                                //************ Count Widgets Beauty Expert*/
+                                CountWidget(
+                                  totalUsers: mainController
+                                      .beauticianUserData.length
+                                      .toString(),
+                                  usersType: 'نوع خبير تجميل',
+                                  persintageUsers:
+                                      '${calculateThePercentage(mainController.beauticianUserData.length, mainController.salonUserData.length)}% من العملاء',
+                                ),
+                              ],
                             ),
+                            26.verticalSpace,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                PieChartWidget(
+                                  salonPercentage: calculateThePercentage(
+                                      mainController.salonUserData.length,
+                                      mainController.beauticianUserData.length),
+                                  bueatyPercentage: calculateThePercentage(
+                                      mainController.beauticianUserData.length,
+                                      mainController.salonUserData.length),
+                                ),
+                                30.horizontalSpace,
+                                const BarChartWidget(),
+                              ],
+                            ).horizontalPadding(50),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    //************ User Table Salon*/
+                                    UserTable(
+                                      tableName: 'عملاء الصالون',
+                                      rPadding: 50,
+                                      salonData: mainController.salonUserData,
+                                      isSalon: true,
+                                    ),
+                                    //  User Table Beauty Expert*/
+                                    UserTable(
+                                      tableName: 'عملاء خبير التجميل',
+                                      rPadding: 50,
+                                      beauticianData:
+                                          mainController.beauticianUserData,
+                                      isSalon: false,
+                                    ),
+                                  ],
+                                ),
+                                20.horizontalSpace,
+                                //************ Added By */
+                                AddedBy(
+                                  salonData: mainController.salonUserData,
+                                ),
+                              ],
+                            ),
+                            50.verticalSpace
                           ],
                         ),
-                        20.horizontalSpace,
-                        //************ Added By */
-                        const AddedBy(),
-                      ],
-                    ),
-                    50.verticalSpace
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+                      ),
+                    ],
+                  ),
+                );
+        }),
       ),
     );
   }

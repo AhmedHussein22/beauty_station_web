@@ -26,7 +26,7 @@ class UserTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 0.6.sw,
+      width: 0.55.sw,
       decoration: BoxDecoration(
         color: ColorManager.neutralWhite,
         borderRadius: BorderRadius.circular(20),
@@ -49,7 +49,7 @@ class UserTable extends StatelessWidget {
           ),
           20.verticalSpace,
           //************ Table Title */
-          const TiTleForTable(),
+          TiTleForTable(isSalon: isSalon),
           15.verticalSpace,
           const Divider(
             color: ColorManager.neutral50,
@@ -59,6 +59,7 @@ class UserTable extends StatelessWidget {
           ListView.separated(
               itemBuilder: (context, index) {
                 return DataForTable(
+                    isSalon: isSalon,
                     id: isSalon
                         ? salonData![index].id!.toString()
                         : beauticianData![index].id.toString(),
@@ -79,7 +80,7 @@ class UserTable extends StatelessWidget {
                         : beauticianData![index].email!,
                     phoneNumber: isSalon
                         ? salonData![index].mobileNumber!
-                        : beauticianData![index].mobileNumber!);
+                        : beauticianData![index].mobileNumber! , index: index);
               },
               itemCount: isSalon ? salonData!.length : beauticianData!.length,
               shrinkWrap: true,

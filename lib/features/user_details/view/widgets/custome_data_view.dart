@@ -1,9 +1,10 @@
+import 'dart:html' as html;
+
 import 'package:beauty_station_web/resource/color_manager.dart';
 import 'package:beauty_station_web/resource/font_weight_manger.dart';
 import 'package:beauty_station_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CustomeDataView extends StatelessWidget {
   final String title, data;
@@ -17,12 +18,6 @@ class CustomeDataView extends StatelessWidget {
       required this.icon,
       required this.isLink,
       required this.isSelectable});
-
-  Future<void> _launchUrl(url) async {
-    if (!await launchUrl(url)) {
-      throw Exception('Could not launch $url');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,22 +60,28 @@ class CustomeDataView extends StatelessWidget {
                   ),
                 )
               : InkWell(
-                  onTap: isLink ? () {
-                    if (isLink) {
-                      _launchUrl(data);
-                    }
-                  } : null,
-                child: CustomText(
-                    title: data,
-                    textStyle: TextStyle(
-                      color: ColorManager.mainColor,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeightManager.bold,
-                      decoration:
-                          isLink ? TextDecoration.underline : TextDecoration.none,
+                  onTap: isLink
+                      ? () {
+                          if (isLink) {
+                            html.window.open(data, 'new tab');
+                          }
+                        }
+                      : null,
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: CustomText(
+                      title: data,
+                      textStyle: TextStyle(
+                        color: ColorManager.mainColor,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeightManager.bold,
+                        decoration: isLink
+                            ? TextDecoration.underline
+                            : TextDecoration.none,
+                      ),
                     ),
                   ),
-              ),
+                ),
         ],
       ),
     );

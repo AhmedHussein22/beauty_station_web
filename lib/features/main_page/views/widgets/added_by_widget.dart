@@ -1,3 +1,4 @@
+import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
 import 'package:beauty_station_web/resource/font_weight_manger.dart';
 import 'package:beauty_station_web/utils/app_utils/extentions.dart';
@@ -7,19 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class AddedBy extends StatelessWidget {
-  const AddedBy({super.key});
+  final List<SalonUserData>? salonData;
+  const AddedBy({super.key, required this.salonData});
 
   @override
   Widget build(BuildContext context) {
-    List<AddedByList> addedByList = [
-      AddedByList('احمد علي', 5),
-      AddedByList('محمد جمال', 3),
-      AddedByList('أبو عماد', 4),
-      AddedByList('خالد المصري', 1),
-      AddedByList('أبو ليان', 2),
-    ];
     return Container(
-      width: 0.15.sw,
+      width: 0.2.sw,
       decoration: BoxDecoration(
         color: ColorManager.neutralWhite,
         borderRadius: BorderRadius.circular(20),
@@ -43,15 +38,15 @@ class AddedBy extends StatelessWidget {
             itemBuilder: (context, index) {
               return ListTile(
                 iconColor: ColorManager.mainColor,
-                leading: const Icon(Icons.person),
+                leading: const Icon(Icons.store),
                 //************ Added By name */
-                title: Text(addedByList[index].name,
+                title: Text(salonData![index].salonName!,
                     style: const TextStyle(
                         color: ColorManager.mainColor,
                         fontSize: 14,
                         fontWeight: FontWeightManager.bold)),
                 //************ Added By count */
-                trailing: Text(addedByList[index].count.toString(),
+                trailing: Text(salonData![index].customerServicePhone!,
                     style: const TextStyle(
                         color: ColorManager.mainColor,
                         fontSize: 12,
@@ -63,11 +58,11 @@ class AddedBy extends StatelessWidget {
                 color: ColorManager.neutral50,
               );
             },
-            itemCount: addedByList.length,
+            itemCount: salonData!.length > 5 ? 5 : salonData!.length,
           ),
         ],
       ),
-    ).paddingOnly(top: 40);
+    ).paddingOnly(top: 30);
   }
 }
 

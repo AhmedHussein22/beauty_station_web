@@ -7,9 +7,10 @@ import 'package:get/get.dart';
 class MainController extends GetxController {
   List<SalonUserData> salonUserData = [];
   List<BeauticianUserData> beauticianUserData = [];
+  SalonUserData emptySalonUserData = SalonUserData();
+  BeauticianUserData emptyBeauticianUserData = BeauticianUserData();
 
 //******* */ fetch salon users from api *****************/
-
   Future<void> fetchSalonUsers() async {
     try {
       final response = await MainRepository().getSalonData();
@@ -38,7 +39,6 @@ class MainController extends GetxController {
       if (response.status == ApiStatus.success) {
         final beauticianData = BeauticiansUsers.fromJson(response.data);
         beauticianUserData = beauticianData.data!;
-
         update();
       } else {
         Get.showSnackbar(GetSnackBar(

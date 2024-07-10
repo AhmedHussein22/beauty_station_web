@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TiTleForTable extends StatelessWidget {
-  const TiTleForTable({super.key});
+  final bool isSalon;
+  const TiTleForTable({super.key, required this.isSalon});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        40.horizontalSpace,
+        45.horizontalSpace,
         //************ Table name */
         SizedBox(
-          width: 100.w,
+          width: 120.w,
           child: const CustomText(
             title: 'الاسم',
             textStyle: TextStyle(
@@ -24,10 +25,11 @@ class TiTleForTable extends StatelessWidget {
         ),
         //************ Table number ID */
         SizedBox(
-          width: 150.w,
+          width: 120.w,
           child: const CustomText(
             title: 'رقم الترخيص',
             textStyle: TextStyle(
+                overflow: TextOverflow.ellipsis,
                 color: ColorManager.secondaryColor,
                 fontSize: 16,
                 fontWeight: FontWeight.bold),
@@ -35,7 +37,7 @@ class TiTleForTable extends StatelessWidget {
         ),
         //  Table email address */
         SizedBox(
-          width: 180.w,
+          width: 220.w,
           child: const CustomText(
             title: 'البريد الاليكتروني',
             textStyle: TextStyle(
@@ -56,27 +58,31 @@ class TiTleForTable extends StatelessWidget {
           ),
         ),
         //************ Table city */
-        SizedBox(
-          width: 80.w,
-          child: const CustomText(
-            title: 'المدينة',
-            textStyle: TextStyle(
-                color: ColorManager.secondaryColor,
-                fontSize: 16,
-                fontWeight: FontWeight.bold),
-          ),
-        ),
+        !isSalon
+            ? const SizedBox()
+            : SizedBox(
+                width: 80.w,
+                child: const CustomText(
+                  title: 'المدينة',
+                  textStyle: TextStyle(
+                      color: ColorManager.secondaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
         //************ Table nation */
-        SizedBox(
-          width: 200.w,
-          child: const CustomText(
-            title: 'الجنسيه',
-            textStyle: TextStyle(
-                color: ColorManager.secondaryColor,
-                fontSize: 16,
-                fontWeight: FontWeight.bold),
-          ),
-        ),
+        isSalon
+            ? const SizedBox()
+            : SizedBox(
+                width: 200.w,
+                child: const CustomText(
+                  title: 'الجنسيه',
+                  textStyle: TextStyle(
+                      color: ColorManager.secondaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
       ],
     );
   }

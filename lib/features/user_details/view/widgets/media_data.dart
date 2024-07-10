@@ -1,44 +1,68 @@
+import 'dart:html' as html;
+
 import 'package:any_link_preview/any_link_preview.dart';
+import 'package:beauty_station_web/features/main_page/data/users_beautician_data.dart';
+import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
 import 'package:beauty_station_web/resource/font_weight_manger.dart';
+import 'package:beauty_station_web/services/api/end_points.dart';
+import 'package:beauty_station_web/utils/app_utils/app_logs.dart';
 import 'package:beauty_station_web/utils/app_utils/extentions.dart';
 import 'package:beauty_station_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MediaData extends StatefulWidget {
-  const MediaData({super.key});
+class MediaData extends StatelessWidget {
+  final SalonUserData salonUserData;
+  final BeauticianUserData beauticianUserData;
+  final bool isSalon;
 
-  @override
-  State<MediaData> createState() => _MediaDataState();
-}
+  const MediaData({
+    super.key,
+    required this.salonUserData,
+    required this.beauticianUserData,
+    required this.isSalon,
+  });
 
-class _MediaDataState extends State<MediaData> {
-  final List<String> portfolio = [
-    "https://drive.google.com/file/d/1Zt8Kyp8hhP3c14b0JhhtdsQccs8aOzu9/view",
-    "https://docs.google.com/spreadsheets/d/1377hrQTaeV0L9I0kt9ZldVlWdksApPiz/edit?gid=1036872227#gid=1036872227",
-    "https://drive.google.com/file/d/1EzJH3ZODz4pGNSuKGz7o5NL03AKFeUVU/view?usp=drive_link"
-  ];
-
-  final String servicemenu =
-      "https://docs.google.com/spreadsheets/d/1377hrQTaeV0L9I0kt9ZldVlWdksApPiz/edit?gid=1036872227#gid=1036872227";
-
-  final String contractIMG =
-      "https://drive.google.com/file/d/1EzJH3ZODz4pGNSuKGz7o5NL03AKFeUVU/view?usp=drive_link";
-
-  final String logoIMG =
-      "https://drive.google.com/file/d/1Zt8Kyp8hhP3c14b0JhhtdsQccs8aOzu9/view";
-  List<Widget> carouselItems = [];
-  Future<void> sliderImage(List<String> images) async {
-    for (var element in images) {
-      carouselItems.add(RenderPreviewLink(link: element));
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    sliderImage(portfolio);
+  bool checkValidationforLength(int type) {
+    return type == 1
+        ? isSalon
+            ? salonUserData.salonImages == null ||
+                    salonUserData.salonImages!.isEmpty
+                ? false
+                : true
+            : beauticianUserData.previousWorkImages == null ||
+                    beauticianUserData.previousWorkImages!.isEmpty
+                ? false
+                : true
+        : type == 2
+            ? isSalon
+                ? salonUserData.servicesAndPrices == null ||
+                        salonUserData.servicesAndPrices!.isEmpty
+                    ? false
+                    : true
+                : beauticianUserData.servicesAndPrices == null ||
+                        beauticianUserData.servicesAndPrices!.isEmpty
+                    ? false
+                    : true
+            : type == 3
+                ? isSalon
+                    ? salonUserData.commercialRecordImage == null ||
+                            salonUserData.commercialRecordImage!.isEmpty
+                        ? false
+                        : true
+                    : beauticianUserData.licenseImage == null ||
+                            beauticianUserData.licenseImage!.isEmpty
+                        ? false
+                        : true
+                : isSalon
+                    ? salonUserData.logo == null || salonUserData.logo!.isEmpty
+                        ? false
+                        : true
+                    : beauticianUserData.logo == null ||
+                            beauticianUserData.logo!.isEmpty
+                        ? false
+                        : true;
   }
 
   @override
@@ -61,86 +85,104 @@ class _MediaDataState extends State<MediaData> {
               ),
             ).horizontalPadding(20).verticalPadding(20),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Column(
-                children: [
-                  //************ Portfolio */
-                  CustomText(
-                    title: 'صور الصالون / الاعمال السابقه (اختياري)',
-                    color: ColorManager.neutral900,
-                    textStyle: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeightManager.bold,
+              if (checkValidationforLength(1))
+                Column(
+                  children: [
+                    //************ Portfolio */
+                    CustomText(
+                      title: 'صور الصالون / الاعمال السابقه (اختياري)',
+                      color: ColorManager.neutral900,
+                      textStyle: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeightManager.bold,
+                      ),
+                    ).horizontalPadding(20).verticalPadding(20),
+                    //************ Portfolio Link */
+                    SizedBox(
+                      height: 300.h,
+                      width: 300.w,
+                      child: ListView.builder(
+                        itemCount: isSalon
+                            ? salonUserData.salonImages!.length
+                            : beauticianUserData.previousWorkImages!.length,
+                        itemBuilder: (context, index) {
+                          return RenderPreviewLink(
+                              link: isSalon
+                                  ? '${EndPoints.media}${salonUserData.salonImages![index]}'
+                                  : '${EndPoints.media}${beauticianUserData.previousWorkImages![index]}',
+                              errorWidget:
+                                  'https://www.creativefabrica.com/wp-content/uploads/2022/11/03/Click-here-button-with-hand-pointer-clic-Graphics-44644519-1.jpg');
+                        },
+                        scrollDirection: Axis.vertical,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                      ),
+                    )
+                  ],
+                ),
+              if (checkValidationforLength(2))
+                Column(
+                  children: [
+                    //************ Service Menu */
+                    CustomText(
+                      title: 'قائمه الخدمات',
+                      color: ColorManager.neutral900,
+                      textStyle: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeightManager.bold,
+                      ),
+                    ).horizontalPadding(20).verticalPadding(20),
+                    //************ Service Menu Link */
+                    RenderPreviewLink(
+                      link: isSalon
+                          ? EndPoints.media + salonUserData.servicesAndPrices!
+                          : EndPoints.media +
+                              beauticianUserData.servicesAndPrices!,
+                    )
+                  ],
+                ),
+              if (checkValidationforLength(3))
+                Column(
+                  children: [
+                    //************ Contract Image */
+                    CustomText(
+                      title: 'صوره السجل التجاري / الترخيص',
+                      color: ColorManager.neutral900,
+                      textStyle: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeightManager.bold,
+                      ),
+                    ).horizontalPadding(20).verticalPadding(20),
+                    //************ Contract Image Link */
+                    RenderPreviewLink(
+                      link: isSalon
+                          ? EndPoints.media +
+                              salonUserData.commercialRecordImage!
+                          : EndPoints.media + beauticianUserData.licenseImage!,
+                      errorWidget:
+                          'https://www.creativefabrica.com/wp-content/uploads/2022/11/03/Click-here-button-with-hand-pointer-clic-Graphics-44644519-1.jpg',
                     ),
-                  ).horizontalPadding(20).verticalPadding(20),
-                  //************ Portfolio Link */
-                  SizedBox(
-                    height: 300.h,
-                    width: 300.w,
-                    child: ListView.builder(
-                      itemCount: portfolio.length,
-                      itemBuilder: (context, index) {
-                        return RenderPreviewLink(
-                            link: portfolio[index],
-                            errorWidget:
-                                'https://www.creativefabrica.com/wp-content/uploads/2022/11/03/Click-here-button-with-hand-pointer-clic-Graphics-44644519-1.jpg');
-                      },
-                      scrollDirection: Axis.vertical,
-                      physics: const AlwaysScrollableScrollPhysics(),
+                  ],
+                ),
+              if (checkValidationforLength(4))
+                Column(
+                  children: [
+                    //************ Logo Image */
+                    CustomText(
+                      title: 'اللوجو (اختياري)',
+                      color: ColorManager.neutral900,
+                      textStyle: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeightManager.bold,
+                      ),
+                    ).horizontalPadding(20).verticalPadding(20),
+                    //************ Logo Image Link */
+                    RenderPreviewLink(
+                      link: isSalon
+                          ? EndPoints.media + salonUserData.logo!
+                          : EndPoints.media + beauticianUserData.logo!,
                     ),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  //************ Service Menu */
-                  CustomText(
-                    title: 'قائمه الخدمات',
-                    color: ColorManager.neutral900,
-                    textStyle: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeightManager.bold,
-                    ),
-                  ).horizontalPadding(20).verticalPadding(20),
-                  //************ Service Menu Link */
-                  RenderPreviewLink(link: servicemenu)
-                ],
-              ),
-              Column(
-                children: [
-                  //************ Contract Image */
-                  CustomText(
-                    title: 'صوره السجل التجاري / الترخيص',
-                    color: ColorManager.neutral900,
-                    textStyle: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeightManager.bold,
-                    ),
-                  ).horizontalPadding(20).verticalPadding(20),
-                  //************ Contract Image Link */
-                  RenderPreviewLink(
-                    link: contractIMG,
-                    errorWidget:
-                        'https://www.creativefabrica.com/wp-content/uploads/2022/11/03/Click-here-button-with-hand-pointer-clic-Graphics-44644519-1.jpg',
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  //************ Logo Image */
-                  CustomText(
-                    title: 'اللوجو (اختياري)',
-                    color: ColorManager.neutral900,
-                    textStyle: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeightManager.bold,
-                    ),
-                  ).horizontalPadding(20).verticalPadding(20),
-                  //************ Logo Image Link */
-                  RenderPreviewLink(
-                    link: portfolio[0],
-                  ),
-                ],
-              )
+                  ],
+                )
             ]).horizontalPadding(50),
           ],
         )).horizontalPadding(20);
@@ -158,18 +200,31 @@ class RenderPreviewLink extends StatelessWidget {
     return SizedBox(
       width: 300.w,
       height: 300.h,
-      child: AnyLinkPreview(
-        link: link,
-        showMultimedia: true,
-        cache: const Duration(days: 7),
-        backgroundColor: Colors.grey[300],
-        bodyMaxLines: 1,
-        errorImage: errorWidget,
-        errorWidget: Container(
-          color: Colors.grey[300],
-          child: const Text('Oops!'),
-        ),
-      ).horizontalPadding(20).verticalPadding(20),
+      child:
+          link.contains('jpg') || link.contains('png') || link.contains('jpeg')
+              ? Image.network(
+                  link,
+                  fit: BoxFit.contain,
+                ).horizontalPadding(20).verticalPadding(20)
+              : AnyLinkPreview(
+                  link: link,
+                  // showMultimedia: true,
+                  cache: const Duration(days: 7),
+                  backgroundColor: Colors.grey[300],
+                  bodyMaxLines: 1,
+                  errorImage: errorWidget,
+                  errorWidget: InkWell(
+                    onTap: () {
+                      html.window.open(link, 'new tab');
+                      AppLogs.infoLog('message: Link: $link');
+                    },
+                    child: Image.network(link.contains('pdf') ||
+                            link.contains('docx') ||
+                            link.contains('doc')
+                        ? 'https://play-lh.googleusercontent.com/dl4ZuJhfD5xR9m2H-oZ9UcLZwYmGpmWMurPrvTiN831ZWLia9NbrYurXV-32wtOzPmM5'
+                        : 'https://www.ro.senac.br/wp-content/uploads/2020/10/excel-avancado-1.jpg'),
+                  ),
+                ).horizontalPadding(20).verticalPadding(20),
     );
   }
 }

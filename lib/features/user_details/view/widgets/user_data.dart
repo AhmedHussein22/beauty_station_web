@@ -1,13 +1,24 @@
+import 'package:beauty_station_web/features/main_page/data/users_beautician_data.dart';
+import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
 import 'package:beauty_station_web/features/user_details/view/widgets/custome_data_view.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
 import 'package:beauty_station_web/resource/font_weight_manger.dart';
+import 'package:beauty_station_web/services/api/end_points.dart';
 import 'package:beauty_station_web/utils/app_utils/extentions.dart';
 import 'package:beauty_station_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UserData extends StatelessWidget {
-  const UserData({super.key});
+  final bool isSalon;
+  final SalonUserData salonUserData;
+  final BeauticianUserData beauticianUserData;
+  const UserData({
+    super.key,
+    required this.salonUserData,
+    required this.beauticianUserData,
+    required this.isSalon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +46,41 @@ class UserData extends StatelessWidget {
                   CircleAvatar(
                     radius: 80.r,
                     backgroundColor: ColorManager.neutral400,
-                    child: Icon(
-                      Icons.store,
-                      size: 0.03.sw,
-                      color: ColorManager.neutralWhite,
-                    ),
+                    child: isSalon
+                        ? Icon(
+                            Icons.store,
+                            size: 0.03.sw,
+                            color: ColorManager.neutralWhite,
+                          )
+                        : beauticianUserData.profileImages!.isEmpty
+                            ? Icon(
+                                Icons.person,
+                                size: 0.03.sw,
+                                color: ColorManager.neutralWhite,
+                              )
+                            : Image.network(
+                                '${EndPoints.media}${beauticianUserData.profilePicture}',
+                                width: 0.15.sw,
+                                height: 0.15.sw,
+                                fit: BoxFit.cover,
+                              ),
                   ).horizontalPadding(20).verticalPadding(20),
                   //************ User Data Name*/
                   CustomText(
-                    title: 'Beauty Station',
-                    color: ColorManager.neutral900,
+                    title: isSalon
+                        ? salonUserData.salonName
+                        : beauticianUserData.beauticianName,
                     textStyle: TextStyle(
+                      color: ColorManager.secondaryColor,
                       fontSize: 18.sp,
                       fontWeight: FontWeightManager.bold,
                     ),
                   ),
                   //************ User Data Phone*/
                   CustomText(
-                    title: '0554152145',
+                    title: isSalon
+                        ? salonUserData.mobileNumber
+                        : beauticianUserData.mobileNumber,
                     color: ColorManager.neutral900,
                     textStyle: TextStyle(
                       fontSize: 14.sp,
@@ -61,7 +89,7 @@ class UserData extends StatelessWidget {
                   ),
                   //************ User Data Email*/
                   SelectableText(
-                    'SalonY@gmail.com',
+                    isSalon ? salonUserData.email! : beauticianUserData.email!,
                     style: TextStyle(
                       color: ColorManager.neutral900,
                       fontSize: 14.sp,
@@ -81,44 +109,52 @@ class UserData extends StatelessWidget {
                 child: Column(
                   children: [
                     //************ User Data Info*/
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         //************ User Data National ID*/
                         CustomeDataView(
-                            title: 'رقم الهويه',
-                            data: '12548596',
+                            title: 'رقم عضويه المشترك',
+                            data: isSalon
+                                ? salonUserData.id!.toString()
+                                : beauticianUserData.id!.toString(),
                             icon: Icons.contacts_rounded,
                             isLink: false,
                             isSelectable: false),
                         //************ User Data Address*/
                         CustomeDataView(
                             title: 'الموقع',
-                            data: 'الرياض - حي النسيم - شارع النسيم العام',
+                            data: isSalon
+                                ? salonUserData.locationName!
+                                : beauticianUserData.locationName!,
                             icon: Icons.location_on,
                             isLink: false,
                             isSelectable: false),
 
                         //********** User Data Nationalty */
-                        CustomeDataView(
-                            title: 'الجنسيه',
-                            data: 'سعودي',
-                            icon: Icons.flag_circle,
-                            isLink: false,
-                            isSelectable: false),
+                        !isSalon
+                            ? CustomeDataView(
+                                title: 'الجنسيه',
+                                data: beauticianUserData.nationality!,
+                                icon: Icons.flag_circle,
+                                isLink: false,
+                                isSelectable: false)
+                            : SizedBox(
+                                width: 0.2.sw,
+                              ),
                       ],
                     ).horizontalPadding(20),
                     const Divider().verticalPadding(10),
                     //************ User Data working hours*/
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         //************ User Data working hours*/
-                        CustomeDataView(
+                        const CustomeDataView(
                           title: 'مواعيد العمل الرسميه',
                           data: ' Sunday to Monday From 08:00 AM to 05:00 PM',
                           icon: Icons.timelapse_sharp,
@@ -129,7 +165,9 @@ class UserData extends StatelessWidget {
                         //************ User Data working hours holidays*/
                         CustomeDataView(
                           title: 'مواعيد العمل ايام الاجازات الرسميه',
-                          data: ' Sunday to Monday From 08:00 AM to 05:00 PM',
+                          data: isSalon
+                              ? salonUserData.holidayWorkingHours!
+                              : beauticianUserData.holidayWorkingHours!,
                           icon: Icons.more_time_outlined,
                           isLink: false,
                           isSelectable: false,
@@ -137,7 +175,9 @@ class UserData extends StatelessWidget {
                         //************ User Data working hours events*/
                         CustomeDataView(
                           title: 'مواعيد العمل ايام المناسبات',
-                          data: ' Sunday to Monday From 08:00 AM to 05:00 PM',
+                          data: isSalon
+                              ? salonUserData.festivalWorkingHours!
+                              : beauticianUserData.festivalWorkingHours!,
                           icon: Icons.more_time_outlined,
                           isLink: false,
                           isSelectable: false,
@@ -152,17 +192,21 @@ class UserData extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         //************ User Data Bank Name*/
-                        const CustomeDataView(
+                        CustomeDataView(
                           title: 'اسم البنك (اختياري)',
-                          data: 'بنك الراجحي',
+                          data: isSalon
+                              ? salonUserData.bankName!
+                              : beauticianUserData.bankName!,
                           icon: Icons.account_balance,
                           isLink: false,
                           isSelectable: false,
                         ),
                         //************ User Data Bank IBAN*/
-                        const CustomeDataView(
+                        CustomeDataView(
                           title: 'رقم الحساب / الايبان IBAN (اختياري) ',
-                          data: 'SA123456789123456789123456789123456789',
+                          data: isSalon
+                              ? salonUserData.iban!
+                              : beauticianUserData.iban!,
                           icon: Icons.check_circle_rounded,
                           isLink: false,
                           isSelectable: false,
@@ -180,17 +224,21 @@ class UserData extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         //************ Store Data Customer service number*/
-                        const CustomeDataView(
+                        CustomeDataView(
                           title: 'رقم جوال خدمه العملاء',
-                          data: '19525',
+                          data: isSalon
+                              ? salonUserData.customerServicePhone!
+                              : beauticianUserData.customerServicePhone!,
                           icon: Icons.call,
                           isLink: false,
                           isSelectable: false,
                         ),
                         //************ Store Data customer service Email*/
-                        const CustomeDataView(
+                        CustomeDataView(
                           title: 'البريد الالكتروني لخدمه العملاء',
-                          data: 'salonHotCall@gmail.com',
+                          data: isSalon
+                              ? salonUserData.customerServiceEmail!
+                              : beauticianUserData.customerServiceEmail!,
                           icon: Icons.email,
                           isLink: false,
                           isSelectable: true,

@@ -4,13 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class PieChartWidget extends StatelessWidget {
-  const PieChartWidget({super.key});
+  final int salonPercentage, bueatyPercentage;
+  const PieChartWidget(
+      {super.key,
+      required this.salonPercentage,
+      required this.bueatyPercentage});
 
   @override
   Widget build(BuildContext context) {
     final List<ChartData> chartData = [
-      ChartData('الصالون', 50, ColorManager.mainColor),
-      ChartData('خبير التجميل', 35, ColorManager.secondaryColor),
+      ChartData('الصالون', double.parse(salonPercentage.toString()),
+          ColorManager.mainColor),
+      ChartData('خبير التجميل', double.parse(bueatyPercentage.toString()),
+          ColorManager.secondaryColor),
     ];
     return Center(
         child: Container(
@@ -35,7 +41,7 @@ class PieChartWidget extends StatelessWidget {
                     explodeAll: true,
                     dataLabelSettings: const DataLabelSettings(
                       isVisible: true,
-                      labelPosition: ChartDataLabelPosition.outside,
+                      labelPosition: ChartDataLabelPosition.inside,
                       labelIntersectAction: LabelIntersectAction.none,
                       connectorLineSettings: ConnectorLineSettings(
                         type: ConnectorType.line,

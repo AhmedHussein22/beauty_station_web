@@ -24,7 +24,7 @@ class Header extends StatelessWidget {
           if (secPage)
             InkWell(
               onTap: () {
-                context.beamBack();
+                context.beamToNamed('/Home');
               },
               child: Icon(
                 Icons.arrow_back_ios,

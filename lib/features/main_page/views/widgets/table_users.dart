@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DataForTable extends StatefulWidget {
-  final String id, name, numberId, city, nation, emailAddress, phoneNumber;
+  final bool isSalon;
+  final String id, name, numberId, city, nation, emailAddress, phoneNumber ;
+  final int index;
   const DataForTable({
     super.key,
     required this.id,
@@ -15,6 +17,7 @@ class DataForTable extends StatefulWidget {
     required this.nation,
     required this.emailAddress,
     required this.phoneNumber,
+    required this.isSalon, required this.index,
   });
 
   @override
@@ -34,15 +37,14 @@ class _DataForTableState extends State<DataForTable> {
     return InkWell(
       onTap: () {
         context.beamToNamed(
-          '/UserDetails/${widget.name}-${widget.id}',
-        );
+            '/UserDetails/${widget.name}-${widget.index}-${widget.isSalon ? '1' : '0'}');
       },
       onHover: _onhover,
       child: Row(
         children: [
           //************ Table Users Data ID */
           SizedBox(
-            width: 40.w,
+            width: 45.w,
             child: Center(
               child: CustomText(
                 title: widget.id,
@@ -58,7 +60,7 @@ class _DataForTableState extends State<DataForTable> {
           ),
           //************ Table Users Data Name */
           SizedBox(
-            width: 100.w,
+            width: 120.w,
             child: CustomText(
               title: widget.name,
               textStyle: TextStyle(
@@ -71,10 +73,11 @@ class _DataForTableState extends State<DataForTable> {
           ),
           //************ Table Users Data Number ID */
           SizedBox(
-            width: 150.w,
+            width: 120.w,
             child: CustomText(
               title: widget.numberId,
               textStyle: TextStyle(
+                  overflow: TextOverflow.ellipsis,
                   color: onHoverColor
                       ? ColorManager.secondaryColor
                       : ColorManager.black,
@@ -84,13 +87,14 @@ class _DataForTableState extends State<DataForTable> {
           ),
           //************ Table Users Data Email Address */
           SizedBox(
-            width: 180.w,
+            width: 220.w,
             child: CustomText(
               title: widget.emailAddress,
               textStyle: TextStyle(
                   color: onHoverColor
                       ? ColorManager.secondaryColor
                       : ColorManager.black,
+                  overflow: TextOverflow.ellipsis,
                   fontSize: 16,
                   fontWeight: FontWeight.bold),
             ),
@@ -109,33 +113,37 @@ class _DataForTableState extends State<DataForTable> {
             ),
           ),
           //************ Table Users Data City */
-          SizedBox(
-            width: 80.w,
-            child: CustomText(
-              title: widget.city,
-              textStyle: TextStyle(
-                  color: onHoverColor
-                      ? ColorManager.secondaryColor
-                      : ColorManager.black,
-                  fontSize: 16,
-                  overflow: TextOverflow.ellipsis,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
+          !widget.isSalon
+              ? const SizedBox()
+              : SizedBox(
+                  width: 80.w,
+                  child: CustomText(
+                    title: widget.city,
+                    textStyle: TextStyle(
+                        color: onHoverColor
+                            ? ColorManager.secondaryColor
+                            : ColorManager.black,
+                        fontSize: 16,
+                        overflow: TextOverflow.ellipsis,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
           //************ Table Users Data Nation */
-          SizedBox(
-            width: 200.w,
-            child: CustomText(
-              title: widget.nation,
-              textStyle: TextStyle(
-                  color: onHoverColor
-                      ? ColorManager.secondaryColor
-                      : ColorManager.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  overflow: TextOverflow.ellipsis),
-            ),
-          ),
+          widget.isSalon
+              ? const SizedBox()
+              : SizedBox(
+                  width: 200.w,
+                  child: CustomText(
+                    title: widget.nation,
+                    textStyle: TextStyle(
+                        color: onHoverColor
+                            ? ColorManager.secondaryColor
+                            : ColorManager.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis),
+                  ),
+                ),
         ],
       ),
     );

@@ -1,11 +1,15 @@
+import 'package:beamer/beamer.dart';
+import 'package:beauty_station_web/features/main_page/controller/main_controller.dart';
 import 'package:beauty_station_web/features/main_page/views/widgets/header.dart';
 import 'package:beauty_station_web/features/user_details/view/widgets/added_by.dart';
 import 'package:beauty_station_web/features/user_details/view/widgets/extra_info.dart';
 import 'package:beauty_station_web/features/user_details/view/widgets/media_data.dart';
 import 'package:beauty_station_web/features/user_details/view/widgets/user_data.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
+import 'package:beauty_station_web/utils/app_utils/app_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class UserDetailsView extends StatelessWidget {
   const UserDetailsView({super.key});
@@ -14,28 +18,76 @@ class UserDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: ColorManager.offWhite,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              //************ Header */
-              Header(
-                width: 1.sw,
-                secPage: true,
-              ),
-              //************ User Data */
-              const UserData(),
-              20.verticalSpace,
-              //************ Media Data */
-              MediaData(),
-              20.verticalSpace,
-              //************ Extra Info */
-              const ExtraInfo(),
-              20.verticalSpace,
-              //************ Added By */
-              const AddedBy(),
-              50.verticalSpace,
-            ],
-          ),
-        ));
+        body: GetBuilder<MainController>(builder: (mainController) {
+          final int id =
+              int.parse(context.currentBeamPages.last.name!.split('-')[1]);
+          final bool isSalon =
+              int.parse(context.currentBeamPages.last.name!.split('-')[2]) == 1
+                  ? true
+                  : false;
+          AppLogs.infoLog('UserDetailsView $id');
+          AppLogs.infoLog('UserDetailsView $isSalon');
+          return mainController.beauticianUserData.isEmpty ||
+                  mainController.salonUserData.isEmpty
+              ? SizedBox(
+                  height: 0.5.sh,
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      color: ColorManager.mainColor,
+                    ),
+                  ),
+                )
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      //************ Header */
+                      Header(
+                        width: 1.sw,
+                        secPage: true,
+                      ),
+                      //************ User Data */
+                      UserData(
+                          salonUserData: isSalon
+                              ? mainController.salonUserData[id]
+                              : mainController.emptySalonUserData,
+                          beauticianUserData: isSalon
+                              ? mainController.emptyBeauticianUserData
+                              : mainController.beauticianUserData[id],
+                          isSalon: isSalon),
+                      20.verticalSpace,
+                      //************ Media Data */
+                      MediaData(
+                          salonUserData: isSalon
+                              ? mainController.salonUserData[id]
+                              : mainController.emptySalonUserData,
+                          beauticianUserData: isSalon
+                              ? mainController.emptyBeauticianUserData
+                              : mainController.beauticianUserData[id],
+                          isSalon: isSalon),
+                      20.verticalSpace,
+                      //************ Extra Info */
+                      ExtraInfo(
+                          salonUserData: isSalon
+                              ? mainController.salonUserData[id]
+                              : mainController.emptySalonUserData,
+                          beauticianUserData: isSalon
+                              ? mainController.emptyBeauticianUserData
+                              : mainController.beauticianUserData[id],
+                          isSalon: isSalon),
+                      20.verticalSpace,
+                      //************ Added By */
+                      AddedBy(
+                          salonUserData: isSalon
+                              ? mainController.salonUserData[id]
+                              : mainController.emptySalonUserData,
+                          beauticianUserData: isSalon
+                              ? mainController.emptyBeauticianUserData
+                              : mainController.beauticianUserData[id],
+                          isSalon: isSalon),
+                      50.verticalSpace,
+                    ],
+                  ),
+                );
+        }));
   }
 }

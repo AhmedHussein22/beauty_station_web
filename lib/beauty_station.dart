@@ -51,7 +51,7 @@ class BeautyStationAppState extends State<BeautyStationApp> {
             name: userName,
             key: ValueKey('Projects_Page/$userName'),
             type: BeamPageType.scaleTransition,
-            child: const UserDetailsView(),
+            child: UserDetailsView(),
           );
         },
       }).call);
