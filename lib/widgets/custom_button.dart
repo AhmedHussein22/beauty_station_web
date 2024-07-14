@@ -3,7 +3,6 @@ import 'package:beauty_station_web/utils/app_utils/extentions.dart';
 import 'package:beauty_station_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback? onTap;
@@ -64,7 +63,7 @@ class CustomButton extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: marginVertical ?? 8.h, horizontal: marginHorizontal ?? 0),
         decoration: BoxDecoration(
           color: isActive ? (btnColor ?? ColorManager.mainColor) : (disActiveColor ?? ColorManager.mainColor),
-          borderRadius: borderRadius == null ? 12.smoothBorderRadius : borderRadius!.smoothBorderRadius,
+          borderRadius: borderRadius == null ? 12.borderRadius : borderRadius!.borderRadius,
           border: Border.all(
             width: borderWidth == null ? 0 : borderWidth!,
             color: borderColor == null ? Colors.transparent : borderColor!,
@@ -72,9 +71,9 @@ class CustomButton extends StatelessWidget {
         ),
         child: Center(
           child: loading
-              ? SpinKitFadingCircle(
+              ? CircularProgressIndicator(
                   color: loadingColor ?? (isDark ? ColorManager.offWhite : ColorManager.mainColor),
-                  size: 26.r,
+                  // s: 26.r,
                 )
               : Row(
                   mainAxisSize: MainAxisSize.min,
