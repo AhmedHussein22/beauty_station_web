@@ -2,6 +2,7 @@ import 'package:beauty_station_web/features/main_page/data/users_beautician_data
 import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
 import 'package:beauty_station_web/features/main_page/repositories/main_repository.dart';
 import 'package:beauty_station_web/resource/enums_manager.dart';
+import 'package:beauty_station_web/utils/app_utils/app_logs.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController {
@@ -36,9 +37,13 @@ class MainController extends GetxController {
   Future<void> fetchBeauticianUsers() async {
     try {
       final response = await MainRepository().getBeauticianData();
+      AppLogs.infoLog(
+          'Beautician state ******************** ${response.status}');
       if (response.status == ApiStatus.success) {
         final beauticianData = BeauticiansUsers.fromJson(response.data);
         beauticianUserData = beauticianData.data!;
+        AppLogs.infoLog(
+            'Beautician Data ############### ${beauticianData.data}');
         update();
       } else {
         Get.showSnackbar(GetSnackBar(
@@ -58,6 +63,7 @@ class MainController extends GetxController {
   void onInit() {
     fetchSalonUsers();
     fetchBeauticianUsers();
+    AppLogs.infoLog('Beautician Data called');
     super.onInit();
   }
 }

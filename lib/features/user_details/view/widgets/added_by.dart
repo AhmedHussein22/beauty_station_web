@@ -49,8 +49,8 @@ class AddedBy extends StatelessWidget {
                     CustomeDataView(
                       title: 'اسم المندوب',
                       data: isSalon
-                          ? salonUserData.registeredBy!
-                          : beauticianUserData.registeredBy!,
+                          ? salonUserData.registeredBy ?? 'غير معروف'
+                          : beauticianUserData.registeredBy ?? 'غير معروف',
                       icon: Icons.person,
                       isLink: false,
                       isSelectable: false,
@@ -59,8 +59,8 @@ class AddedBy extends StatelessWidget {
                     CustomeDataView(
                       title: 'رقم الجوال',
                       data: isSalon
-                          ? salonUserData.sellerMobile!
-                          : beauticianUserData.sellerMobile!,
+                          ? salonUserData.sellerMobile ?? 'غير معروف'
+                          : beauticianUserData.sellerMobile ?? 'غير معروف',
                       icon: Icons.phone,
                       isLink: false,
                       isSelectable: false,
@@ -69,9 +69,9 @@ class AddedBy extends StatelessWidget {
                     CustomeDataView(
                       title: 'التاريخ',
                       data: isSalon
-                          ? salonUserData.sellerRegistrationDate!.toString()
-                          : beauticianUserData.sellerRegistrationDate!
-                              .toString(),
+                          ? salonUserData.sellerRegistrationDate ?? 'غير معروف'
+                          : beauticianUserData.sellerRegistrationDate ??
+                              'غير معروف',
                       icon: Icons.date_range,
                       isLink: false,
                       isSelectable: false,

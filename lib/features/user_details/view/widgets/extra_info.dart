@@ -50,8 +50,8 @@ class ExtraInfo extends StatelessWidget {
                     CustomeDataView(
                       title: 'رقم السجل التجاري / الخدمه',
                       data: isSalon
-                          ? salonUserData.commercialRecordNumber!
-                          : beauticianUserData.licenseNumber!,
+                          ? salonUserData.commercialRecordNumber ?? 'غير متوفر'
+                          : beauticianUserData.licenseNumber ?? 'غير متوفر',
                       icon: Icons.pin,
                       isLink: false,
                       isSelectable: false,
@@ -60,8 +60,8 @@ class ExtraInfo extends StatelessWidget {
                     CustomeDataView(
                       title: 'الموقع الالكتروني',
                       data: isSalon
-                          ? salonUserData.website!
-                          : beauticianUserData.website!,
+                          ? salonUserData.website ?? 'غير متوفر'
+                          : beauticianUserData.website ?? 'غير متوفر',
                       icon: Icons.language,
                       isLink: true,
                       isSelectable: false,
@@ -70,8 +70,9 @@ class ExtraInfo extends StatelessWidget {
                     CustomeDataView(
                       title: 'الموقع التواصل الاجتماعي',
                       data: isSalon
-                          ? salonUserData.socialMediaAccounts!
-                          : beauticianUserData.socialMediaAccounts!,
+                          ? salonUserData.socialMediaAccounts ?? 'غير متوفر'
+                          : beauticianUserData.socialMediaAccounts ??
+                              'غير متوفر',
                       icon: Icons.phone_android_rounded,
                       isLink: true,
                       isSelectable: false,

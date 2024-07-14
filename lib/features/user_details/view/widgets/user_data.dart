@@ -89,7 +89,9 @@ class UserData extends StatelessWidget {
                   ),
                   //************ User Data Email*/
                   SelectableText(
-                    isSalon ? salonUserData.email! : beauticianUserData.email!,
+                    isSalon
+                        ? '${salonUserData.email}'
+                        : '${beauticianUserData.email}',
                     style: TextStyle(
                       color: ColorManager.neutral900,
                       fontSize: 14.sp,
@@ -118,8 +120,8 @@ class UserData extends StatelessWidget {
                         CustomeDataView(
                             title: 'رقم عضويه المشترك',
                             data: isSalon
-                                ? salonUserData.id!.toString()
-                                : beauticianUserData.id!.toString(),
+                                ? '${salonUserData.id ?? 'غير معروف'}'
+                                : '${beauticianUserData.id ?? 'غير معروف'}',
                             icon: Icons.contacts_rounded,
                             isLink: false,
                             isSelectable: false),
@@ -127,8 +129,8 @@ class UserData extends StatelessWidget {
                         CustomeDataView(
                             title: 'الموقع',
                             data: isSalon
-                                ? salonUserData.locationName!
-                                : beauticianUserData.locationName!,
+                                ? salonUserData.locationName ?? 'غير معروف'
+                                : beauticianUserData.locationName ?? 'غير معروف',
                             icon: Icons.location_on,
                             isLink: false,
                             isSelectable: false),
@@ -137,7 +139,7 @@ class UserData extends StatelessWidget {
                         !isSalon
                             ? CustomeDataView(
                                 title: 'الجنسيه',
-                                data: beauticianUserData.nationality!,
+                                data: beauticianUserData.nationality ?? 'غير معروف',
                                 icon: Icons.flag_circle,
                                 isLink: false,
                                 isSelectable: false)
@@ -166,8 +168,8 @@ class UserData extends StatelessWidget {
                         CustomeDataView(
                           title: 'مواعيد العمل ايام الاجازات الرسميه',
                           data: isSalon
-                              ? salonUserData.holidayWorkingHours!
-                              : beauticianUserData.holidayWorkingHours!,
+                              ? salonUserData.holidayWorkingHours ?? 'غير معروف'
+                              : beauticianUserData.holidayWorkingHours ?? 'غير معروف',
                           icon: Icons.more_time_outlined,
                           isLink: false,
                           isSelectable: false,
@@ -176,8 +178,8 @@ class UserData extends StatelessWidget {
                         CustomeDataView(
                           title: 'مواعيد العمل ايام المناسبات',
                           data: isSalon
-                              ? salonUserData.festivalWorkingHours!
-                              : beauticianUserData.festivalWorkingHours!,
+                              ? salonUserData.festivalWorkingHours ?? 'غير معروف'
+                              : beauticianUserData.festivalWorkingHours ?? 'غير معروف',
                           icon: Icons.more_time_outlined,
                           isLink: false,
                           isSelectable: false,
@@ -195,8 +197,8 @@ class UserData extends StatelessWidget {
                         CustomeDataView(
                           title: 'اسم البنك (اختياري)',
                           data: isSalon
-                              ? salonUserData.bankName!
-                              : beauticianUserData.bankName!,
+                              ? salonUserData.bankName ?? 'غير معروف'
+                              : beauticianUserData.bankName ?? 'غير معروف',
                           icon: Icons.account_balance,
                           isLink: false,
                           isSelectable: false,
@@ -205,8 +207,8 @@ class UserData extends StatelessWidget {
                         CustomeDataView(
                           title: 'رقم الحساب / الايبان IBAN (اختياري) ',
                           data: isSalon
-                              ? salonUserData.iban!
-                              : beauticianUserData.iban!,
+                              ? salonUserData.iban ?? 'غير معروف'
+                              : beauticianUserData.iban ?? 'غير معروف',
                           icon: Icons.check_circle_rounded,
                           isLink: false,
                           isSelectable: false,
@@ -227,8 +229,8 @@ class UserData extends StatelessWidget {
                         CustomeDataView(
                           title: 'رقم جوال خدمه العملاء',
                           data: isSalon
-                              ? salonUserData.customerServicePhone!
-                              : beauticianUserData.customerServicePhone!,
+                              ? salonUserData.customerServicePhone ?? 'غير معروف'
+                              : beauticianUserData.customerServicePhone ?? 'غير معروف',
                           icon: Icons.call,
                           isLink: false,
                           isSelectable: false,
@@ -237,8 +239,8 @@ class UserData extends StatelessWidget {
                         CustomeDataView(
                           title: 'البريد الالكتروني لخدمه العملاء',
                           data: isSalon
-                              ? salonUserData.customerServiceEmail!
-                              : beauticianUserData.customerServiceEmail!,
+                              ? salonUserData.customerServiceEmail ?? 'غير معروف'
+                              : beauticianUserData.customerServiceEmail ?? 'غير معروف',
                           icon: Icons.email,
                           isLink: false,
                           isSelectable: true,

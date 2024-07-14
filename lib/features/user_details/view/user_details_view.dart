@@ -27,67 +27,57 @@ class UserDetailsView extends StatelessWidget {
                   : false;
           AppLogs.infoLog('UserDetailsView $id');
           AppLogs.infoLog('UserDetailsView $isSalon');
-          return mainController.beauticianUserData.isEmpty ||
-                  mainController.salonUserData.isEmpty
-              ? SizedBox(
-                  height: 0.5.sh,
-                  child: const Center(
-                    child: CircularProgressIndicator(
-                      color: ColorManager.mainColor,
-                    ),
-                  ),
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      //************ Header */
-                      Header(
-                        width: 1.sw,
-                        secPage: true,
-                      ),
-                      //************ User Data */
-                      UserData(
-                          salonUserData: isSalon
-                              ? mainController.salonUserData[id]
-                              : mainController.emptySalonUserData,
-                          beauticianUserData: isSalon
-                              ? mainController.emptyBeauticianUserData
-                              : mainController.beauticianUserData[id],
-                          isSalon: isSalon),
-                      20.verticalSpace,
-                      //************ Media Data */
-                      MediaData(
-                          salonUserData: isSalon
-                              ? mainController.salonUserData[id]
-                              : mainController.emptySalonUserData,
-                          beauticianUserData: isSalon
-                              ? mainController.emptyBeauticianUserData
-                              : mainController.beauticianUserData[id],
-                          isSalon: isSalon),
-                      20.verticalSpace,
-                      //************ Extra Info */
-                      ExtraInfo(
-                          salonUserData: isSalon
-                              ? mainController.salonUserData[id]
-                              : mainController.emptySalonUserData,
-                          beauticianUserData: isSalon
-                              ? mainController.emptyBeauticianUserData
-                              : mainController.beauticianUserData[id],
-                          isSalon: isSalon),
-                      20.verticalSpace,
-                      //************ Added By */
-                      AddedBy(
-                          salonUserData: isSalon
-                              ? mainController.salonUserData[id]
-                              : mainController.emptySalonUserData,
-                          beauticianUserData: isSalon
-                              ? mainController.emptyBeauticianUserData
-                              : mainController.beauticianUserData[id],
-                          isSalon: isSalon),
-                      50.verticalSpace,
-                    ],
-                  ),
-                );
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                //************ Header */
+                Header(
+                  width: 1.sw,
+                  secPage: true,
+                ),
+                //************ User Data */
+                UserData(
+                    salonUserData: isSalon
+                        ? mainController.salonUserData[id]
+                        : mainController.emptySalonUserData,
+                    beauticianUserData: isSalon
+                        ? mainController.emptyBeauticianUserData
+                        : mainController.beauticianUserData[id],
+                    isSalon: isSalon),
+                20.verticalSpace,
+                //************ Media Data */
+                MediaData(
+                    salonUserData: isSalon
+                        ? mainController.salonUserData[id]
+                        : mainController.emptySalonUserData,
+                    beauticianUserData: isSalon
+                        ? mainController.emptyBeauticianUserData
+                        : mainController.beauticianUserData[id],
+                    isSalon: isSalon),
+                20.verticalSpace,
+                //************ Extra Info */
+                ExtraInfo(
+                    salonUserData: isSalon
+                        ? mainController.salonUserData[id]
+                        : mainController.emptySalonUserData,
+                    beauticianUserData: isSalon
+                        ? mainController.emptyBeauticianUserData
+                        : mainController.beauticianUserData[id],
+                    isSalon: isSalon),
+                20.verticalSpace,
+                //************ Added By */
+                AddedBy(
+                    salonUserData: isSalon
+                        ? mainController.salonUserData[id]
+                        : mainController.emptySalonUserData,
+                    beauticianUserData: isSalon
+                        ? mainController.emptyBeauticianUserData
+                        : mainController.beauticianUserData[id],
+                    isSalon: isSalon),
+                50.verticalSpace,
+              ],
+            ),
+          );
         }));
   }
 }

@@ -103,13 +103,13 @@ class MediaData extends StatelessWidget {
                       width: 300.w,
                       child: ListView.builder(
                         itemCount: isSalon
-                            ? salonUserData.salonImages!.length
-                            : beauticianUserData.previousWorkImages!.length,
+                            ? salonUserData.salonImages?.length
+                            : beauticianUserData.previousWorkImages?.length,
                         itemBuilder: (context, index) {
                           return RenderPreviewLink(
                               link: isSalon
-                                  ? '${EndPoints.media}${salonUserData.salonImages![index]}'
-                                  : '${EndPoints.media}${beauticianUserData.previousWorkImages![index]}',
+                                  ? '${EndPoints.media}${salonUserData.salonImages?[index]}'
+                                  : '${EndPoints.media}${beauticianUserData.previousWorkImages?[index]}',
                               errorWidget:
                                   'https://www.creativefabrica.com/wp-content/uploads/2022/11/03/Click-here-button-with-hand-pointer-clic-Graphics-44644519-1.jpg');
                         },
@@ -134,9 +134,8 @@ class MediaData extends StatelessWidget {
                     //************ Service Menu Link */
                     RenderPreviewLink(
                       link: isSalon
-                          ? EndPoints.media + salonUserData.servicesAndPrices!
-                          : EndPoints.media +
-                              beauticianUserData.servicesAndPrices!,
+                          ? '${EndPoints.media}${salonUserData.servicesAndPrices ?? 'غير معروف'}'
+                          : '${EndPoints.media}${beauticianUserData.servicesAndPrices ?? 'غير معروف'}',
                     )
                   ],
                 ),
@@ -155,9 +154,8 @@ class MediaData extends StatelessWidget {
                     //************ Contract Image Link */
                     RenderPreviewLink(
                       link: isSalon
-                          ? EndPoints.media +
-                              salonUserData.commercialRecordImage!
-                          : EndPoints.media + beauticianUserData.licenseImage!,
+                          ? '${EndPoints.media}$context{salonUserData.commercialRecordImage ?? }'
+                          : '${EndPoints.media}${beauticianUserData.licenseImage ?? 'غير معروف'}',
                       errorWidget:
                           'https://www.creativefabrica.com/wp-content/uploads/2022/11/03/Click-here-button-with-hand-pointer-clic-Graphics-44644519-1.jpg',
                     ),
@@ -178,8 +176,8 @@ class MediaData extends StatelessWidget {
                     //************ Logo Image Link */
                     RenderPreviewLink(
                       link: isSalon
-                          ? EndPoints.media + salonUserData.logo!
-                          : EndPoints.media + beauticianUserData.logo!,
+                          ? '${EndPoints.media}${salonUserData.logo ?? 'غير معروف'}'
+                          : '${EndPoints.media}${beauticianUserData.logo ?? 'غير معروف'}',
                     ),
                   ],
                 )

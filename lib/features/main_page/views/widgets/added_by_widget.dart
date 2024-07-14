@@ -40,13 +40,13 @@ class AddedBy extends StatelessWidget {
                 iconColor: ColorManager.mainColor,
                 leading: const Icon(Icons.store),
                 //************ Added By name */
-                title: Text(salonData![index].salonName!,
+                title: Text(salonData?[index].salonName ?? '',
                     style: const TextStyle(
                         color: ColorManager.mainColor,
                         fontSize: 14,
                         fontWeight: FontWeightManager.bold)),
                 //************ Added By count */
-                trailing: Text(salonData![index].customerServicePhone!,
+                trailing: Text(salonData?[index].customerServicePhone ?? '',
                     style: const TextStyle(
                         color: ColorManager.mainColor,
                         fontSize: 12,

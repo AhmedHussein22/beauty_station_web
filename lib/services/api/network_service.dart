@@ -31,6 +31,7 @@ class NetworkService {
             "accept": "application/json",
             "Accept-Language": 'ar',
             "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
             // if (token != '' && token != null) AppStrings.authorizationKey: '${AppStrings.bearerKey} $token',
           };
 

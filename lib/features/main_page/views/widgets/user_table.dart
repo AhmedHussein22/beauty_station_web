@@ -61,26 +61,27 @@ class UserTable extends StatelessWidget {
                 return DataForTable(
                     isSalon: isSalon,
                     id: isSalon
-                        ? salonData![index].id!.toString()
-                        : beauticianData![index].id.toString(),
+                        ? '${salonData?[index].id}'
+                        : '${beauticianData?[index].id}',
                     name: isSalon
-                        ? salonData![index].salonName!
-                        : beauticianData![index].beauticianName!,
+                        ? '${salonData?[index].salonName}'
+                        : '${beauticianData?[index].beauticianName}',
                     numberId: isSalon
-                        ? salonData![index].commercialRecordNumber!.toString()
-                        : beauticianData![index].licenseNumber!.toString(),
+                        ? '${salonData?[index].commercialRecordNumber}'
+                        : '${beauticianData?[index].licenseNumber}',
                     city: isSalon
-                        ? salonData![index].locationName!
-                        : beauticianData![index].locationName!,
+                        ? '${salonData?[index].locationName}'
+                        : '${beauticianData?[index].locationName}',
                     nation: isSalon
                         ? 'لا يوجد'
-                        : beauticianData![index].nationality!,
+                        : '${beauticianData?[index].nationality}',
                     emailAddress: isSalon
-                        ? salonData![index].email!
-                        : beauticianData![index].email!,
+                        ? '${salonData?[index].email}'
+                        : '${beauticianData?[index].email}',
                     phoneNumber: isSalon
-                        ? salonData![index].mobileNumber!
-                        : beauticianData![index].mobileNumber! , index: index);
+                        ? '${salonData?[index].mobileNumber}'
+                        : '${beauticianData?[index].mobileNumber}',
+                    index: index);
               },
               itemCount: isSalon ? salonData!.length : beauticianData!.length,
               shrinkWrap: true,
