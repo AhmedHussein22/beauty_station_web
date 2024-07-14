@@ -108,8 +108,13 @@ class MediaData extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return RenderPreviewLink(
                               link: isSalon
-                                  ? '${EndPoints.media}${salonUserData.salonImages?[index]}'
-                                  : '${EndPoints.media}${beauticianUserData.previousWorkImages?[index]}',
+                                  ? EndPoints.media +
+                                      (salonUserData.salonImages?[index] ??
+                                          'غير معروف')
+                                  : EndPoints.media +
+                                      (beauticianUserData
+                                              .previousWorkImages?[index] ??
+                                          'غير معروف'),
                               errorWidget:
                                   'https://www.creativefabrica.com/wp-content/uploads/2022/11/03/Click-here-button-with-hand-pointer-clic-Graphics-44644519-1.jpg');
                         },
@@ -134,8 +139,11 @@ class MediaData extends StatelessWidget {
                     //************ Service Menu Link */
                     RenderPreviewLink(
                       link: isSalon
-                          ? '${EndPoints.media}${salonUserData.servicesAndPrices ?? 'غير معروف'}'
-                          : '${EndPoints.media}${beauticianUserData.servicesAndPrices ?? 'غير معروف'}',
+                          ? EndPoints.media +
+                              (salonUserData.servicesAndPrices ?? 'غير معروف')
+                          : EndPoints.media +
+                              (beauticianUserData.servicesAndPrices ??
+                                  'غير معروف'),
                     )
                   ],
                 ),
@@ -154,8 +162,11 @@ class MediaData extends StatelessWidget {
                     //************ Contract Image Link */
                     RenderPreviewLink(
                       link: isSalon
-                          ? '${EndPoints.media}$context{salonUserData.commercialRecordImage ?? }'
-                          : '${EndPoints.media}${beauticianUserData.licenseImage ?? 'غير معروف'}',
+                          ? EndPoints.media +
+                              (salonUserData.commercialRecordImage ??
+                                  'غير معروف')
+                          : EndPoints.media +
+                              (beauticianUserData.licenseImage ?? 'غير معروف'),
                       errorWidget:
                           'https://www.creativefabrica.com/wp-content/uploads/2022/11/03/Click-here-button-with-hand-pointer-clic-Graphics-44644519-1.jpg',
                     ),
@@ -176,8 +187,10 @@ class MediaData extends StatelessWidget {
                     //************ Logo Image Link */
                     RenderPreviewLink(
                       link: isSalon
-                          ? '${EndPoints.media}${salonUserData.logo ?? 'غير معروف'}'
-                          : '${EndPoints.media}${beauticianUserData.logo ?? 'غير معروف'}',
+                          ? EndPoints.media +
+                              (salonUserData.logo ?? 'غير معروف')
+                          : EndPoints.media +
+                              (beauticianUserData.logo ?? 'غير معروف'),
                     ),
                   ],
                 )
@@ -200,10 +213,16 @@ class RenderPreviewLink extends StatelessWidget {
       height: 300.h,
       child:
           link.contains('jpg') || link.contains('png') || link.contains('jpeg')
-              ? Image.network(
-                  link,
-                  fit: BoxFit.contain,
-                ).horizontalPadding(20).verticalPadding(20)
+              ? InkWell(
+                  onTap: () {
+                    html.window.open(link, 'new tab');
+                    AppLogs.infoLog('message: Link: $link');
+                  },
+                  child: Image.network(
+                    link,
+                    fit: BoxFit.contain,
+                  ).horizontalPadding(20).verticalPadding(20),
+                )
               : AnyLinkPreview(
                   link: link,
                   // showMultimedia: true,
