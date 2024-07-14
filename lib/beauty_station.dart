@@ -19,20 +19,14 @@ class BeautyStationAppState extends State<BeautyStationApp> {
   @override
   void initState() {
     super.initState();
-
-    initNotifications();
   }
 
-  initNotifications() async {
-    // await NotificationFirebase().initializeNotificationSetting();
-  }
   final routerDelegate = BeamerDelegate(
       transitionDelegate: const NoAnimationTransitionDelegate(),
       beamBackTransitionDelegate: const NoAnimationTransitionDelegate(),
       initialPath: '/Home',
       buildListener: (context, beamerDelegate) async {
-        AppLogs.infoLog(
-            'Beamer buildListener: ${beamerDelegate.currentPages[0].name}');
+        AppLogs.infoLog('Beamer buildListener: ${beamerDelegate.currentPages[0].name}');
       },
       locationBuilder: RoutesLocationBuilder(routes: {
         '/Home': (context, state, data) {
@@ -51,7 +45,7 @@ class BeautyStationAppState extends State<BeautyStationApp> {
             name: userName,
             key: ValueKey('Projects_Page/$userName'),
             type: BeamPageType.scaleTransition,
-            child: UserDetailsView(),
+            child: const UserDetailsView(),
           );
         },
       }).call);
@@ -59,27 +53,27 @@ class BeautyStationAppState extends State<BeautyStationApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(1600, 1200),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, child) {
-          return GetMaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: 'My Portfolio',
-            useInheritedMediaQuery: true,
-            locale: const Locale("ar"),
-            opaqueRoute: true,
-            popGesture: true,
-            fallbackLocale: const Locale("ar"),
-            initialBinding: ControllersBindings(),
-            routeInformationParser: BeamerParser(),
-            routerDelegate: routerDelegate,
-            backButtonDispatcher:
-                BeamerBackButtonDispatcher(delegate: routerDelegate),
-            theme: AppTheme().appLightTheme(),
-            enableLog: true,
-            smartManagement: SmartManagement.full,
-          );
-        });
+      designSize: const Size(1600, 1200),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return GetMaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'My Portfolio',
+          useInheritedMediaQuery: true,
+          locale: const Locale("ar"),
+          opaqueRoute: true,
+          popGesture: true,
+          fallbackLocale: const Locale("ar"),
+          initialBinding: ControllersBindings(),
+          routeInformationParser: BeamerParser(),
+          routerDelegate: routerDelegate,
+          backButtonDispatcher: BeamerBackButtonDispatcher(delegate: routerDelegate),
+          theme: AppTheme().appLightTheme(),
+          enableLog: true,
+          smartManagement: SmartManagement.full,
+        );
+      },
+    );
   }
 }
