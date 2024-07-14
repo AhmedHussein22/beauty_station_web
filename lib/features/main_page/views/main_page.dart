@@ -19,8 +19,7 @@ class MainPage extends StatelessWidget {
 
   int calculateThePercentage(int theMianValue, int theSecValue) {
     var resultOfPercentage = 0;
-    resultOfPercentage =
-        ((theMianValue / (theMianValue + theSecValue)) * 100).round();
+    resultOfPercentage = ((theMianValue / (theMianValue + theSecValue)) * 100).round();
     return theMianValue == 0 ? 0 : resultOfPercentage;
   }
 

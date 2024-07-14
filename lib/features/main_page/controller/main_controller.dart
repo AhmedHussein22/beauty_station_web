@@ -20,16 +20,17 @@ class MainController extends GetxController {
         salonUserData = salonUser.data!;
         update();
       } else {
-        Get.showSnackbar(GetSnackBar(
-          message: response.message,
-          duration: const Duration(seconds: 2),
-        ));
+       
+        //   Get.showSnackbar(GetSnackBar(
+        //     message: response.message,
+        //     duration: const Duration(seconds: 2),
+        //   ));
       }
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        message: e.toString(),
-        duration: const Duration(seconds: 2),
-      ));
+      // Get.showSnackbar(GetSnackBar(
+      //   message: e.toString(),
+      //   duration: const Duration(seconds: 2),
+      // ));
     }
   }
 
@@ -46,24 +47,23 @@ class MainController extends GetxController {
             'Beautician Data ############### ${beauticianData.data}');
         update();
       } else {
-        Get.showSnackbar(GetSnackBar(
-          message: response.message,
-          duration: const Duration(seconds: 2),
-        ));
+        // Get.showSnackbar(GetSnackBar(
+        //   message: response.message,
+        //   duration: const Duration(seconds: 2),
+        // ));
       }
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        message: e.toString(),
-        duration: const Duration(seconds: 2),
-      ));
+      // Get.showSnackbar(GetSnackBar(
+      //   message: e.toString(),
+      //   duration: const Duration(seconds: 2),
+      // ));
     }
   }
 
   @override
-  void onInit() {
-    fetchSalonUsers();
-    fetchBeauticianUsers();
-    AppLogs.infoLog('Beautician Data called');
+  void onInit() async {
+    await fetchSalonUsers();
+    await fetchBeauticianUsers();
     super.onInit();
   }
 }

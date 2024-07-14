@@ -1,72 +1,71 @@
-import 'package:beauty_station_web/resource/strings_manager.dart';
-import 'package:beauty_station_web/services/api/end_points.dart';
-import 'package:beauty_station_web/utils/app_utils/app_logs.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:beauty_station_web/resource/strings_manager.dart';
+// import 'package:beauty_station_web/services/api/end_points.dart';
+// import 'package:beauty_station_web/utils/app_utils/app_logs.dart';
+// import 'package:dio/dio.dart';
+// import 'package:flutter/foundation.dart';
 
 
-class NetworkService {
-  static final NetworkService _singleton = NetworkService._internal();
+// class NetworkService {
+//   static final NetworkService _singleton = NetworkService._internal();
 
-  factory NetworkService() {
-    return _singleton;
-  }
+//   factory NetworkService() {
+//     return _singleton;
+//   }
 
-  Dio get dio {
-    Dio dio = Dio();
-    dio.options.baseUrl = EndPoints.baseUrl;
-    //dio.options.connectTimeout = const Duration(seconds: 7); //5s
-    //dio.options.receiveTimeout = const Duration(seconds: 7);
+//   Dio get dio {
+//     Dio dio = Dio();
+//     dio.options.baseUrl = EndPoints.baseUrl;
+//     //dio.options.connectTimeout = const Duration(seconds: 7); //5s
+//     //dio.options.receiveTimeout = const Duration(seconds: 7);
 
-    dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (RequestOptions options, handler) async {
-          // String? token = HiveStorage.get(HiveKeys.apiTokenKey);
-          // String lang = HiveStorage.get(HiveKeys.languageCode) ?? 'ar';
-          //debugPrint("User token : ****   $token");
-          Map<String, String>? headers;
+//     dio.interceptors.add(
+//       InterceptorsWrapper(
+//         onRequest: (RequestOptions options, handler) async {
+//           // String? token = HiveStorage.get(HiveKeys.apiTokenKey);
+//           // String lang = HiveStorage.get(HiveKeys.languageCode) ?? 'ar';
+//           //debugPrint("User token : ****   $token");
+//           Map<String, String>? headers;
 
-          headers = {
-            'Content-Type': 'application/json',
-            "accept": "application/json",
-            "Accept-Language": 'ar',
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-            // if (token != '' && token != null) AppStrings.authorizationKey: '${AppStrings.bearerKey} $token',
-          };
+//           headers = {
+//             'Content-Type': 'application/json',
+//             "accept": "application/json",
+//             "Accept-Language": 'ar',
+//             "Access-Control-Allow-Origin": "*",
+//             // if (token != '' && token != null) AppStrings.authorizationKey: '${AppStrings.bearerKey} $token',
+//           };
 
-          options.headers = headers;
+//           options.headers = headers;
 
-          if (kDebugMode) {
-            AppLogs.infoLog(options.baseUrl, "baseUrl From");
-            AppLogs.infoLog(options.path, "endPoint");
-            AppLogs.infoLog(options.headers.toString(), "Headers");
-            AppLogs.infoLog(options.data.toString(), "data");
-            AppLogs.infoLog(options.queryParameters.toString(), "queryParameters");
-          }
+//           if (kDebugMode) {
+//             AppLogs.infoLog(options.baseUrl, "baseUrl From");
+//             AppLogs.infoLog(options.path, "endPoint");
+//             AppLogs.infoLog(options.headers.toString(), "Headers");
+//             AppLogs.infoLog(options.data.toString(), "data");
+//             AppLogs.infoLog(options.queryParameters.toString(), "queryParameters");
+//           }
 
-          return handler.next(options); //continue
-        },
-        onResponse: (Response response, handler) async {
-          if (kDebugMode) {
-            AppLogs.successLog("${response.data}", "Response From");
-          }
-          return handler.next(response); // continue
-        },
-        onError: (DioException e, handler) async {
-          if (kDebugMode) {
-            AppLogs.errorLog(e.error.toString(), "dio error response");
-            AppLogs.errorLog(e.error.toString(), "dio error");
-            AppLogs.errorLog(e.type.toString(), "dio error");
-            AppLogs.errorLog(e.requestOptions.path, "dio error");
-            AppLogs.errorLog(e.message ?? '', "dio error message");
-          }
-          return handler.next(e);
-        },
-      ),
-    );
-    return dio;
-  }
+//           return handler.next(options); //continue
+//         },
+//         onResponse: (Response response, handler) async {
+//           if (kDebugMode) {
+//             AppLogs.successLog("${response.data}", "Response From");
+//           }
+//           return handler.next(response); // continue
+//         },
+//         onError: (DioException e, handler) async {
+//           if (kDebugMode) {
+//             AppLogs.errorLog(e.error.toString(), "dio error response");
+//             AppLogs.errorLog(e.error.toString(), "dio error");
+//             AppLogs.errorLog(e.type.toString(), "dio error");
+//             AppLogs.errorLog(e.requestOptions.path, "dio error");
+//             AppLogs.errorLog(e.message ?? '', "dio error message");
+//           }
+//           return handler.next(e);
+//         },
+//       ),
+//     );
+//     return dio;
+//   }
 
-  NetworkService._internal();
-}
+//   NetworkService._internal();
+// }
