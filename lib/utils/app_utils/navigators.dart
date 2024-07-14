@@ -1,20 +1,12 @@
 import 'package:beauty_station_web/resource/app_keys.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 void pushNewScreen(Widget widget) {
   AppKeys.navigatorKey.currentState!.push(CupertinoPageRoute(builder: (context) => widget));
 }
 
-void pushNewScreenWithCubit(Widget screen, StateStreamableSource<Object?> cubit) {
-  Navigator.push(
-    AppKeys.navigatorKey.currentContext!,
-    CupertinoPageRoute(
-      builder: (_) => BlocProvider(create: (_) => cubit, child: screen),
-    ),
-  );
-}
+
 
 void pushReplacementScreen(Widget widget) {
   AppKeys.navigatorKey.currentState!.pushReplacement(CupertinoPageRoute(builder: (context) => widget));

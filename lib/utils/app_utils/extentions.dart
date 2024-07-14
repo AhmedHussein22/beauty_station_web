@@ -2,7 +2,6 @@
 //! String Extension`
 import 'package:beauty_station_web/config/locale/locale_setup.dart';
 import 'package:beauty_station_web/resource/app_keys.dart';
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -71,7 +70,7 @@ extension AppNumberExtension on num {
 
   //****************  borderRadius ****************** */
   BorderRadius get borderRadius => BorderRadius.circular(toDouble().r);
-  SmoothBorderRadius get smoothBorderRadius => SmoothBorderRadius(cornerRadius: toDouble().r, cornerSmoothing: .5);
+ // SmoothBorderRadius get smoothBorderRadius => SmoothBorderRadius(cornerRadius: toDouble().r, cornerSmoothing: .5);
 
   //***************  dividers ****************** */
   Widget get verticalDivider => VerticalDivider(width: toDouble().w, thickness: 1);
