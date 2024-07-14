@@ -22,7 +22,7 @@ class SalonUserData {
   final String? salonName;
   final String? commercialRecordNumber;
   final String? commercialRecordImage;
-  final List<String>? salonImages;
+  final List<dynamic>? salonImages;
   final String? locationName;
   final String? latitude;
   final String? longitude;
@@ -31,8 +31,8 @@ class SalonUserData {
   final String? iban;
   final String? bankName;
   final String? logo;
-  final List<String>? profileImages;
-  final List<dynamic>? workingHours;
+  final List<dynamic>? profileImages;
+  final List<WorkingHour>? workingHours;
   final String? holidayWorkingHours;
   final String? festivalWorkingHours;
   final String? servicesAndPrices;
@@ -79,7 +79,7 @@ class SalonUserData {
         commercialRecordImage: json["commercialRecordImage"],
         salonImages: json["salonImages"] == null
             ? []
-            : List<String>.from(json["salonImages"]!.map((x) => x)),
+            : List<dynamic>.from(json["salonImages"]!.map((x) => x)),
         locationName: json["locationName"],
         latitude: json["latitude"],
         longitude: json["longitude"],
@@ -90,10 +90,11 @@ class SalonUserData {
         logo: json["logo"],
         profileImages: json["profileImages"] == null
             ? []
-            : List<String>.from(json["profileImages"]!.map((x) => x)),
+            : List<dynamic>.from(json["profileImages"]!.map((x) => x)),
         workingHours: json["workingHours"] == null
             ? []
-            : List<dynamic>.from(json["workingHours"]!.map((x) => x)),
+            : List<WorkingHour>.from(
+                json["workingHours"]!.map((x) => WorkingHour.fromJson(x))),
         holidayWorkingHours: json["holidayWorkingHours"],
         festivalWorkingHours: json["festivalWorkingHours"],
         servicesAndPrices: json["servicesAndPrices"],
@@ -105,4 +106,66 @@ class SalonUserData {
         sellerMobile: json["sellerMobile"],
         sellerRegistrationDate: json["sellerRegistrationDate"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "salonName": salonName,
+        "commercialRecordNumber": commercialRecordNumber,
+        "commercialRecordImage": commercialRecordImage,
+        "salonImages": salonImages == null
+            ? []
+            : List<dynamic>.from(salonImages!.map((x) => x)),
+        "locationName": locationName,
+        "latitude": latitude,
+        "longitude": longitude,
+        "mobileNumber": mobileNumber,
+        "email": email,
+        "iban": iban,
+        "bankName": bankName,
+        "logo": logo,
+        "profileImages": profileImages == null
+            ? []
+            : List<dynamic>.from(profileImages!.map((x) => x)),
+        "workingHours": workingHours == null
+            ? []
+            : List<dynamic>.from(workingHours!.map((x) => x.toJson())),
+        "holidayWorkingHours": holidayWorkingHours,
+        "festivalWorkingHours": festivalWorkingHours,
+        "servicesAndPrices": servicesAndPrices,
+        "socialMediaAccounts": socialMediaAccounts,
+        "website": website,
+        "customerServicePhone": customerServicePhone,
+        "customerServiceEmail": customerServiceEmail,
+        "registeredBy": registeredBy,
+        "sellerMobile": sellerMobile,
+        "sellerRegistrationDate": sellerRegistrationDate,
+      };
+}
+
+class WorkingHour {
+  final int? id;
+  final String? day;
+  final String? from;
+  final String? to;
+
+  WorkingHour({
+    this.id,
+    this.day,
+    this.from,
+    this.to,
+  });
+
+  factory WorkingHour.fromJson(Map<String, dynamic> json) => WorkingHour(
+        id: json["id"],
+        day: json["day"],
+        from: json["from"],
+        to: json["to"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "day": day,
+        "from": from,
+        "to": to,
+      };
 }

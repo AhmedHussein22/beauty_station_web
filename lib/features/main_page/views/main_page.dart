@@ -19,8 +19,7 @@ class MainPage extends StatelessWidget {
 
   int calculateThePercentage(int theMianValue, int theSecValue) {
     var resultOfPercentage = 0;
-    resultOfPercentage =
-        ((theMianValue / (theMianValue + theSecValue)) * 100).round();
+    resultOfPercentage = ((theMianValue / (theMianValue + theSecValue)) * 100).round();
     return theMianValue == 0 ? 0 : resultOfPercentage;
   }
 
@@ -30,8 +29,7 @@ class MainPage extends StatelessWidget {
       backgroundColor: ColorManager.offWhite,
       body: SingleChildScrollView(
         child: GetBuilder<MainController>(builder: (mainController) {
-          return mainController.salonUserData == null ||
-                  mainController.beauticianUserData == null
+          return mainController.salonUserData == null || mainController.beauticianUserData == null || mainController.salonUserData.isEmpty || mainController.beauticianUserData.isEmpty
               ? SizedBox(
                   height: 0.5.sh,
                   child: const Center(
@@ -64,22 +62,16 @@ class MainPage extends StatelessWidget {
                                 50.horizontalSpace,
                                 //************ Count Widgets Salon*/
                                 CountWidget(
-                                  totalUsers: mainController
-                                      .salonUserData.length
-                                      .toString(),
+                                  totalUsers: mainController.salonUserData.length.toString(),
                                   usersType: 'نوع صالون',
-                                  persintageUsers:
-                                      '${calculateThePercentage(mainController.salonUserData.length, mainController.beauticianUserData.length)}% من العملاء',
+                                  persintageUsers: '${calculateThePercentage(mainController.salonUserData.length, mainController.beauticianUserData.length)}% من العملاء',
                                 ),
                                 20.horizontalSpace,
                                 //************ Count Widgets Beauty Expert*/
                                 CountWidget(
-                                  totalUsers: mainController
-                                      .beauticianUserData.length
-                                      .toString(),
+                                  totalUsers: mainController.beauticianUserData.length.toString(),
                                   usersType: 'نوع خبير تجميل',
-                                  persintageUsers:
-                                      '${calculateThePercentage(mainController.beauticianUserData.length, mainController.salonUserData.length)}% من العملاء',
+                                  persintageUsers: '${calculateThePercentage(mainController.beauticianUserData.length, mainController.salonUserData.length)}% من العملاء',
                                 ),
                               ],
                             ),
@@ -88,12 +80,8 @@ class MainPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 PieChartWidget(
-                                  salonPercentage: calculateThePercentage(
-                                      mainController.salonUserData.length,
-                                      mainController.beauticianUserData.length),
-                                  bueatyPercentage: calculateThePercentage(
-                                      mainController.beauticianUserData.length,
-                                      mainController.salonUserData.length),
+                                  salonPercentage: calculateThePercentage(mainController.salonUserData.length, mainController.beauticianUserData.length),
+                                  bueatyPercentage: calculateThePercentage(mainController.beauticianUserData.length, mainController.salonUserData.length),
                                 ),
                                 30.horizontalSpace,
                                 const BarChartWidget(),
@@ -118,8 +106,7 @@ class MainPage extends StatelessWidget {
                                     UserTable(
                                       tableName: 'عملاء خبير التجميل',
                                       rPadding: 50,
-                                      beauticianData:
-                                          mainController.beauticianUserData,
+                                      beauticianData: mainController.beauticianUserData,
                                       isSalon: false,
                                     ),
                                   ],
