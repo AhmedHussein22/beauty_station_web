@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_interpolations
+
 import 'package:beauty_station_web/features/main_page/data/users_beautician_data.dart';
 import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
 import 'package:beauty_station_web/features/user_details/view/widgets/custome_data_view.dart';
@@ -130,16 +132,21 @@ class UserData extends StatelessWidget {
                             title: 'الموقع',
                             data: isSalon
                                 ? salonUserData.locationName ?? 'غير معروف'
-                                : beauticianUserData.locationName ?? 'غير معروف',
+                                : beauticianUserData.locationName ??
+                                    'غير معروف',
                             icon: Icons.location_on,
-                            isLink: false,
+                            extraLink:
+                                'https://www.google.com/maps/search/?api=1&query=${isSalon ? salonUserData.latitude : beauticianUserData.latitude},${isSalon ? salonUserData.longitude : beauticianUserData.longitude}',
+                            isLink: true,
+                            isExtraLink: true,
                             isSelectable: false),
 
                         //********** User Data Nationalty */
                         !isSalon
                             ? CustomeDataView(
                                 title: 'الجنسيه',
-                                data: beauticianUserData.nationality ?? 'غير معروف',
+                                data: beauticianUserData.nationality ??
+                                    'غير معروف',
                                 icon: Icons.flag_circle,
                                 isLink: false,
                                 isSelectable: false)
@@ -156,12 +163,58 @@ class UserData extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         //************ User Data working hours*/
-                        const CustomeDataView(
+                        CustomeDataView(
                           title: 'مواعيد العمل الرسميه',
                           data: ' Sunday to Monday From 08:00 AM to 05:00 PM',
                           icon: Icons.timelapse_sharp,
                           isLink: false,
                           isSelectable: false,
+                          isWorkingHours: true,
+                          workingHours: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: isSalon
+                                ? salonUserData.workingHours!.length
+                                : beauticianUserData.workingHours!.length,
+                            itemBuilder: (context, index) {
+                              final workingHoursday = isSalon
+                                  ? '${salonUserData.workingHours?[index].day ?? 'غير معروف'}'
+                                  : '${beauticianUserData.workingHours?[index].day ?? 'غير معروف'}';
+                              final workingHoursfrom = isSalon
+                                  ? '${salonUserData.workingHours?[index].from ?? 'غير معروف'}'
+                                  : '${beauticianUserData.workingHours?[index].from ?? 'غير معروف'}';
+                              final workingHoursto = isSalon
+                                  ? '${salonUserData.workingHours?[index].to ?? 'غير معروف'}'
+                                  : '${beauticianUserData.workingHours?[index].to ?? 'غير معروف'}';
+                              return Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      CustomText(
+                                        title: workingHoursday,
+                                        textStyle: TextStyle(
+                                          color: ColorManager.neutral400,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeightManager.bold,
+                                        ),
+                                      ),
+                                      CustomText(
+                                        title:
+                                            '$workingHoursfrom - $workingHoursto',
+                                        textStyle: TextStyle(
+                                          color: ColorManager.neutral400,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeightManager.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  10.verticalSpace
+                                ],
+                              );
+                            },
+                          ),
                         ),
 
                         //************ User Data working hours holidays*/
@@ -169,7 +222,8 @@ class UserData extends StatelessWidget {
                           title: 'مواعيد العمل ايام الاجازات الرسميه',
                           data: isSalon
                               ? salonUserData.holidayWorkingHours ?? 'غير معروف'
-                              : beauticianUserData.holidayWorkingHours ?? 'غير معروف',
+                              : beauticianUserData.holidayWorkingHours ??
+                                  'غير معروف',
                           icon: Icons.more_time_outlined,
                           isLink: false,
                           isSelectable: false,
@@ -178,8 +232,10 @@ class UserData extends StatelessWidget {
                         CustomeDataView(
                           title: 'مواعيد العمل ايام المناسبات',
                           data: isSalon
-                              ? salonUserData.festivalWorkingHours ?? 'غير معروف'
-                              : beauticianUserData.festivalWorkingHours ?? 'غير معروف',
+                              ? salonUserData.festivalWorkingHours ??
+                                  'غير معروف'
+                              : beauticianUserData.festivalWorkingHours ??
+                                  'غير معروف',
                           icon: Icons.more_time_outlined,
                           isLink: false,
                           isSelectable: false,
@@ -229,8 +285,10 @@ class UserData extends StatelessWidget {
                         CustomeDataView(
                           title: 'رقم جوال خدمه العملاء',
                           data: isSalon
-                              ? salonUserData.customerServicePhone ?? 'غير معروف'
-                              : beauticianUserData.customerServicePhone ?? 'غير معروف',
+                              ? salonUserData.customerServicePhone ??
+                                  'غير معروف'
+                              : beauticianUserData.customerServicePhone ??
+                                  'غير معروف',
                           icon: Icons.call,
                           isLink: false,
                           isSelectable: false,
@@ -239,8 +297,10 @@ class UserData extends StatelessWidget {
                         CustomeDataView(
                           title: 'البريد الالكتروني لخدمه العملاء',
                           data: isSalon
-                              ? salonUserData.customerServiceEmail ?? 'غير معروف'
-                              : beauticianUserData.customerServiceEmail ?? 'غير معروف',
+                              ? salonUserData.customerServiceEmail ??
+                                  'غير معروف'
+                              : beauticianUserData.customerServiceEmail ??
+                                  'غير معروف',
                           icon: Icons.email,
                           isLink: false,
                           isSelectable: true,

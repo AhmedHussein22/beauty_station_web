@@ -20,7 +20,7 @@ class PieChartWidget extends StatelessWidget {
     ];
     return Center(
         child: Container(
-            width: 0.3.sw,
+            width: 0.15.sw,
             decoration: BoxDecoration(
               color: ColorManager.neutralWhite,
               borderRadius: BorderRadius.circular(25),

@@ -6,7 +6,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DataForTable extends StatefulWidget {
   final bool isSalon;
-  final String id, name, numberId, city, nation, emailAddress, phoneNumber ;
+  final String id,
+      name,
+      numberId,
+      city,
+      nation,
+      emailAddress,
+      phoneNumber,
+      website;
   final int index;
   const DataForTable({
     super.key,
@@ -17,7 +24,9 @@ class DataForTable extends StatefulWidget {
     required this.nation,
     required this.emailAddress,
     required this.phoneNumber,
-    required this.isSalon, required this.index,
+    required this.isSalon,
+    required this.index,
+    required this.website,
   });
 
   @override
@@ -87,7 +96,7 @@ class _DataForTableState extends State<DataForTable> {
           ),
           //************ Table Users Data Email Address */
           SizedBox(
-            width: 220.w,
+            width: 170.w,
             child: CustomText(
               title: widget.emailAddress,
               textStyle: TextStyle(
@@ -116,7 +125,7 @@ class _DataForTableState extends State<DataForTable> {
           !widget.isSalon
               ? const SizedBox()
               : SizedBox(
-                  width: 80.w,
+                  width: 180.w,
                   child: CustomText(
                     title: widget.city,
                     textStyle: TextStyle(
@@ -129,10 +138,11 @@ class _DataForTableState extends State<DataForTable> {
                   ),
                 ),
           //************ Table Users Data Nation */
+          if (widget.isSalon) 15.horizontalSpace,
           widget.isSalon
               ? const SizedBox()
               : SizedBox(
-                  width: 200.w,
+                  width: 100.w,
                   child: CustomText(
                     title: widget.nation,
                     textStyle: TextStyle(
@@ -144,6 +154,19 @@ class _DataForTableState extends State<DataForTable> {
                         overflow: TextOverflow.ellipsis),
                   ),
                 ),
+          SizedBox(
+            width: 150.w,
+            child: CustomText(
+              title: widget.website,
+              textStyle: TextStyle(
+                  color: onHoverColor
+                      ? ColorManager.secondaryColor
+                      : ColorManager.black,
+                  fontSize: 16,
+                  overflow: TextOverflow.ellipsis,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
         ],
       ),
     );

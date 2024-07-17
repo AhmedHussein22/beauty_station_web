@@ -37,7 +37,7 @@ class TiTleForTable extends StatelessWidget {
         ),
         //  Table email address */
         SizedBox(
-          width: 220.w,
+          width: 170.w,
           child: const CustomText(
             title: 'البريد الاليكتروني',
             textStyle: TextStyle(
@@ -61,7 +61,7 @@ class TiTleForTable extends StatelessWidget {
         !isSalon
             ? const SizedBox()
             : SizedBox(
-                width: 80.w,
+                width: 180.w,
                 child: const CustomText(
                   title: 'المدينة',
                   textStyle: TextStyle(
@@ -70,11 +70,12 @@ class TiTleForTable extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
               ),
+        if (isSalon) 15.horizontalSpace,
         //************ Table nation */
         isSalon
             ? const SizedBox()
             : SizedBox(
-                width: 200.w,
+                width: 100.w,
                 child: const CustomText(
                   title: 'الجنسيه',
                   textStyle: TextStyle(
@@ -83,6 +84,16 @@ class TiTleForTable extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
               ),
+        SizedBox(
+          width: 150.w,
+          child: const CustomText(
+            title: 'الموقع الالكتروني',
+            textStyle: TextStyle(
+                color: ColorManager.secondaryColor,
+                fontSize: 16,
+                fontWeight: FontWeight.bold),
+          ),
+        ),
       ],
     );
   }

@@ -1,8 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
+import 'package:beauty_station_web/utils/app_utils/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class Header extends StatelessWidget {
   final double width;
@@ -19,21 +19,33 @@ class Header extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          30.horizontalSpace,
-          if (secPage)
-            InkWell(
+          secPage
+              ? InkWell(
+                  onTap: () {
+                    context.beamToNamed('/Home');
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: ColorManager.neutralWhite,
+                    size: 25.sp,
+                  ),
+                )
+              : const SizedBox(),
+          InkWell(
               onTap: () {
-                context.beamToNamed('/Home');
+                context.beamToReplacementNamed('/Login');
               },
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: ColorManager.neutralWhite,
-                size: 25.sp,
-              ).paddingAll(8),
-            )
+              child: const Text(
+                'تسجيل خروج',
+                style: TextStyle(
+                  color: ColorManager.neutralWhite,
+                  fontSize: 14,
+                ),
+              ))
         ],
-      ),
-    ).paddingAll(12);
+      ).horizontalPadding(30).verticalPadding(16),
+    ).horizontalPadding(12).verticalPadding(10);
   }
 }

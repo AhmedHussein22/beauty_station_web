@@ -1,7 +1,8 @@
-import 'package:beauty_station_web/resource/color_manager.dart';
+import 'package:beauty_station_web/features/main_page/controller/main_controller.dart';
 import 'package:beauty_station_web/utils/app_utils/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class BarChartWidget extends StatelessWidget {
@@ -9,36 +10,35 @@ class BarChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 0.45.sw,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: SfCartesianChart(
-          primaryXAxis: const CategoryAxis(),
-          title: const ChartTitle(text: 'نسبة العملاء بين المدن'),
-          series: <CartesianSeries>[
-            LineSeries<ChartData, String>(
-                dataSource: [
-                  ChartData('الرياض', 35, ColorManager.mainColor),
-                  ChartData('جده', 23, ColorManager.secondaryColor),
-                  ChartData("الخبر", 34, ColorManager.otherGreen0),
-                  ChartData('الدمام', 25, ColorManager.neutral400),
-                  ChartData('المدينه', 40, ColorManager.neutral950),
-                ],
-                pointColorMapper: (ChartData data, _) => data.color,
-                xValueMapper: (ChartData data, _) => data.x,
-                yValueMapper: (ChartData data, _) => data.y,
-                dataLabelSettings: const DataLabelSettings(isVisible: true))
-          ]).horizontalPadding(20),
+    return GetBuilder<MainController>(
+      builder: (mainController) {
+        return Container(
+          width: 0.6.sw,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: SfCartesianChart(
+              primaryXAxis: const CategoryAxis(),
+              title: const ChartTitle(text: 'نسبة العملاء بين المدن'),
+              series: <CartesianSeries>[
+                ColumnSeries<ChartData, String>(
+                    dataSource: mainController.cities,
+                    pointColorMapper: (ChartData data, _) => data.color,
+                    xValueMapper: (ChartData data, _) => data.x,
+                    yValueMapper: (ChartData data, _) => data.y,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true))
+              ]).horizontalPadding(20),
+        );
+      },
     );
   }
 }
 
 class ChartData {
-  ChartData(this.x, this.y, this.color);
+  ChartData(this.id , this.x, this.y, this.color, );
   final String x;
-  final double y;
+  double y;
   final Color color;
+  final int id;
 }

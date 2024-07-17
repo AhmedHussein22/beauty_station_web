@@ -80,7 +80,6 @@ flutter:
     - assets/jsons/
     - assets/gifs/
     - assets/jsons/lang/
-    - assets/jsons/lottifiles/
  #*To add fonts to your application, add a fonts section, like this:
   fonts:
     - family: Tajawal

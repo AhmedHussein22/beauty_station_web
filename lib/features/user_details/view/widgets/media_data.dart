@@ -55,14 +55,25 @@ class MediaData extends StatelessWidget {
                             beauticianUserData.licenseImage!.isEmpty
                         ? false
                         : true
-                : isSalon
-                    ? salonUserData.logo == null || salonUserData.logo!.isEmpty
-                        ? false
-                        : true
-                    : beauticianUserData.logo == null ||
-                            beauticianUserData.logo!.isEmpty
-                        ? false
-                        : true;
+                : type == 4
+                    ? isSalon
+                        ? salonUserData.salonImages == null ||
+                                salonUserData.salonImages!.isEmpty
+                            ? false
+                            : true
+                        : beauticianUserData.previousWorkImages == null ||
+                                beauticianUserData.previousWorkImages!.isEmpty
+                            ? false
+                            : true
+                    : isSalon
+                        ? salonUserData.logo == null ||
+                                salonUserData.logo!.isEmpty
+                            ? false
+                            : true
+                        : beauticianUserData.logo == null ||
+                                beauticianUserData.logo!.isEmpty
+                            ? false
+                            : true;
   }
 
   @override
@@ -91,12 +102,13 @@ class MediaData extends StatelessWidget {
                     //************ Portfolio */
                     CustomText(
                       title: 'صور الصالون / الاعمال السابقه (اختياري)',
-                      color: ColorManager.neutral900,
+                      color: const Color.fromRGBO(17, 25, 40, 1),
                       textStyle: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeightManager.bold,
                       ),
                     ).horizontalPadding(20).verticalPadding(20),
+
                     //************ Portfolio Link */
                     SizedBox(
                       height: 300.h,
@@ -114,6 +126,47 @@ class MediaData extends StatelessWidget {
                                   : EndPoints.media +
                                       (beauticianUserData
                                               .previousWorkImages?[index] ??
+                                          'غير معروف'),
+                              errorWidget:
+                                  'https://www.creativefabrica.com/wp-content/uploads/2022/11/03/Click-here-button-with-hand-pointer-clic-Graphics-44644519-1.jpg');
+                        },
+                        scrollDirection: Axis.vertical,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                      ),
+                    )
+                  ],
+                ),
+              if (checkValidationforLength(4))
+                //************ Photos */
+                Column(
+                  children: [
+                    //************ Portfolio */
+                    CustomText(
+                      title: 'صور (اختياري)',
+                      color: const Color.fromRGBO(17, 25, 40, 1),
+                      textStyle: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeightManager.bold,
+                      ),
+                    ).horizontalPadding(20).verticalPadding(20),
+
+                    //************ Portfolio Link */
+                    SizedBox(
+                      height: 300.h,
+                      width: 300.w,
+                      child: ListView.builder(
+                        itemCount: isSalon
+                            ? salonUserData.profileImages?.length
+                            : beauticianUserData.profileImages?.length,
+                        itemBuilder: (context, index) {
+                          return RenderPreviewLink(
+                              link: isSalon
+                                  ? EndPoints.media +
+                                      (salonUserData.profileImages?[index] ??
+                                          'غير معروف')
+                                  : EndPoints.media +
+                                      (beauticianUserData
+                                              .profileImages?[index] ??
                                           'غير معروف'),
                               errorWidget:
                                   'https://www.creativefabrica.com/wp-content/uploads/2022/11/03/Click-here-button-with-hand-pointer-clic-Graphics-44644519-1.jpg');
@@ -209,7 +262,7 @@ class RenderPreviewLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 300.w,
+      width: 250.w,
       height: 300.h,
       child:
           link.contains('jpg') || link.contains('png') || link.contains('jpeg')

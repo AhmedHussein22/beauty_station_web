@@ -19,7 +19,8 @@ class MainPage extends StatelessWidget {
 
   int calculateThePercentage(int theMianValue, int theSecValue) {
     var resultOfPercentage = 0;
-    resultOfPercentage = ((theMianValue / (theMianValue + theSecValue)) * 100).round();
+    resultOfPercentage =
+        ((theMianValue / (theMianValue + theSecValue)) * 100).round();
     return theMianValue == 0 ? 0 : resultOfPercentage;
   }
 
@@ -126,12 +127,10 @@ class MainPage extends StatelessWidget {
                             ],
                           ),
                           20.horizontalSpace,
-                          //************ Added By */
+                          //  ************ Added By */
                           AddedBy(
-                            salonData: mainController.salonUserData.isEmpty
-                                ? []
-                                : mainController.salonUserData,
-                          ),
+                            salonData: mainController.addedBy,
+                          ).onlyPadding(tPadding: 50),
                         ],
                       ),
                       50.verticalSpace

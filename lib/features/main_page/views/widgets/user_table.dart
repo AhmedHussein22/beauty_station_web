@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_interpolations
+
 import 'package:beauty_station_web/features/main_page/data/users_beautician_data.dart';
 import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
 import 'package:beauty_station_web/features/main_page/views/widgets/table_title.dart';
@@ -26,7 +28,7 @@ class UserTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 0.55.sw,
+      width: 0.6.sw,
       decoration: BoxDecoration(
         color: ColorManager.neutralWhite,
         borderRadius: BorderRadius.circular(20),
@@ -59,29 +61,31 @@ class UserTable extends StatelessWidget {
           ListView.separated(
               itemBuilder: (context, index) {
                 return DataForTable(
-                    isSalon: isSalon,
-                    id: isSalon
-                        ? '${salonData?[index].id}'
-                        : '${beauticianData?[index].id}',
-                    name: isSalon
-                        ? '${salonData?[index].salonName}'
-                        : '${beauticianData?[index].beauticianName}',
-                    numberId: isSalon
-                        ? '${salonData?[index].commercialRecordNumber}'
-                        : '${beauticianData?[index].licenseNumber}',
-                    city: isSalon
-                        ? '${salonData?[index].locationName}'
-                        : '${beauticianData?[index].locationName}',
-                    nation: isSalon
-                        ? 'لا يوجد'
-                        : '${beauticianData?[index].nationality}',
-                    emailAddress: isSalon
-                        ? '${salonData?[index].email}'
-                        : '${beauticianData?[index].email}',
-                    phoneNumber: isSalon
-                        ? '${salonData?[index].mobileNumber}'
-                        : '${beauticianData?[index].mobileNumber}',
-                    index: index);
+                  isSalon: isSalon,
+                  id: '${index + 1}',
+                  name: isSalon
+                      ? '${salonData?[index].salonName ?? 'غير معروف'}'
+                      : '${beauticianData?[index].beauticianName ?? 'غير معروف'}',
+                  numberId: isSalon
+                      ? '${salonData?[index].commercialRecordNumber ?? 'غير معروف'}'
+                      : '${beauticianData?[index].licenseNumber ?? 'غير معروف'}',
+                  city: isSalon
+                      ? '${salonData?[index].locationName ?? 'غير معروف'}'
+                      : '${beauticianData?[index].locationName ?? 'غير معروف'}',
+                  nation: isSalon
+                      ? 'لا يوجد'
+                      : '${beauticianData?[index].nationality ?? 'غير معروف'}',
+                  emailAddress: isSalon
+                      ? '${salonData?[index].email ?? 'غير معروف'}'
+                      : '${beauticianData?[index].email ?? 'غير معروف'}',
+                  phoneNumber: isSalon
+                      ? '${salonData?[index].mobileNumber ?? 'غير معروف'} '
+                      : '${beauticianData?[index].mobileNumber ?? 'غير معروف'}',
+                  index: index,
+                  website: isSalon
+                      ? '${salonData?[index].website ?? 'غير معروف'}'
+                      : '${beauticianData?[index].website ?? 'غير معروف'}',
+                );
               },
               itemCount: isSalon ? salonData!.length : beauticianData!.length,
               shrinkWrap: true,

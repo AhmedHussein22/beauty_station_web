@@ -26,6 +26,7 @@ class BeauticianUserData {
     final String? profilePicture;
     final List<String>? previousWorkImages;
     final String? locationName;
+    final String? city;
     final String? latitude;
     final String? longitude;
     final String? mobileNumber;
@@ -56,6 +57,7 @@ class BeauticianUserData {
         this.profilePicture,
         this.previousWorkImages,
         this.locationName,
+        this.city,
         this.latitude,
         this.longitude,
         this.mobileNumber,
@@ -87,6 +89,7 @@ class BeauticianUserData {
         profilePicture: json["profilePicture"],
         previousWorkImages: json["previousWorkImages"] == null ? [] : List<String>.from(json["previousWorkImages"]!.map((x) => x)),
         locationName: json["locationName"],
+        city: json["city"],
         latitude: json["latitude"],
         longitude: json["longitude"],
         mobileNumber: json["mobileNumber"],
@@ -118,6 +121,7 @@ class BeauticianUserData {
         "profilePicture": profilePicture,
         "previousWorkImages": previousWorkImages == null ? [] : List<dynamic>.from(previousWorkImages!.map((x) => x)),
         "locationName": locationName,
+        "city": city,
         "latitude": latitude,
         "longitude": longitude,
         "mobileNumber": mobileNumber,
@@ -141,29 +145,29 @@ class BeauticianUserData {
 }
 
 class WorkingHour {
-    final int? id;
-    final String? day;
-    final String? from;
-    final String? to;
+  final int? id;
+  final String? day;
+  final String? from;
+  final String? to;
 
-    WorkingHour({
-        this.id,
-        this.day,
-        this.from,
-        this.to,
-    });
+  WorkingHour({
+    this.id,
+    this.day,
+    this.from,
+    this.to,
+  });
 
-    factory WorkingHour.fromJson(Map<String, dynamic> json) => WorkingHour(
+  factory WorkingHour.fromJson(Map<String, dynamic> json) => WorkingHour(
         id: json["id"],
         day: json["day"],
         from: json["from"],
         to: json["to"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "day": day,
         "from": from,
         "to": to,
-    };
+      };
 }

@@ -1,20 +1,19 @@
-import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
+import 'package:beauty_station_web/features/main_page/controller/main_controller.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
 import 'package:beauty_station_web/resource/font_weight_manger.dart';
 import 'package:beauty_station_web/utils/app_utils/extentions.dart';
 import 'package:beauty_station_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class AddedBy extends StatelessWidget {
-  final List<SalonUserData>? salonData;
+  final List<AddedByModel>? salonData;
   const AddedBy({super.key, required this.salonData});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 0.2.sw,
+      width: 0.15.sw,
       decoration: BoxDecoration(
         color: ColorManager.neutralWhite,
         borderRadius: BorderRadius.circular(20),
@@ -31,22 +30,22 @@ class AddedBy extends StatelessWidget {
                 fontSize: 18,
                 fontWeight: FontWeightManager.bold,
                 color: ColorManager.secondaryColor),
-          ).horizontalPadding(15),
+          ).horizontalPadding(25),
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return ListTile(
                 iconColor: ColorManager.mainColor,
-                leading: const Icon(Icons.store),
+                leading: const Icon(Icons.person),
                 //************ Added By name */
-                title: Text(salonData?[index].salonName ?? '',
+                title: Text(salonData?[index].name ?? '',
                     style: const TextStyle(
                         color: ColorManager.mainColor,
                         fontSize: 14,
                         fontWeight: FontWeightManager.bold)),
                 //************ Added By count */
-                trailing: Text(salonData?[index].customerServicePhone ?? '',
+                trailing: Text('${salonData?[index].count ?? ''}',
                     style: const TextStyle(
                         color: ColorManager.mainColor,
                         fontSize: 12,
@@ -60,9 +59,10 @@ class AddedBy extends StatelessWidget {
             },
             itemCount: salonData!.length > 5 ? 5 : salonData!.length,
           ),
+          15.verticalSpace,
         ],
       ),
-    ).paddingOnly(top: 30);
+    );
   }
 }
 

@@ -7,22 +7,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomeDataView extends StatelessWidget {
-  final String title, data;
+  final String title, data, extraLink;
   final IconData icon;
   final bool isLink;
-  final bool isSelectable;
+  final Widget workingHours;
+  final bool isSelectable, isExtraLink, isWorkingHours;
+  final double width;
   const CustomeDataView(
       {super.key,
       required this.title,
       required this.data,
       required this.icon,
       required this.isLink,
-      required this.isSelectable});
+      required this.isSelectable,
+      this.extraLink = '',
+      this.width = 0.2,
+      this.isExtraLink = false,
+      this.workingHours = const SizedBox(),
+      this.isWorkingHours = false});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 0.2.sw,
+      width: width.sw,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,30 +55,12 @@ class CustomeDataView extends StatelessWidget {
           ),
           10.verticalSpace,
           //************ Extra Info Commercial Registration No Value*/
-          isSelectable
-              ? SelectableText(
-                  data,
-                  style: TextStyle(
-                    color: ColorManager.mainColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeightManager.bold,
-                    decoration:
-                        isLink ? TextDecoration.underline : TextDecoration.none,
-                  ),
-                )
-              : InkWell(
-                  onTap: isLink
-                      ? () {
-                          if (isLink) {
-                            html.window.open(data, 'new tab');
-                          }
-                        }
-                      : null,
-                  child: Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: CustomText(
-                      title: data,
-                      textStyle: TextStyle(
+          isWorkingHours
+              ? workingHours
+              : isSelectable
+                  ? SelectableText(
+                      data,
+                      style: TextStyle(
                         color: ColorManager.mainColor,
                         fontSize: 14.sp,
                         fontWeight: FontWeightManager.bold,
@@ -79,9 +68,32 @@ class CustomeDataView extends StatelessWidget {
                             ? TextDecoration.underline
                             : TextDecoration.none,
                       ),
+                    )
+                  : InkWell(
+                      onTap: isLink
+                          ? () {
+                              if (isLink) {
+                                isExtraLink
+                                    ? html.window.open(extraLink, 'new tab')
+                                    : html.window.open(data, 'new tab');
+                              }
+                            }
+                          : null,
+                      child: Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: CustomText(
+                          title: data,
+                          textStyle: TextStyle(
+                            color: ColorManager.mainColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeightManager.bold,
+                            decoration: isLink
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
         ],
       ),
     );

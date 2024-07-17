@@ -2,6 +2,13 @@
 //
 //     final salonUsers = salonUsersFromJson(jsonString);
 
+import 'dart:convert';
+
+SalonUsers salonUsersFromJson(String str) =>
+    SalonUsers.fromJson(json.decode(str));
+
+String salonUsersToJson(SalonUsers data) => json.encode(data.toJson());
+
 class SalonUsers {
   final List<SalonUserData>? data;
 
@@ -15,6 +22,12 @@ class SalonUsers {
             : List<SalonUserData>.from(
                 json["data"]!.map((x) => SalonUserData.fromJson(x))),
       );
+
+  Map<String, dynamic> toJson() => {
+        "data": data == null
+            ? []
+            : List<dynamic>.from(data!.map((x) => x.toJson())),
+      };
 }
 
 class SalonUserData {
@@ -24,6 +37,7 @@ class SalonUserData {
   final String? commercialRecordImage;
   final List<dynamic>? salonImages;
   final String? locationName;
+  final String? city;
   final String? latitude;
   final String? longitude;
   final String? mobileNumber;
@@ -51,6 +65,7 @@ class SalonUserData {
     this.commercialRecordImage,
     this.salonImages,
     this.locationName,
+    this.city,
     this.latitude,
     this.longitude,
     this.mobileNumber,
@@ -81,6 +96,7 @@ class SalonUserData {
             ? []
             : List<dynamic>.from(json["salonImages"]!.map((x) => x)),
         locationName: json["locationName"],
+        city: json["city"],
         latitude: json["latitude"],
         longitude: json["longitude"],
         mobileNumber: json["mobileNumber"],
@@ -116,6 +132,7 @@ class SalonUserData {
             ? []
             : List<dynamic>.from(salonImages!.map((x) => x)),
         "locationName": locationName,
+        "city": city,
         "latitude": latitude,
         "longitude": longitude,
         "mobileNumber": mobileNumber,

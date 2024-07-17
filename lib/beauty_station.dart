@@ -3,6 +3,7 @@ import 'package:beauty_station_web/config/theme/app_theme.dart';
 import 'package:beauty_station_web/features/main_page/controller/controller_bindding.dart';
 import 'package:beauty_station_web/features/main_page/views/main_page.dart';
 import 'package:beauty_station_web/features/user_details/view/user_details_view.dart';
+import 'package:beauty_station_web/features/welcome_screen/welcome_screen.dart';
 import 'package:beauty_station_web/utils/app_utils/app_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,9 +25,10 @@ class BeautyStationAppState extends State<BeautyStationApp> {
   final routerDelegate = BeamerDelegate(
       transitionDelegate: const NoAnimationTransitionDelegate(),
       beamBackTransitionDelegate: const NoAnimationTransitionDelegate(),
-      initialPath: '/Home',
+      initialPath: '/Login',
       buildListener: (context, beamerDelegate) async {
-        AppLogs.infoLog('Beamer buildListener: ${beamerDelegate.currentPages[0].name}');
+        AppLogs.infoLog(
+            'Beamer buildListener: ${beamerDelegate.currentPages[0].name}');
       },
       locationBuilder: RoutesLocationBuilder(routes: {
         '/Home': (context, state, data) {
@@ -46,6 +48,14 @@ class BeautyStationAppState extends State<BeautyStationApp> {
             key: ValueKey('Projects_Page/$userName'),
             type: BeamPageType.scaleTransition,
             child: const UserDetailsView(),
+          );
+        },
+        '/Login': (context, state, data) {
+          return const BeamPage(
+            title: 'Login',
+            key: ValueKey('Login'),
+            name: 'Login',
+            child: WelcomeScreen(),
           );
         },
       }).call);
@@ -68,7 +78,8 @@ class BeautyStationAppState extends State<BeautyStationApp> {
           initialBinding: ControllersBindings(),
           routeInformationParser: BeamerParser(),
           routerDelegate: routerDelegate,
-          backButtonDispatcher: BeamerBackButtonDispatcher(delegate: routerDelegate),
+          backButtonDispatcher:
+              BeamerBackButtonDispatcher(delegate: routerDelegate),
           theme: AppTheme().appLightTheme(),
           enableLog: true,
           smartManagement: SmartManagement.full,

@@ -1,3 +1,4 @@
+import 'package:beauty_station_web/resource/assets_manager.dart';
 import 'package:beauty_station_web/resource/color_manager.dart';
 import 'package:beauty_station_web/resource/font_weight_manger.dart';
 import 'package:beauty_station_web/utils/app_utils/extentions.dart';
@@ -19,8 +20,72 @@ class DrawerWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(25),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            20.verticalSpace,
+            Column(
+              children: [
+                20.verticalSpace,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomText(
+                      title: 'Beauty Station',
+                      textStyle: TextStyle(
+                        color: ColorManager.secondaryColor,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeightManager.semiBold,
+                      ),
+                    ),
+                    Image.asset(
+                      ImageAssets.logo,
+                      height: 50.h,
+                      width: 50.w,
+                      fit: BoxFit.cover,
+                    ),
+                  ],
+                ),
+                20.verticalSpace,
+                Row(
+                  children: [
+                    CustomText(
+                      title: 'الرئيسية',
+                      textStyle: TextStyle(
+                        color: ColorManager.neutralWhite,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeightManager.semiBold,
+                      ),
+                    ),
+                  ],
+                ).onlyPadding(rPadding: 26),
+                20.verticalSpace,
+                Container(
+                  decoration: const BoxDecoration(
+                    color: ColorManager.offWhite,
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.person,
+                      size: 25.h,
+                      color: ColorManager.neutral600,
+                    ),
+                    title: Text(
+                      'عرض المشتركين',
+                      style: TextStyle(
+                        color: ColorManager.neutral600,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeightManager.semiBold,
+                      ),
+                    ),
+                    onTap: () {},
+                    textColor: ColorManager.neutralWhite,
+                  ),
+                ).onlyPadding(rPadding: 20),
+              ],
+            ),
             CustomText(
               title: 'Ping Information',
               textStyle: TextStyle(
@@ -28,47 +93,7 @@ class DrawerWidget extends StatelessWidget {
                 fontSize: 14.sp,
                 fontWeight: FontWeightManager.semiBold,
               ),
-            ),
-            20.verticalSpace,
-            Row(
-              children: [
-                CustomText(
-                  title: 'الرئيسية',
-                  textStyle: TextStyle(
-                    color: ColorManager.neutralWhite,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeightManager.semiBold,
-                  ),
-                ),
-              ],
-            ).onlyPadding(rPadding: 26),
-            20.verticalSpace,
-            Container(
-              decoration: const BoxDecoration(
-                color: ColorManager.offWhite,
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-              ),
-              child: ListTile(
-                leading: Icon(
-                  Icons.person,
-                  size: 25.h,
-                  color: ColorManager.neutral600,
-                ),
-                title: Text(
-                  'عرض المشتركين',
-                  style: TextStyle(
-                    color: ColorManager.neutral600,
-                    fontSize: 12.sp,
-                    fontWeight: FontWeightManager.semiBold,
-                  ),
-                ),
-                onTap: () {},
-                textColor: ColorManager.neutralWhite,
-              ),
-            ).onlyPadding(rPadding: 20),
+            ).verticalPadding(10),
           ],
         )).paddingAll(8);
   }
