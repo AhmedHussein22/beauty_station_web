@@ -87,7 +87,7 @@ class UserData extends StatelessWidget {
                           fontWeight: FontWeightManager.bold,
                         ),
                       ),
-                      10.horizontalSpace,
+                      5.horizontalSpace,
                       if (returnValidation())
                         Icon(
                           Icons.verified,

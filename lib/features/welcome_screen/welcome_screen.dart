@@ -24,11 +24,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(ImageAssets.logo),
-            fit: BoxFit.cover,
-          ),
-        ),
+            image: DecorationImage(
+              image: AssetImage(
+                ImageAssets.logo1,
+              ),
+              fit: BoxFit.contain,
+            ),
+            color: ColorManager.secondaryColor),
         child: Stack(
           children: [
             Container(

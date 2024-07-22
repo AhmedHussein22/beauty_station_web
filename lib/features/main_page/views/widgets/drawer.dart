@@ -5,7 +5,6 @@ import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
 import 'package:beauty_solution_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -25,26 +24,21 @@ class DrawerWidget extends StatelessWidget {
             Column(
               children: [
                 20.verticalSpace,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    CustomText(
-                      title: 'Beauty Solution',
-                      textStyle: TextStyle(
-                        color: ColorManager.secondaryColor,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeightManager.semiBold,
-                      ),
-                    ),
-                    20.horizontalSpace,
-                    Image.asset(
-                      ImageAssets.logo1,
-                      height: 50.h,
-                      width: 50.w,
-                      fit: BoxFit.cover,
-                    ),
-                  ],
+                // CustomText(
+                //   title: 'Beauty Solution',
+                //   textStyle: TextStyle(
+                //     color: ColorManager.secondaryColor,
+                //     fontSize: 14.sp,
+                //     fontWeight: FontWeightManager.semiBold,
+                //   ),
+                // ),
+                // 20.horizontalSpace,
+                Image.asset(
+                  ImageAssets.logo1,
+                  height: 120.h,
+                  width: 120.w,
+                  color: ColorManager.secondaryColor,
+                  fit: BoxFit.contain,
                 ),
                 20.verticalSpace,
                 Row(
@@ -97,6 +91,6 @@ class DrawerWidget extends StatelessWidget {
               ),
             ).verticalPadding(10),
           ],
-        )).paddingAll(8);
+        )).horizontalPadding(8).verticalPadding(16);
   }
 }

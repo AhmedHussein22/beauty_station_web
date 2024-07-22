@@ -46,6 +46,6 @@ class Header extends StatelessWidget {
               ))
         ],
       ).horizontalPadding(30).verticalPadding(16),
-    ).horizontalPadding(12).verticalPadding(10);
+    ).verticalPadding(16);
   }
 }
