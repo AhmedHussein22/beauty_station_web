@@ -7,6 +7,7 @@ import 'package:beauty_solution_web/features/user_details/view/widgets/media_dat
 import 'package:beauty_solution_web/features/user_details/view/widgets/user_data.dart';
 import 'package:beauty_solution_web/resource/color_manager.dart';
 import 'package:beauty_solution_web/utils/app_utils/app_logs.dart';
+import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -44,46 +45,50 @@ class UserDetailsView extends StatelessWidget {
                       Header(
                         width: 1.sw,
                         secPage: true,
-                      ),
+                      ).horizontalPadding(50),
                       //************ User Data */
                       UserData(
-                          salonUserData: isSalon
-                              ? mainController.salonUserData[id]
-                              : mainController.emptySalonUserData,
-                          beauticianUserData: isSalon
-                              ? mainController.emptyBeauticianUserData
-                              : mainController.beauticianUserData[id],
-                          isSalon: isSalon),
+                              salonUserData: isSalon
+                                  ? mainController.salonUserData[id]
+                                  : mainController.emptySalonUserData,
+                              beauticianUserData: isSalon
+                                  ? mainController.emptyBeauticianUserData
+                                  : mainController.beauticianUserData[id],
+                              isSalon: isSalon)
+                          .horizontalPadding(50),
                       20.verticalSpace,
                       //************ Media Data */
                       MediaData(
-                          salonUserData: isSalon
-                              ? mainController.salonUserData[id]
-                              : mainController.emptySalonUserData,
-                          beauticianUserData: isSalon
-                              ? mainController.emptyBeauticianUserData
-                              : mainController.beauticianUserData[id],
-                          isSalon: isSalon),
+                              salonUserData: isSalon
+                                  ? mainController.salonUserData[id]
+                                  : mainController.emptySalonUserData,
+                              beauticianUserData: isSalon
+                                  ? mainController.emptyBeauticianUserData
+                                  : mainController.beauticianUserData[id],
+                              isSalon: isSalon)
+                          .horizontalPadding(50),
                       20.verticalSpace,
                       //************ Extra Info */
                       ExtraInfo(
-                          salonUserData: isSalon
-                              ? mainController.salonUserData[id]
-                              : mainController.emptySalonUserData,
-                          beauticianUserData: isSalon
-                              ? mainController.emptyBeauticianUserData
-                              : mainController.beauticianUserData[id],
-                          isSalon: isSalon),
+                              salonUserData: isSalon
+                                  ? mainController.salonUserData[id]
+                                  : mainController.emptySalonUserData,
+                              beauticianUserData: isSalon
+                                  ? mainController.emptyBeauticianUserData
+                                  : mainController.beauticianUserData[id],
+                              isSalon: isSalon)
+                          .horizontalPadding(50),
                       20.verticalSpace,
                       //************ Added By */
                       AddedBy(
-                          salonUserData: isSalon
-                              ? mainController.salonUserData[id]
-                              : mainController.emptySalonUserData,
-                          beauticianUserData: isSalon
-                              ? mainController.emptyBeauticianUserData
-                              : mainController.beauticianUserData[id],
-                          isSalon: isSalon),
+                              salonUserData: isSalon
+                                  ? mainController.salonUserData[id]
+                                  : mainController.emptySalonUserData,
+                              beauticianUserData: isSalon
+                                  ? mainController.emptyBeauticianUserData
+                                  : mainController.beauticianUserData[id],
+                              isSalon: isSalon)
+                          .horizontalPadding(50),
                       50.verticalSpace,
                     ],
                   ),

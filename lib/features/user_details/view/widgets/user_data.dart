@@ -67,11 +67,13 @@ class UserData extends StatelessWidget {
                                 size: 0.03.sw,
                                 color: ColorManager.neutralWhite,
                               )
-                            : Image.network(
-                                '${EndPoints.media}${beauticianUserData.profilePicture}',
-                                width: 0.15.sw,
-                                height: 0.15.sw,
-                                fit: BoxFit.cover,
+                            : ClipOval(
+                                child: Image.network(
+                                  '${EndPoints.media}${beauticianUserData.profilePicture}',
+                                  width: 0.15.sw,
+                                  height: 0.15.sw,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                   ).horizontalPadding(20).verticalPadding(20),
                   //************ User Data Name*/

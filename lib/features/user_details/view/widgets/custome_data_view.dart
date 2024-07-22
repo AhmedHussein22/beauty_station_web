@@ -46,7 +46,7 @@ class CustomeDataView extends StatelessWidget {
               CustomText(
                 title: title,
                 textStyle: TextStyle(
-                  color: ColorManager.neutral400,
+                  color: ColorManager.thiredColor,
                   fontSize: 18.sp,
                   fontWeight: FontWeightManager.regular,
                 ),

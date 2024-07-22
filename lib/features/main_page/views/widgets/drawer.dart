@@ -15,7 +15,7 @@ class DrawerWidget extends StatelessWidget {
         height: 1.5.sh,
         width: 0.15.sw,
         decoration: BoxDecoration(
-          color: ColorManager.w,
+          color: ColorManager.neutralWhite,
           borderRadius: BorderRadius.circular(25),
         ),
         child: Column(
@@ -37,7 +37,7 @@ class DrawerWidget extends StatelessWidget {
                   ImageAssets.logo1,
                   height: 180.h,
                   width: 180.w,
-                  color: ColorManager.secondaryColor,
+                  color: ColorManager.mainColor,
                   fit: BoxFit.contain,
                 ),
                 20.verticalSpace,
@@ -46,7 +46,7 @@ class DrawerWidget extends StatelessWidget {
                     CustomText(
                       title: 'الرئيسية',
                       textStyle: TextStyle(
-                        color: ColorManager.neutralWhite,
+                        color: ColorManager.mainColor,
                         fontSize: 14.sp,
                         fontWeight: FontWeightManager.semiBold,
                       ),
@@ -56,7 +56,7 @@ class DrawerWidget extends StatelessWidget {
                 20.verticalSpace,
                 Container(
                   decoration: const BoxDecoration(
-                    color: ColorManager.secondaryColor,
+                    color: ColorManager.mainColor,
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(20),
                       topRight: Radius.circular(20),
@@ -66,12 +66,12 @@ class DrawerWidget extends StatelessWidget {
                     leading: Icon(
                       Icons.person,
                       size: 25.h,
-                      color: ColorManager.mainColor,
+                      color: ColorManager.neutralWhite,
                     ),
                     title: Text(
                       'عرض المشتركين',
                       style: TextStyle(
-                        color: ColorManager.mainColor,
+                        color: ColorManager.neutralWhite,
                         fontSize: 12.sp,
                         fontWeight: FontWeightManager.semiBold,
                       ),

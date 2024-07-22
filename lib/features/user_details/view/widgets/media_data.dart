@@ -105,14 +105,15 @@ class MediaData extends StatelessWidget {
                       color: const Color.fromRGBO(17, 25, 40, 1),
                       textStyle: TextStyle(
                         fontSize: 16.sp,
+                        color: ColorManager.thiredColor,
                         fontWeight: FontWeightManager.bold,
                       ),
                     ).horizontalPadding(20).verticalPadding(20),
 
                     //************ Portfolio Link */
                     SizedBox(
-                      height: 300.h,
-                      width: 300.w,
+                      height: 250.h,
+                      width: 250.w,
                       child: ListView.builder(
                         itemCount: isSalon
                             ? salonUserData.salonImages?.length
@@ -146,14 +147,15 @@ class MediaData extends StatelessWidget {
                       color: const Color.fromRGBO(17, 25, 40, 1),
                       textStyle: TextStyle(
                         fontSize: 16.sp,
+                        color: ColorManager.thiredColor,
                         fontWeight: FontWeightManager.bold,
                       ),
                     ).horizontalPadding(20).verticalPadding(20),
 
                     //************ Portfolio Link */
                     SizedBox(
-                      height: 300.h,
-                      width: 300.w,
+                      height: 250.h,
+                      width: 250.w,
                       child: ListView.builder(
                         itemCount: isSalon
                             ? salonUserData.profileImages?.length
@@ -183,7 +185,7 @@ class MediaData extends StatelessWidget {
                     //************ Service Menu */
                     CustomText(
                       title: 'قائمه الخدمات',
-                      color: ColorManager.neutral900,
+                      color: ColorManager.thiredColor,
                       textStyle: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeightManager.bold,
@@ -206,7 +208,7 @@ class MediaData extends StatelessWidget {
                     //************ Contract Image */
                     CustomText(
                       title: 'صوره السجل التجاري / الترخيص',
-                      color: ColorManager.neutral900,
+                      color: ColorManager.thiredColor,
                       textStyle: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeightManager.bold,
