@@ -1,6 +1,6 @@
 {
-    "name": "beauty_station_web",
-    "short_name": "beauty_station_web",
+    "name": "beauty_solution_web",
+    "short_name": "beauty_solution_web",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

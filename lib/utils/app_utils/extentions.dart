@@ -1,7 +1,7 @@
 
 //! String Extension`
-import 'package:beauty_station_web/config/locale/locale_setup.dart';
-import 'package:beauty_station_web/resource/app_keys.dart';
+import 'package:beauty_solution_web/config/locale/locale_setup.dart';
+import 'package:beauty_solution_web/resource/app_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

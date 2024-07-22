@@ -1,4 +1,4 @@
-name: beauty_station_web
+name: beauty_solution_web
 description: "A new Flutter project."
 
 publish_to: 'none' 
@@ -25,7 +25,7 @@ dependencies:
   
   flutter_screenutil: ^5.9.0  # for responsive ui
   syncfusion_flutter_charts: ^26.1.40
-
+  flutter_svg: ^2.0.10+1
 
   # ****** Images *******
 
@@ -64,6 +64,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^3.0.0
+  
 #  build_runner: ^2.4.8
  # freezed: ^2.5.2
 

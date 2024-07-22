@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "beauty_station_web",
+            "name": "beauty_solution_web",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "beauty_station_web (profile mode)",
+            "name": "beauty_solution_web (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "beauty_station_web (release mode)",
+            "name": "beauty_solution_web (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

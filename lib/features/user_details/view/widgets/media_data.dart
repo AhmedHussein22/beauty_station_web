@@ -1,14 +1,14 @@
 import 'dart:html' as html;
 
 import 'package:any_link_preview/any_link_preview.dart';
-import 'package:beauty_station_web/features/main_page/data/users_beautician_data.dart';
-import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
-import 'package:beauty_station_web/resource/color_manager.dart';
-import 'package:beauty_station_web/resource/font_weight_manger.dart';
-import 'package:beauty_station_web/services/api/end_points.dart';
-import 'package:beauty_station_web/utils/app_utils/app_logs.dart';
-import 'package:beauty_station_web/utils/app_utils/extentions.dart';
-import 'package:beauty_station_web/widgets/custom_text.dart';
+import 'package:beauty_solution_web/features/main_page/data/users_beautician_data.dart';
+import 'package:beauty_solution_web/features/main_page/data/users_salon_data.dart';
+import 'package:beauty_solution_web/resource/color_manager.dart';
+import 'package:beauty_solution_web/resource/font_weight_manger.dart';
+import 'package:beauty_solution_web/services/api/end_points.dart';
+import 'package:beauty_solution_web/utils/app_utils/app_logs.dart';
+import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
+import 'package:beauty_solution_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -225,7 +225,7 @@ class MediaData extends StatelessWidget {
                     ),
                   ],
                 ),
-              if (checkValidationforLength(4))
+              if (checkValidationforLength(5))
                 Column(
                   children: [
                     //************ Logo Image */
@@ -263,7 +263,7 @@ class RenderPreviewLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 250.w,
-      height: 300.h,
+      height: 250.h,
       child:
           link.contains('jpg') || link.contains('png') || link.contains('jpeg')
               ? InkWell(

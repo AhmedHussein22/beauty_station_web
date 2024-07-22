@@ -1,4 +1,4 @@
-package com.example.beauty_station_web
+package com.example.beauty_solution_web
 
 import io.flutter.embedding.android.FlutterActivity
 

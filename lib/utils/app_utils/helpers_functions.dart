@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:beauty_station_web/resource/color_manager.dart';
-import 'package:beauty_station_web/utils/app_utils/app_logs.dart';
+import 'package:beauty_solution_web/resource/color_manager.dart';
+import 'package:beauty_solution_web/utils/app_utils/app_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';

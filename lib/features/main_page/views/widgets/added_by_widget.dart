@@ -1,8 +1,8 @@
-import 'package:beauty_station_web/features/main_page/controller/main_controller.dart';
-import 'package:beauty_station_web/resource/color_manager.dart';
-import 'package:beauty_station_web/resource/font_weight_manger.dart';
-import 'package:beauty_station_web/utils/app_utils/extentions.dart';
-import 'package:beauty_station_web/widgets/custom_text.dart';
+import 'package:beauty_solution_web/features/main_page/controller/main_controller.dart';
+import 'package:beauty_solution_web/resource/color_manager.dart';
+import 'package:beauty_solution_web/resource/font_weight_manger.dart';
+import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
+import 'package:beauty_solution_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,27 +27,27 @@ class AddedBy extends StatelessWidget {
           const CustomText(
             title: 'تم التسجيل بواسطه',
             textStyle: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeightManager.bold,
-                color: ColorManager.secondaryColor),
+                color: ColorManager.mainColor),
           ).horizontalPadding(25),
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return ListTile(
-                iconColor: ColorManager.mainColor,
+                iconColor: ColorManager.fourthColor,
                 leading: const Icon(Icons.person),
                 //************ Added By name */
                 title: Text(salonData?[index].name ?? '',
                     style: const TextStyle(
-                        color: ColorManager.mainColor,
+                        color: ColorManager.neutral600,
                         fontSize: 14,
                         fontWeight: FontWeightManager.bold)),
                 //************ Added By count */
                 trailing: Text('${salonData?[index].count ?? ''}',
                     style: const TextStyle(
-                        color: ColorManager.mainColor,
+                        color: ColorManager.neutral600,
                         fontSize: 12,
                         fontWeight: FontWeightManager.semiBold)),
               );

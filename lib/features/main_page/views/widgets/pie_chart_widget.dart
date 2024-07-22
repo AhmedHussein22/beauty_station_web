@@ -1,4 +1,4 @@
-import 'package:beauty_station_web/resource/color_manager.dart';
+import 'package:beauty_solution_web/resource/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';

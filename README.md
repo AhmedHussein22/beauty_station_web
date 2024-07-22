@@ -1,4 +1,4 @@
-# beauty_station_web
+# beauty_solution_web
 
 A new Flutter project.
 

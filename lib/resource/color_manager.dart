@@ -6,8 +6,10 @@ class ColorManager {
   static const Color offWhite = Color.fromARGB(255, 240, 240, 240);
 
   //********* primary color  *********//
-  static const Color mainColor = Color(0xFF0d2b3b);
-  static const Color secondaryColor = Color(0xFFd7ba78);
+  static const Color mainColor = Color(0xFF832e1a);
+  static const Color secondaryColor = Color(0xFFf6e4da);
+  static const Color thiredColor = Color(0xFF11351E);
+  static const Color fourthColor = Color(0xFFcdcce8);
   //** neutral color  *********//
   static const Color neutral50 = Color(0xFFF9FAFB);
   static const Color neutralWhite = Color(0xFFFFFFFF);

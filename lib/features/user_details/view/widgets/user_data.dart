@@ -1,13 +1,13 @@
 // ignore_for_file: unnecessary_string_interpolations
 
-import 'package:beauty_station_web/features/main_page/data/users_beautician_data.dart';
-import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
-import 'package:beauty_station_web/features/user_details/view/widgets/custome_data_view.dart';
-import 'package:beauty_station_web/resource/color_manager.dart';
-import 'package:beauty_station_web/resource/font_weight_manger.dart';
-import 'package:beauty_station_web/services/api/end_points.dart';
-import 'package:beauty_station_web/utils/app_utils/extentions.dart';
-import 'package:beauty_station_web/widgets/custom_text.dart';
+import 'package:beauty_solution_web/features/main_page/data/users_beautician_data.dart';
+import 'package:beauty_solution_web/features/main_page/data/users_salon_data.dart';
+import 'package:beauty_solution_web/features/user_details/view/widgets/custome_data_view.dart';
+import 'package:beauty_solution_web/resource/color_manager.dart';
+import 'package:beauty_solution_web/resource/font_weight_manger.dart';
+import 'package:beauty_solution_web/services/api/end_points.dart';
+import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
+import 'package:beauty_solution_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,6 +21,13 @@ class UserData extends StatelessWidget {
     required this.beauticianUserData,
     required this.isSalon,
   });
+
+  bool returnValidation() {
+    bool isValid = isSalon
+        ? salonUserData.isAgreeToContract ?? false
+        : beauticianUserData.isAgreeToContract ?? false;
+    return isValid;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,15 +75,26 @@ class UserData extends StatelessWidget {
                               ),
                   ).horizontalPadding(20).verticalPadding(20),
                   //************ User Data Name*/
-                  CustomText(
-                    title: isSalon
-                        ? salonUserData.salonName
-                        : beauticianUserData.beauticianName,
-                    textStyle: TextStyle(
-                      color: ColorManager.secondaryColor,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeightManager.bold,
-                    ),
+                  Row(
+                    children: [
+                      CustomText(
+                        title: isSalon
+                            ? salonUserData.salonName
+                            : beauticianUserData.beauticianName,
+                        textStyle: TextStyle(
+                          color: ColorManager.thiredColor,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeightManager.bold,
+                        ),
+                      ),
+                      10.horizontalSpace,
+                      if (returnValidation())
+                        Icon(
+                          Icons.verified,
+                          color: ColorManager.mainColor,
+                          size: 20.sp,
+                        ),
+                    ],
                   ),
                   //************ User Data Phone*/
                   CustomText(
@@ -305,9 +323,16 @@ class UserData extends StatelessWidget {
                           isLink: false,
                           isSelectable: true,
                         ),
-                        Container(
-                          width: 0.2.sw,
-                        )
+                        //************ Store Data Contract Precentage*/
+                        CustomeDataView(
+                          title: 'نسبه التعاقد',
+                          data: isSalon
+                              ? '${salonUserData.contractPrecentage.toString() ?? 'غير معروف'} %'
+                              : '${beauticianUserData.contractPrecentage.toString() ?? 'غير معروف'} %',
+                          icon: Icons.price_change_sharp,
+                          isLink: false,
+                          isSelectable: true,
+                        ),
                       ],
                     ).horizontalPadding(20),
                     50.verticalSpace

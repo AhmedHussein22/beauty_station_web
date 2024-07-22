@@ -1,5 +1,5 @@
 
-import 'package:beauty_station_web/resource/enums_manager.dart';
+import 'package:beauty_solution_web/resource/enums_manager.dart';
 
 class ApiResponseModel {
   ApiStatus status;

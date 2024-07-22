@@ -1,5 +1,5 @@
-import 'package:beauty_station_web/resource/color_manager.dart';
-import 'package:beauty_station_web/widgets/custom_text.dart';
+import 'package:beauty_solution_web/resource/color_manager.dart';
+import 'package:beauty_solution_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +18,7 @@ class TiTleForTable extends StatelessWidget {
           child: const CustomText(
             title: 'الاسم',
             textStyle: TextStyle(
-                color: ColorManager.secondaryColor,
+                color: ColorManager.mainColor,
                 fontSize: 16,
                 fontWeight: FontWeight.bold),
           ),
@@ -30,7 +30,7 @@ class TiTleForTable extends StatelessWidget {
             title: 'رقم الترخيص',
             textStyle: TextStyle(
                 overflow: TextOverflow.ellipsis,
-                color: ColorManager.secondaryColor,
+                color: ColorManager.mainColor,
                 fontSize: 16,
                 fontWeight: FontWeight.bold),
           ),
@@ -41,7 +41,7 @@ class TiTleForTable extends StatelessWidget {
           child: const CustomText(
             title: 'البريد الاليكتروني',
             textStyle: TextStyle(
-                color: ColorManager.secondaryColor,
+                color: ColorManager.mainColor,
                 fontSize: 16,
                 fontWeight: FontWeight.bold),
           ),
@@ -52,7 +52,7 @@ class TiTleForTable extends StatelessWidget {
           child: const CustomText(
             title: 'رقم الجوال',
             textStyle: TextStyle(
-                color: ColorManager.secondaryColor,
+                color: ColorManager.mainColor,
                 fontSize: 16,
                 fontWeight: FontWeight.bold),
           ),
@@ -65,7 +65,7 @@ class TiTleForTable extends StatelessWidget {
                 child: const CustomText(
                   title: 'المدينة',
                   textStyle: TextStyle(
-                      color: ColorManager.secondaryColor,
+                      color: ColorManager.mainColor,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
@@ -79,7 +79,7 @@ class TiTleForTable extends StatelessWidget {
                 child: const CustomText(
                   title: 'الجنسيه',
                   textStyle: TextStyle(
-                      color: ColorManager.secondaryColor,
+                      color: ColorManager.mainColor,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
@@ -89,7 +89,7 @@ class TiTleForTable extends StatelessWidget {
           child: const CustomText(
             title: 'الموقع الالكتروني',
             textStyle: TextStyle(
-                color: ColorManager.secondaryColor,
+                color: ColorManager.mainColor,
                 fontSize: 16,
                 fontWeight: FontWeight.bold),
           ),

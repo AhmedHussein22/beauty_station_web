@@ -1,4 +1,4 @@
-import 'package:beauty_station_web/utils/app_utils/extentions.dart';
+import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
 import 'package:flutter/material.dart';
 
 class AppValidate {

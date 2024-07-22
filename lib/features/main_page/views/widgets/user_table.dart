@@ -1,12 +1,12 @@
 // ignore_for_file: unnecessary_string_interpolations
 
-import 'package:beauty_station_web/features/main_page/data/users_beautician_data.dart';
-import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
-import 'package:beauty_station_web/features/main_page/views/widgets/table_title.dart';
-import 'package:beauty_station_web/features/main_page/views/widgets/table_users.dart';
-import 'package:beauty_station_web/resource/color_manager.dart';
-import 'package:beauty_station_web/utils/app_utils/extentions.dart';
-import 'package:beauty_station_web/widgets/custom_text.dart';
+import 'package:beauty_solution_web/features/main_page/data/users_beautician_data.dart';
+import 'package:beauty_solution_web/features/main_page/data/users_salon_data.dart';
+import 'package:beauty_solution_web/features/main_page/views/widgets/table_title.dart';
+import 'package:beauty_solution_web/features/main_page/views/widgets/table_users.dart';
+import 'package:beauty_solution_web/resource/color_manager.dart';
+import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
+import 'package:beauty_solution_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

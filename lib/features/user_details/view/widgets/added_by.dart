@@ -1,10 +1,10 @@
-import 'package:beauty_station_web/features/main_page/data/users_beautician_data.dart';
-import 'package:beauty_station_web/features/main_page/data/users_salon_data.dart';
-import 'package:beauty_station_web/features/user_details/view/widgets/custome_data_view.dart';
-import 'package:beauty_station_web/resource/color_manager.dart';
-import 'package:beauty_station_web/resource/font_weight_manger.dart';
-import 'package:beauty_station_web/utils/app_utils/extentions.dart';
-import 'package:beauty_station_web/widgets/custom_text.dart';
+import 'package:beauty_solution_web/features/main_page/data/users_beautician_data.dart';
+import 'package:beauty_solution_web/features/main_page/data/users_salon_data.dart';
+import 'package:beauty_solution_web/features/user_details/view/widgets/custome_data_view.dart';
+import 'package:beauty_solution_web/resource/color_manager.dart';
+import 'package:beauty_solution_web/resource/font_weight_manger.dart';
+import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
+import 'package:beauty_solution_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

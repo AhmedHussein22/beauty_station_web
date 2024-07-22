@@ -2,13 +2,6 @@
 //
 //     final salonUsers = salonUsersFromJson(jsonString);
 
-import 'dart:convert';
-
-SalonUsers salonUsersFromJson(String str) =>
-    SalonUsers.fromJson(json.decode(str));
-
-String salonUsersToJson(SalonUsers data) => json.encode(data.toJson());
-
 class SalonUsers {
   final List<SalonUserData>? data;
 
@@ -22,12 +15,6 @@ class SalonUsers {
             : List<SalonUserData>.from(
                 json["data"]!.map((x) => SalonUserData.fromJson(x))),
       );
-
-  Map<String, dynamic> toJson() => {
-        "data": data == null
-            ? []
-            : List<dynamic>.from(data!.map((x) => x.toJson())),
-      };
 }
 
 class SalonUserData {
@@ -57,6 +44,8 @@ class SalonUserData {
   final String? registeredBy;
   final String? sellerMobile;
   final String? sellerRegistrationDate;
+  final double? contractPrecentage;
+  final bool? isAgreeToContract;
 
   SalonUserData({
     this.id,
@@ -85,6 +74,8 @@ class SalonUserData {
     this.registeredBy,
     this.sellerMobile,
     this.sellerRegistrationDate,
+    this.contractPrecentage,
+    this.isAgreeToContract,
   });
 
   factory SalonUserData.fromJson(Map<String, dynamic> json) => SalonUserData(
@@ -121,6 +112,8 @@ class SalonUserData {
         registeredBy: json["registeredBy"],
         sellerMobile: json["sellerMobile"],
         sellerRegistrationDate: json["sellerRegistrationDate"],
+        isAgreeToContract: json["isAgreeToContract"],
+        contractPrecentage: json["contractPrecentage"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -156,6 +149,8 @@ class SalonUserData {
         "registeredBy": registeredBy,
         "sellerMobile": sellerMobile,
         "sellerRegistrationDate": sellerRegistrationDate,
+        "isAgreeToContract": isAgreeToContract,
+        "contractPrecentage": contractPrecentage,
       };
 }
 

@@ -1,4 +1,4 @@
-import 'package:beauty_station_web/resource/app_keys.dart';
+import 'package:beauty_solution_web/resource/app_keys.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final beauticiansUsers = beauticiansUsersFromJson(jsonString);
-
 
 class BeauticiansUsers {
     final List<BeauticianUserData>? data;
@@ -46,6 +42,8 @@ class BeauticianUserData {
     final String? registeredBy;
     final String? sellerMobile;
     final String? sellerRegistrationDate;
+    final double? contractPrecentage;
+    final bool? isAgreeToContract;
 
     BeauticianUserData({
         this.id,
@@ -77,6 +75,8 @@ class BeauticianUserData {
         this.registeredBy,
         this.sellerMobile,
         this.sellerRegistrationDate,
+        this.contractPrecentage,
+        this.isAgreeToContract,
     });
 
     factory BeauticianUserData.fromJson(Map<String, dynamic> json) => BeauticianUserData(
@@ -109,6 +109,8 @@ class BeauticianUserData {
         registeredBy: json["registeredBy"],
         sellerMobile: json["sellerMobile"],
         sellerRegistrationDate: json["sellerRegistrationDate"],
+        contractPrecentage: json["contractPrecentage"],
+        isAgreeToContract: json["isAgreeToContract"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -141,6 +143,8 @@ class BeauticianUserData {
         "registeredBy": registeredBy,
         "sellerMobile": sellerMobile,
         "sellerRegistrationDate": sellerRegistrationDate,
+        "isAgreeToContract": isAgreeToContract,
+        "contractPrecentage": contractPrecentage,
     };
 }
 

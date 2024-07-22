@@ -1,8 +1,8 @@
 import 'package:beamer/beamer.dart';
-import 'package:beauty_station_web/resource/assets_manager.dart';
-import 'package:beauty_station_web/resource/color_manager.dart';
-import 'package:beauty_station_web/utils/app_utils/extentions.dart';
-import 'package:beauty_station_web/widgets/custom_text_field.dart';
+import 'package:beauty_solution_web/resource/assets_manager.dart';
+import 'package:beauty_solution_web/resource/color_manager.dart';
+import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
+import 'package:beauty_solution_web/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,7 +34,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Container(
               width: 0.2.sw,
               height: 0.6.sh,
-              color: ColorManager.secondaryColor,
+              color: ColorManager.mainColor,
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -62,8 +62,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         title: 'البريد الإلكتروني',
                         isRequired: true,
                         controller: emailController,
+                        textColor: ColorManager.neutralWhite,
+                        fillColor: ColorManager.neutralWhite,
                         validator: (value) {
-                          if (value != 'admin@beautystation.com') {
+                          if (value != 'admin@beautysolution.com') {
                             return 'البريد الإلكتروني غير صحيح';
                           }
                           return null;
@@ -73,6 +75,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       title: 'كلمة المرور',
                       isRequired: true,
                       controller: passwordController,
+                      textColor: ColorManager.neutralWhite,
+                      fillColor: ColorManager.neutralWhite,
                       obscureText: true,
                       validator: (value) {
                         if (value != '123456') {
@@ -86,7 +90,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         child: const Text(
                           'تسجيل الدخول',
                           style: TextStyle(
-                            color: ColorManager.secondaryColor,
+                            color: ColorManager.black,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),

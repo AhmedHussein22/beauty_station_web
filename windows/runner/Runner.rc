@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "beauty_station_web" "\0"
+            VALUE "FileDescription", "beauty_solution_web" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "beauty_station_web" "\0"
+            VALUE "InternalName", "beauty_solution_web" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "beauty_station_web.exe" "\0"
-            VALUE "ProductName", "beauty_station_web" "\0"
+            VALUE "OriginalFilename", "beauty_solution_web.exe" "\0"
+            VALUE "ProductName", "beauty_solution_web" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

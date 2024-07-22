@@ -1,5 +1,5 @@
-import 'package:beauty_station_web/beauty_station.dart';
-import 'package:beauty_station_web/services/services_init.dart';
+import 'package:beauty_solution_web/beauty_station.dart';
+import 'package:beauty_solution_web/services/services_init.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

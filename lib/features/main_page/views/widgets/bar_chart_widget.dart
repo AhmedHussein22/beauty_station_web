@@ -1,5 +1,5 @@
-import 'package:beauty_station_web/features/main_page/controller/main_controller.dart';
-import 'package:beauty_station_web/utils/app_utils/extentions.dart';
+import 'package:beauty_solution_web/features/main_page/controller/main_controller.dart';
+import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -36,9 +36,14 @@ class BarChartWidget extends StatelessWidget {
 }
 
 class ChartData {
-  ChartData(this.id , this.x, this.y, this.color, );
+  ChartData(
+    this.id,
+    this.x,
+    this.y,
+    this.color,
+  );
   final String x;
-  double y;
+  int y;
   final Color color;
   final int id;
 }

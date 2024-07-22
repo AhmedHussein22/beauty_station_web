@@ -1,15 +1,15 @@
 // ignore_for_file: unnecessary_null_comparison
 
-import 'package:beauty_station_web/features/main_page/controller/main_controller.dart';
-import 'package:beauty_station_web/features/main_page/views/widgets/added_by_widget.dart';
-import 'package:beauty_station_web/features/main_page/views/widgets/bar_chart_widget.dart';
-import 'package:beauty_station_web/features/main_page/views/widgets/count_widget.dart';
-import 'package:beauty_station_web/features/main_page/views/widgets/drawer.dart';
-import 'package:beauty_station_web/features/main_page/views/widgets/header.dart';
-import 'package:beauty_station_web/features/main_page/views/widgets/pie_chart_widget.dart';
-import 'package:beauty_station_web/features/main_page/views/widgets/user_table.dart';
-import 'package:beauty_station_web/resource/color_manager.dart';
-import 'package:beauty_station_web/utils/app_utils/extentions.dart';
+import 'package:beauty_solution_web/features/main_page/controller/main_controller.dart';
+import 'package:beauty_solution_web/features/main_page/views/widgets/added_by_widget.dart';
+import 'package:beauty_solution_web/features/main_page/views/widgets/bar_chart_widget.dart';
+import 'package:beauty_solution_web/features/main_page/views/widgets/count_widget.dart';
+import 'package:beauty_solution_web/features/main_page/views/widgets/drawer.dart';
+import 'package:beauty_solution_web/features/main_page/views/widgets/header.dart';
+import 'package:beauty_solution_web/features/main_page/views/widgets/pie_chart_widget.dart';
+import 'package:beauty_solution_web/features/main_page/views/widgets/user_table.dart';
+import 'package:beauty_solution_web/resource/color_manager.dart';
+import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

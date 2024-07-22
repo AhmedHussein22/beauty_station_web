@@ -1,9 +1,9 @@
 // lib/repository/home_repository.dart
 
-import 'package:beauty_station_web/resource/enums_manager.dart';
-import 'package:beauty_station_web/services/api/api_response.dart';
-import 'package:beauty_station_web/services/api/end_points.dart';
-import 'package:beauty_station_web/utils/app_utils/app_logs.dart';
+import 'package:beauty_solution_web/resource/enums_manager.dart';
+import 'package:beauty_solution_web/services/api/api_response.dart';
+import 'package:beauty_solution_web/services/api/end_points.dart';
+import 'package:beauty_solution_web/utils/app_utils/app_logs.dart';
 import 'package:get/get.dart';
 
 class MainRepository {
