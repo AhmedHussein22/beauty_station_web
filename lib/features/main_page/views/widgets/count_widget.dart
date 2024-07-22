@@ -60,7 +60,7 @@ class CountWidget extends StatelessWidget {
               radius: 30,
               child: Icon(
                 Icons.people,
-                color: ColorManager.neutral600,
+                color: ColorManager.mainColor,
                 size: 40,
               ))
         ],

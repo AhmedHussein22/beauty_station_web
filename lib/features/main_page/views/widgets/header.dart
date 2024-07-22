@@ -1,4 +1,5 @@
 import 'package:beamer/beamer.dart';
+import 'package:beauty_solution_web/resource/assets_manager.dart';
 import 'package:beauty_solution_web/resource/color_manager.dart';
 import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class Header extends StatelessWidget {
                     size: 25.sp,
                   ),
                 )
-              : const SizedBox(),
+              : Image.asset(ImageAssets.logo2),
           InkWell(
               onTap: () {
                 context.beamToReplacementNamed('/Login');
@@ -46,6 +47,6 @@ class Header extends StatelessWidget {
               ))
         ],
       ).horizontalPadding(30).verticalPadding(16),
-    ).verticalPadding(16);
+    ).horizontalPadding(secPage ? 24 : 0).verticalPadding(26);
   }
 }

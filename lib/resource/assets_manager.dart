@@ -8,6 +8,7 @@ class ImageAssets {
   //svg
   static const String logo = "$imagePath/Beauty-Station-LOGO.png";
   static const String logo1 = "$imagePath/Beauty-Station-LOGO 1.png";
+  static const String logo2 = "$imagePath/Beauty-Station-LOGO-2.png";
   static const String defualtAvtar = "$imagePath/avtar.png";
 }
 

@@ -15,7 +15,7 @@ class DrawerWidget extends StatelessWidget {
         height: 1.5.sh,
         width: 0.15.sw,
         decoration: BoxDecoration(
-          color: ColorManager.mainColor,
+          color: ColorManager.w,
           borderRadius: BorderRadius.circular(25),
         ),
         child: Column(
@@ -35,8 +35,8 @@ class DrawerWidget extends StatelessWidget {
                 // 20.horizontalSpace,
                 Image.asset(
                   ImageAssets.logo1,
-                  height: 120.h,
-                  width: 120.w,
+                  height: 180.h,
+                  width: 180.w,
                   color: ColorManager.secondaryColor,
                   fit: BoxFit.contain,
                 ),
@@ -66,12 +66,12 @@ class DrawerWidget extends StatelessWidget {
                     leading: Icon(
                       Icons.person,
                       size: 25.h,
-                      color: ColorManager.neutral600,
+                      color: ColorManager.mainColor,
                     ),
                     title: Text(
                       'عرض المشتركين',
                       style: TextStyle(
-                        color: ColorManager.neutral600,
+                        color: ColorManager.mainColor,
                         fontSize: 12.sp,
                         fontWeight: FontWeightManager.semiBold,
                       ),
