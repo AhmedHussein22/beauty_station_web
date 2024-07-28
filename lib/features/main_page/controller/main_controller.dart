@@ -56,7 +56,10 @@ class MainController extends GetxController {
   //******* handling the values for added by for each salon and bueaty */
   Future<void> getAddedByData() async {
     List<dynamic> allUserData = [...salonUserData, ...beauticianUserData];
+
     for (final user in allUserData) {
+      AppLogs.infoLog(
+          'Added By Data before ############### $addedBy  $allUserData');
       final int count = salonUserData
               .where((element) => element.registeredBy == user.registeredBy)
               .toList()
@@ -65,12 +68,16 @@ class MainController extends GetxController {
               .where((element) => element.registeredBy == user.registeredBy)
               .toList()
               .length;
+
       if (addedBy
           .where((element) => element.name == user.registeredBy)
           .isEmpty) {
         addedBy.add(AddedByModel(user.registeredBy, count));
       }
+      AppLogs.infoLog(
+          'Added By Data after ############### $addedBy  $allUserData');
     }
+
     update();
   }
 

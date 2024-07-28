@@ -109,49 +109,13 @@ class SalonUserData {
         website: json["website"],
         customerServicePhone: json["customerServicePhone"],
         customerServiceEmail: json["customerServiceEmail"],
-        registeredBy: json["registeredBy"],
+        registeredBy: json["registeredBy"] ?? 'غير معروف',
         sellerMobile: json["sellerMobile"],
         sellerRegistrationDate: json["sellerRegistrationDate"],
         isAgreeToContract: json["isAgreeToContract"],
         contractPrecentage: json["contractPrecentage"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "salonName": salonName,
-        "commercialRecordNumber": commercialRecordNumber,
-        "commercialRecordImage": commercialRecordImage,
-        "salonImages": salonImages == null
-            ? []
-            : List<dynamic>.from(salonImages!.map((x) => x)),
-        "locationName": locationName,
-        "city": city,
-        "latitude": latitude,
-        "longitude": longitude,
-        "mobileNumber": mobileNumber,
-        "email": email,
-        "iban": iban,
-        "bankName": bankName,
-        "logo": logo,
-        "profileImages": profileImages == null
-            ? []
-            : List<dynamic>.from(profileImages!.map((x) => x)),
-        "workingHours": workingHours == null
-            ? []
-            : List<dynamic>.from(workingHours!.map((x) => x.toJson())),
-        "holidayWorkingHours": holidayWorkingHours,
-        "festivalWorkingHours": festivalWorkingHours,
-        "servicesAndPrices": servicesAndPrices,
-        "socialMediaAccounts": socialMediaAccounts,
-        "website": website,
-        "customerServicePhone": customerServicePhone,
-        "customerServiceEmail": customerServiceEmail,
-        "registeredBy": registeredBy,
-        "sellerMobile": sellerMobile,
-        "sellerRegistrationDate": sellerRegistrationDate,
-        "isAgreeToContract": isAgreeToContract,
-        "contractPrecentage": contractPrecentage,
-      };
 }
 
 class WorkingHour {

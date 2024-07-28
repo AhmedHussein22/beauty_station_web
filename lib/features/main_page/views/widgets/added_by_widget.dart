@@ -57,7 +57,7 @@ class AddedBy extends StatelessWidget {
                 color: ColorManager.neutral50,
               );
             },
-            itemCount: salonData!.length > 5 ? 5 : salonData!.length,
+            itemCount: salonData!.length,
           ),
           15.verticalSpace,
         ],
