@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_string_interpolations
 
+import 'package:beauty_solution_web/data/local_storage/printing_contract.dart';
 import 'package:beauty_solution_web/features/main_page/data/users_beautician_data.dart';
 import 'package:beauty_solution_web/features/main_page/data/users_salon_data.dart';
 import 'package:beauty_solution_web/features/user_details/view/widgets/custome_data_view.dart';
@@ -120,6 +121,39 @@ class UserData extends StatelessWidget {
                       fontWeight: FontWeightManager.regular,
                     ),
                   ),
+
+                  //************* Contract  */
+                  if (returnValidation())
+                    Row(
+                      children: [
+                        const CustomText(
+                          title: 'صوره العقد',
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              PrintClass.printPDF(
+                                name :isSalon
+                                  ? '${salonUserData.salonName}'
+                                  : '${beauticianUserData.beauticianName}',
+                                  date: isSalon
+                          ? salonUserData.sellerRegistrationDate ?? 'غير معروف'
+                          : beauticianUserData.sellerRegistrationDate ??
+                              'غير معروف',
+                          address: isSalon
+                                  ? '${salonUserData.locationName}'
+                                  : '${beauticianUserData.locationName}',
+                          phone: isSalon
+                                  ? '${salonUserData.mobileNumber}'
+                                  : '${beauticianUserData.mobileNumber}',
+                          email: isSalon
+                                  ? '${salonUserData.email}'
+                                  : '${beauticianUserData.email}',
+                                  
+                                  );
+                            },
+                            icon: const Icon(Icons.print))
+                      ],
+                    )
                 ],
               ),
               //************ Horizontal Divider*/

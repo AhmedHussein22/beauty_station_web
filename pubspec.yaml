@@ -49,6 +49,12 @@ dependencies:
   get: ^4.6.6
 
 
+  # ****** Printing *******
+  printing: ^5.9.0
+  pdf: ^3.11.0
+  google_fonts: ^4.0.3 
+
+
 
   beamer: ^1.6.1
 
@@ -96,4 +102,8 @@ flutter:
         - asset: assets/fonts/Tajawal-Light.ttf
           weight: 300
         - asset: assets/fonts/Tajawal-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/MonsieurLaDoulaise-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/MonsieurLaDoulaise-Regular.ttf
           weight: 200

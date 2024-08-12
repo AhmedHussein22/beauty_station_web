@@ -10,6 +10,7 @@ class ImageAssets {
   static const String logo1 = "$imagePath/Beauty-Station-LOGO 1.png";
   static const String logo2 = "$imagePath/Beauty-Station-LOGO-2.png";
   static const String defualtAvtar = "$imagePath/avtar.png";
+  static const String logoPing = "$imagePath/ping-logo 1.png";
 }
 
 class IconAssets {
