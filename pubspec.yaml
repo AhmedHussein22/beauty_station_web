@@ -83,7 +83,6 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/
-    - assets/svgs/
     - assets/jsons/
     - assets/gifs/
     - assets/jsons/lang/
