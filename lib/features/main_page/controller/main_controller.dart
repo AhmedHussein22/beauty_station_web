@@ -101,27 +101,30 @@ class MainController extends GetxController {
     }
   }
 
-//******* */ fetch PDF file from api *****************/
-  Future<void> fetchFileFromApi() async {
-    final response = await MainRepository().getPDFforUser();
-
-    if (response.status == ApiStatus.success) {
-      // final directory = await getTemporaryDirectory();
-      // final filePath = '${directory.path}/file.pdf'; // Adjust the file extension as needed
-      // final file = File(filePath);
-
-      // final raf = file.openSync(mode: FileMode.write);
-
-      // await for (var chunk in response.databytes) {
-      //   raf.writeFromSync(chunk);
-      // }
-
-      // raf.closeSync();
-      // return file;
-    } else {
-      throw Exception('Failed to load file');
+  //******* */ resend contract for salon  *****************/
+  Future<void> resendContract(String id, bool isSalon) async {
+    try {
+      final response = await MainRepository().resendContractSalon(id, isSalon);
+      if (response.status == ApiStatus.success) {
+        Get.showSnackbar(GetSnackBar(
+          message: 'تم إعادة إرسال بنجاح',
+          duration: const Duration(seconds: 2),
+        ));
+      } else {
+        // Get.showSnackbar(GetSnackBar(
+        //   message: response.message,
+        //   duration: const Duration(seconds: 2),
+        // ));
+      }
+    } catch (e) {
+      // Get.showSnackbar(GetSnackBar(
+      //   message: e.toString(),
+      //   duration: const Duration(seconds: 2),
+      // ));
     }
   }
+
+
 
   @override
   void onInit() async {

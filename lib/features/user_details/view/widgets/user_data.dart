@@ -129,15 +129,22 @@ class UserData extends StatelessWidget {
                             IconButton(
                                 onPressed: () {
                                   AppLogs.infoLog('****** Call fetch File PDF');
-                                  HelperFunctions.launchURL('https://beautycenter.runasp.net/api/Pdf/GenerateAgreementPdf');
+                                  HelperFunctions.launchURL('https://beautycenter.runasp.net/api/${isSalon ? 'Salons' : 'Beauticians'}/SendAgreementPdf?id=${isSalon ? salonUserData.id : beauticianUserData.id}');
                                 },
                                 icon: const Icon(Icons.print))
                           ],
                         ),
+                      15.verticalSpace,
                       if (returnValidation())
-                        const CustomText(
-                          title: ' اعاده ارسال الشروط و الاحكام ',
-                          underLine: true,
+                        InkWell(
+                          onTap: () {
+                            AppLogs.infoLog('****** Call resend Contract');
+                            mainController.resendContract(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon);
+                          },
+                          child: const CustomText(
+                            title: ' اعاده ارسال الشروط و الاحكام ',
+                            underLine: true,
+                          ),
                         ),
                     ],
                   ),

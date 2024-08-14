@@ -27,6 +27,12 @@ class FontStyleManager {
     fontWeight: FontWeightManager.regular,
     color: ColorManager.black,
   );
+
+  static TextStyle h35BlackB = TextStyle(
+    fontSize: 35.sp,
+    fontWeight: FontWeightManager.bold,
+    color: ColorManager.black,
+  );
   //********* White *********//
 
   //********* red  *********//

@@ -27,6 +27,13 @@ class MainRepository {
       EndPoints.getPdfFile,
     );
   }
+
+  //*************** resend contract for salon *****************/
+  Future<ApiResponseModel> resendContractSalon(String id, bool isSalon) async {
+    return await ApiService().getData(
+      isSalon ? EndPoints.resendContractSalon + id : EndPoints.resendContractBeautician + id,
+    );
+  }
 }
 
 class ApiService extends GetConnect {
