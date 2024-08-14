@@ -87,7 +87,7 @@ class TiTleForTable extends StatelessWidget {
         SizedBox(
           width: 150.w,
           child: const CustomText(
-            title: 'الموقع الالكتروني',
+            title: 'موافق علي العقد',
             textStyle: TextStyle(
                 color: ColorManager.mainColor,
                 fontSize: 16,

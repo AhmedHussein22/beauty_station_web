@@ -85,6 +85,9 @@ class UserTable extends StatelessWidget {
                   website: isSalon
                       ? '${salonData?[index].website ?? 'غير معروف'}'
                       : '${beauticianData?[index].website ?? 'غير معروف'}',
+                  isAgreeToContract: isSalon
+                      ? salonData![index].isAgreeToContract ?? false 
+                      : beauticianData![index].isAgreeToContract  ?? false
                 );
               },
               itemCount: isSalon ? salonData!.length : beauticianData!.length,

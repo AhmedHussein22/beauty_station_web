@@ -40,14 +40,7 @@ class MainController extends GetxController {
 //******* handling the values for cities for each salon and bueaty */
   Future<void> getCityData() async {
     for (final city in cities) {
-      final int count = salonUserData
-              .where((element) => element.city.toString() == city.id.toString())
-              .toList()
-              .length +
-          beauticianUserData
-              .where((element) => element.city.toString() == city.id.toString())
-              .toList()
-              .length;
+      final int count = salonUserData.where((element) => element.city.toString() == city.id.toString()).toList().length + beauticianUserData.where((element) => element.city.toString() == city.id.toString()).toList().length;
       city.y = count;
     }
     update();
@@ -58,24 +51,13 @@ class MainController extends GetxController {
     List<dynamic> allUserData = [...salonUserData, ...beauticianUserData];
 
     for (final user in allUserData) {
-      AppLogs.infoLog(
-          'Added By Data before ############### $addedBy  $allUserData');
-      final int count = salonUserData
-              .where((element) => element.registeredBy == user.registeredBy)
-              .toList()
-              .length +
-          beauticianUserData
-              .where((element) => element.registeredBy == user.registeredBy)
-              .toList()
-              .length;
+      AppLogs.infoLog('Added By Data before ############### $addedBy  $allUserData');
+      final int count = salonUserData.where((element) => element.registeredBy == user.registeredBy).toList().length + beauticianUserData.where((element) => element.registeredBy == user.registeredBy).toList().length;
 
-      if (addedBy
-          .where((element) => element.name == user.registeredBy)
-          .isEmpty) {
+      if (addedBy.where((element) => element.name == user.registeredBy).isEmpty) {
         addedBy.add(AddedByModel(user.registeredBy, count));
       }
-      AppLogs.infoLog(
-          'Added By Data after ############### $addedBy  $allUserData');
+      AppLogs.infoLog('Added By Data after ############### $addedBy  $allUserData');
     }
 
     update();
@@ -107,25 +89,37 @@ class MainController extends GetxController {
   Future<void> fetchBeauticianUsers() async {
     try {
       final response = await MainRepository().getBeauticianData();
-      AppLogs.infoLog(
-          'Beautician state ******************** ${response.status}');
+      AppLogs.infoLog('Beautician state ******************** ${response.status}');
       if (response.status == ApiStatus.success) {
         final beauticianData = BeauticiansUsers.fromJson(response.data);
         beauticianUserData = beauticianData.data!;
-        AppLogs.infoLog(
-            'Beautician Data ############### ${beauticianData.data}');
+        AppLogs.infoLog('Beautician Data ############### ${beauticianData.data}');
         update();
-      } else {
-        // Get.showSnackbar(GetSnackBar(
-        //   message: response.message,
-        //   duration: const Duration(seconds: 2),
-        // ));
-      }
+      } else {}
     } catch (e) {
-      // Get.showSnackbar(GetSnackBar(
-      //   message: e.toString(),
-      //   duration: const Duration(seconds: 2),
-      // ));
+      //add catch error
+    }
+  }
+
+//******* */ fetch PDF file from api *****************/
+  Future<void> fetchFileFromApi() async {
+    final response = await MainRepository().getPDFforUser();
+
+    if (response.status == ApiStatus.success) {
+      // final directory = await getTemporaryDirectory();
+      // final filePath = '${directory.path}/file.pdf'; // Adjust the file extension as needed
+      // final file = File(filePath);
+
+      // final raf = file.openSync(mode: FileMode.write);
+
+      // await for (var chunk in response.databytes) {
+      //   raf.writeFromSync(chunk);
+      // }
+
+      // raf.closeSync();
+      // return file;
+    } else {
+      throw Exception('Failed to load file');
     }
   }
 

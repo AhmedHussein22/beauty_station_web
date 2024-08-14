@@ -20,6 +20,13 @@ class MainRepository {
       EndPoints.getBeautician,
     );
   }
+
+  //*************** get user beautician data *****************/
+  Future<ApiResponseModel> getPDFforUser() async {
+    return await ApiService().getData(
+      EndPoints.getPdfFile,
+    );
+  }
 }
 
 class ApiService extends GetConnect {
@@ -30,17 +37,22 @@ class ApiService extends GetConnect {
       AppLogs.debugLog("${response.statusCode}", 'statusCode');
       final String stateCode = response.body['statusCode'].toString();
       final data = response.body;
+      final databytes = response.bodyBytes;
+      AppLogs.infoLog('${response.statusCode}');
       if (response.statusCode == 200 || stateCode.startsWith('2')) {
         AppLogs.successLog(data.toString());
+        AppLogs.successLog(databytes.toString());
         return ApiResponseModel(
           status: ApiStatus.success,
           data: data,
+          databytes: databytes,
         );
       } else {
         AppLogs.errorLog('error getData');
         return ApiResponseModel(
           status: ApiStatus.error,
           data: data,
+          databytes: databytes,
         );
       }
     } catch (e) {

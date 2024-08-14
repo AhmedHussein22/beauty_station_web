@@ -53,6 +53,10 @@ dependencies:
   printing: ^5.9.0
   pdf: ^3.11.0
   google_fonts: ^4.0.3 
+  http: 
+  webview_flutter: ^4.2.0  # or the latest version
+  path_provider: ^2.0.11  # for saving files locally
+
 
 
 

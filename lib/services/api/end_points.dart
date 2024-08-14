@@ -7,4 +7,8 @@ class EndPoints {
 
   //**************** Beautician *****************/
   static const String getBeautician = 'beauticians';
+
+
+  //**************** PDF file *****************/
+  static const String getPdfFile = 'Pdf/GenerateAgreementPdf';
 }
