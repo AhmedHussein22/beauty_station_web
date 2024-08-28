@@ -8,16 +8,17 @@ import 'package:get/get.dart';
 
 class MainRepository {
   //*************** get user salon data *****************/
-  Future<ApiResponseModel> getSalonData() async {
+  Future<ApiResponseModel> getSalonData({required int pageNumber ,required int pageSize ,required String filter , required String asc }) async {
+    
     return await ApiService().getData(
-      EndPoints.getsalonData,
+      '${EndPoints.getsalonData}?pageNumber=$pageNumber&pageSize=$pageSize&filter=$filter&sortOrder=$asc',
     );
   }
 
 //*************** get user beautician data *****************/
-  Future<ApiResponseModel> getBeauticianData() async {
+  Future<ApiResponseModel> getBeauticianData({required int pageNumber ,required int pageSize ,required String filter , required String asc }) async {
     return await ApiService().getData(
-      EndPoints.getBeautician,
+      '${EndPoints.getBeautician}?pageNumber=$pageNumber&pageSize=$pageSize&filter=$filter&sortOrder=$asc',
     );
   }
 

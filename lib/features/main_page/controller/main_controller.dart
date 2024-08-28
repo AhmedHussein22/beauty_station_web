@@ -66,7 +66,7 @@ class MainController extends GetxController {
 //******* */ fetch salon users from api *****************/
   Future<void> fetchSalonUsers() async {
     try {
-      final response = await MainRepository().getSalonData();
+      final response = await MainRepository().getSalonData(pageNumber: 1, pageSize: 100, filter: '', asc: '');
       if (response.status == ApiStatus.success) {
         final salonUser = SalonUsers.fromJson(response.data);
         salonUserData = salonUser.data!;
@@ -88,7 +88,7 @@ class MainController extends GetxController {
 //******* */ fetch Beauticians users from api *****************/
   Future<void> fetchBeauticianUsers() async {
     try {
-      final response = await MainRepository().getBeauticianData();
+      final response = await MainRepository().getBeauticianData(pageNumber: 1, pageSize: 100, filter: '', asc: '');
       AppLogs.infoLog('Beautician state ******************** ${response.status}');
       if (response.status == ApiStatus.success) {
         final beauticianData = BeauticiansUsers.fromJson(response.data);
@@ -106,9 +106,9 @@ class MainController extends GetxController {
     try {
       final response = await MainRepository().resendContractSalon(id, isSalon);
       if (response.status == ApiStatus.success) {
-        Get.showSnackbar(GetSnackBar(
+        Get.showSnackbar(const GetSnackBar(
           message: 'تم إعادة إرسال بنجاح',
-          duration: const Duration(seconds: 2),
+          duration: Duration(seconds: 2),
         ));
       } else {
         // Get.showSnackbar(GetSnackBar(
@@ -123,8 +123,6 @@ class MainController extends GetxController {
       // ));
     }
   }
-
-
 
   @override
   void onInit() async {
