@@ -6,6 +6,6 @@ class AppStrings {
   static const String fontFamily = 'Tajawal';
   static const String arabicCode = 'ar';
   static const String englishCode = 'en';
-  static const String appName = 'Rakeez';
-  static const String appVersion = 'V 1.0.0';
+  static const String appName = 'Beauty Station';
+  static const String appVersion = 'V 4.0.0';
 }

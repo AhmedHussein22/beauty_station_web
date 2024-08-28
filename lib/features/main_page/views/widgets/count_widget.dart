@@ -7,11 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CountWidget extends StatelessWidget {
   final String totalUsers, usersType, persintageUsers;
-  const CountWidget(
-      {super.key,
-      required this.totalUsers,
-      required this.usersType,
-      required this.persintageUsers});
+  const CountWidget({super.key, required this.totalUsers, required this.usersType, required this.persintageUsers});
 
   @override
   Widget build(BuildContext context) {
@@ -30,26 +26,17 @@ class CountWidget extends StatelessWidget {
               // ******* total users *******
               CustomText(
                 title: totalUsers,
-                textStyle: TextStyle(
-                    color: ColorManager.black,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeightManager.semiBold),
+                textStyle: TextStyle(color: ColorManager.black, fontSize: 14.sp, fontWeight: FontWeightManager.semiBold),
               ),
               // ******* users type *******
               CustomText(
                 title: usersType,
-                textStyle: TextStyle(
-                    color: ColorManager.neutral600,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeightManager.medium),
+                textStyle: TextStyle(color: ColorManager.neutral600, fontSize: 14.sp, fontWeight: FontWeightManager.medium),
               ),
               // ******* persintage users *******
               CustomText(
                 title: persintageUsers,
-                textStyle: TextStyle(
-                    color: ColorManager.neutral600,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeightManager.medium),
+                textStyle: TextStyle(color: ColorManager.neutral600, fontSize: 14.sp, fontWeight: FontWeightManager.medium),
               ),
             ],
           ),

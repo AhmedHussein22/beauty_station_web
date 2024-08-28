@@ -106,7 +106,7 @@ flutter:
           weight: 300
         - asset: assets/fonts/Tajawal-ExtraLight.ttf
           weight: 200
-        - asset: assets/fonts/MonsieurLaDoulaise-Regular.ttf
-          weight: 500
-        - asset: assets/fonts/MonsieurLaDoulaise-Regular.ttf
-          weight: 200
+        # - asset: assets/fonts/MonsieurLaDoulaise-Regular.ttf
+        #   weight: 500
+        # - asset: assets/fonts/MonsieurLaDoulaise-Regular.ttf
+        #   weight: 200

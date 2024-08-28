@@ -50,7 +50,7 @@ class _DataForTableState extends State<DataForTable> {
       child: Row(children: [
         //************ Table Users Data ID */
         SizedBox(
-          width: 45.w,
+          width: 55.w,
           child: Center(
             child: CustomText(
               title: widget.id,
@@ -64,23 +64,23 @@ class _DataForTableState extends State<DataForTable> {
         ),
         //************ Table Users Data Name */
         SizedBox(
-          width: 120.w,
+          width: 170.w,
           child: CustomText(
             title: widget.name,
             textStyle: TextStyle(color: onHoverColor ? ColorManager.secondaryColor : ColorManager.black, fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
         //************ Table Users Data Number ID */
-        SizedBox(
-          width: 120.w,
-          child: CustomText(
-            title: widget.numberId,
-            textStyle: TextStyle(overflow: TextOverflow.ellipsis, color: onHoverColor ? ColorManager.secondaryColor : ColorManager.black, fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
+        // SizedBox(
+        //   width: 120.w,
+        //   child: CustomText(
+        //     title: widget.numberId,
+        //     textStyle: TextStyle(overflow: TextOverflow.ellipsis, color: onHoverColor ? ColorManager.secondaryColor : ColorManager.black, fontSize: 16, fontWeight: FontWeight.bold),
+        //   ),
+        // ),
         //************ Table Users Data Email Address */
         SizedBox(
-          width: 170.w,
+          width: !widget.isSalon ? 270.w : 220.w,
           child: CustomText(
             title: widget.emailAddress,
             textStyle: TextStyle(color: onHoverColor ? ColorManager.secondaryColor : ColorManager.black, overflow: TextOverflow.ellipsis, fontSize: 16, fontWeight: FontWeight.bold),
@@ -88,7 +88,7 @@ class _DataForTableState extends State<DataForTable> {
         ),
         //************ Table Users Data Phone Number */
         SizedBox(
-          width: 120.w,
+          width: !widget.isSalon ? 150.w : 120.w,
           child: CustomText(
             title: widget.phoneNumber,
             textStyle: TextStyle(color: onHoverColor ? ColorManager.secondaryColor : ColorManager.black, fontSize: 16, fontWeight: FontWeight.bold),
@@ -105,16 +105,16 @@ class _DataForTableState extends State<DataForTable> {
                 ),
               ),
         //************ Table Users Data Nation */
-        if (widget.isSalon) 15.horizontalSpace,
-        widget.isSalon
-            ? const SizedBox()
-            : SizedBox(
-                width: 100.w,
-                child: CustomText(
-                  title: widget.nation,
-                  textStyle: TextStyle(color: onHoverColor ? ColorManager.secondaryColor : ColorManager.black, fontSize: 16, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
-                ),
-              ),
+        // if (widget.isSalon) 15.horizontalSpace,
+        // widget.isSalon
+        //     ? const SizedBox()
+        //     : SizedBox(
+        //         width: 100.w,
+        //         child: CustomText(
+        //           title: widget.nation,
+        //           textStyle: TextStyle(color: onHoverColor ? ColorManager.secondaryColor : ColorManager.black, fontSize: 16, fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
+        //         ),
+        //       ),
         SizedBox(
           width: 150.w,
           child: returnValidation()
