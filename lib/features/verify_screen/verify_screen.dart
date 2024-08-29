@@ -18,7 +18,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(ImageAssets.welcomeBg),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
         ),
       ),
