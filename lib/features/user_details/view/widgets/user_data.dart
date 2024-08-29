@@ -151,23 +151,23 @@ class UserData extends StatelessWidget {
                             ),
                           ),
                         ),
-                      if (!returnValidation())
-                        InkWell(
-                          mouseCursor: WidgetStateMouseCursor.clickable,
-                          onTap: () {
-                            mainController.changeInviteToContract();
-                          },
-                          child: SizedBox(
-                            width: 0.06.sw,
-                            height: 0.04.sh,
-                            child: const Center(
-                              child: CustomText(
-                                title: 'دعوه للتعاقد',
-                                underLine: true,
-                              ),
-                            ),
-                          ),
-                        ),
+                      // if (!returnValidation())
+                      //   InkWell(
+                      //     mouseCursor: WidgetStateMouseCursor.clickable,
+                      //     onTap: () {
+                      //       mainController.changeInviteToContract();
+                      //     },
+                      //     child: SizedBox(
+                      //       width: 0.06.sw,
+                      //       height: 0.04.sh,
+                      //       child: const Center(
+                      //         child: CustomText(
+                      //           title: 'دعوه للتعاقد',
+                      //           underLine: true,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
                     ],
                   ),
                   10.horizontalSpace,
