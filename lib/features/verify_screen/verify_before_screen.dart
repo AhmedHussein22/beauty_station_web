@@ -1,8 +1,8 @@
 import 'package:beauty_solution_web/resource/assets_manager.dart';
 import 'package:flutter/material.dart';
 
-class VerifyScreen extends StatelessWidget {
-  const VerifyScreen({super.key});
+class VerifyBeforeScreen extends StatelessWidget {
+  const VerifyBeforeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class VerifyScreen extends StatelessWidget {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(ImageAssets.welcomeBg),
+            image: AssetImage(ImageAssets.welcomeBg1),
             fit: BoxFit.cover,
           ),
         ),

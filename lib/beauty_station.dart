@@ -1,7 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:beauty_solution_web/config/theme/app_theme.dart';
 import 'package:beauty_solution_web/features/main_page/controller/controller_bindding.dart';
-import 'package:beauty_solution_web/features/verify_screen/verify_screen.dart';
+import 'package:beauty_solution_web/features/verify_screen/verify_before_screen.dart';
 import 'package:beauty_solution_web/utils/app_utils/app_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,17 +23,25 @@ class BeautyStationAppState extends State<BeautyStationApp> {
   final routerDelegate = BeamerDelegate(
       transitionDelegate: const NoAnimationTransitionDelegate(),
       beamBackTransitionDelegate: const NoAnimationTransitionDelegate(),
-      initialPath: '/Verified',
+      initialPath: '/VerifiedBefore',
       buildListener: (context, beamerDelegate) async {
         AppLogs.infoLog('Beamer buildListener: ${beamerDelegate.currentPages[0].name}');
       },
       locationBuilder: RoutesLocationBuilder(routes: {
-        '/Verified': (context, state, data) {
+        // '/Verified': (context, state, data) {
+        //   return const BeamPage(
+        //     title: 'Verified',
+        //     key: ValueKey('Verified'),
+        //     name: 'Verified',
+        //     child: VerifyScreen(),
+        //   );
+        // },
+        '/VerifiedBefore': (context, state, data) {
           return const BeamPage(
-            title: 'Verified',
-            key: ValueKey('Verified'),
-            name: 'Verified',
-            child: VerifyScreen(),
+            title: 'VerifiedBefore',
+            key: ValueKey('VerifiedBefore'),
+            name: 'VerifiedBefore',
+            child: VerifyBeforeScreen(),
           );
         },
         // '/Home': (context, state, data) {
