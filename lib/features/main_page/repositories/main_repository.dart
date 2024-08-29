@@ -49,7 +49,7 @@ class ApiService extends GetConnect {
         AppLogs.successLog(data.toString());
         return ApiResponseModel(
           status: ApiStatus.success,
-          data: data['data'],
+          data: data,
         );
       } else {
         AppLogs.errorLog('error getData');

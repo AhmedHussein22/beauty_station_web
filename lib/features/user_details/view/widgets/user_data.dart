@@ -111,7 +111,7 @@ class UserData extends StatelessWidget {
                       ),
                       //************ User Data Email*/
                       SelectableText(
-                        isSalon ? '${salonUserData.email}' : '${beauticianUserData.email}',
+                        isSalon ? '${salonUserData.email ?? 'غير معروف'}' : '${beauticianUserData.email ?? 'غير معروف'}',
                         style: TextStyle(
                           color: ColorManager.neutral900,
                           fontSize: 14.sp,
