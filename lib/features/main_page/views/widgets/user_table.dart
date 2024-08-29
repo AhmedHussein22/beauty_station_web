@@ -87,7 +87,7 @@ class UserTable extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return DataForTable(
                       isSalon: isSalon,
-                      id: '${index + 1}',
+                      id: isSalon ? '${salonData?[index].id ?? 'غير معروف'}' : '${beauticianData?[index].id ?? 'غير معروف'}',
                       name: isSalon ? '${salonData?[index].salonName ?? 'غير معروف'}' : '${beauticianData?[index].beauticianName ?? 'غير معروف'}',
                       numberId: isSalon ? '${salonData?[index].commercialRecordNumber ?? 'غير معروف'}' : '${beauticianData?[index].licenseNumber ?? 'غير معروف'}',
                       city: isSalon ? '${salonData?[index].locationName ?? 'غير معروف'}' : '${beauticianData?[index].locationName ?? 'غير معروف'}',

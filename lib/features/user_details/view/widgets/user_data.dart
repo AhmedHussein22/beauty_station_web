@@ -137,13 +137,35 @@ class UserData extends StatelessWidget {
                       15.verticalSpace,
                       if (returnValidation())
                         InkWell(
+                          mouseCursor: WidgetStateMouseCursor.clickable,
                           onTap: () {
                             AppLogs.infoLog('****** Call resend Contract');
                             mainController.resendContract(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon);
                           },
-                          child: const CustomText(
-                            title: ' اعاده ارسال الشروط و الاحكام ',
-                            underLine: true,
+                          child: SizedBox(
+                            width: 0.15.sw,
+                            height: 0.04.sh,
+                            child: const CustomText(
+                              title: ' اعاده ارسال الشروط و الاحكام ',
+                              underLine: true,
+                            ),
+                          ),
+                        ),
+                      if (!returnValidation())
+                        InkWell(
+                          mouseCursor: WidgetStateMouseCursor.clickable,
+                          onTap: () {
+                            mainController.changeInviteToContract();
+                          },
+                          child: SizedBox(
+                            width: 0.06.sw,
+                            height: 0.04.sh,
+                            child: const Center(
+                              child: CustomText(
+                                title: 'دعوه للتعاقد',
+                                underLine: true,
+                              ),
+                            ),
                           ),
                         ),
                     ],

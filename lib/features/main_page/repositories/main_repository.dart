@@ -21,6 +21,7 @@ class MainRepository {
     );
   }
 
+
   //*************** get user beautician data *****************/
   Future<ApiResponseModel> getPDFforUser() async {
     return await ApiService().getData(

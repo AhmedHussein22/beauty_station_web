@@ -53,7 +53,7 @@ class _DataForTableState extends State<DataForTable> {
           width: 55.w,
           child: Center(
             child: CustomText(
-              title: widget.id,
+              title: '${widget.index + 1}',
               textStyle: TextStyle(
                 color: onHoverColor ? ColorManager.mainColor : ColorManager.secondaryColor,
                 fontSize: 16,

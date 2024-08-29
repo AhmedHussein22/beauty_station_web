@@ -11,6 +11,8 @@ import 'package:get/get.dart';
 class MainController extends GetxController {
   List<SalonUserData> salonUserData = [];
   List<BeauticianUserData> beauticianUserData = [];
+  SalonUserData salonUser = SalonUserData();
+  BeauticianUserData beauticianUser = BeauticianUserData();
   List<ChartData> cities = [
     ChartData(1, 'الرياض', 0, ColorManager.mainColor),
     ChartData(2, 'جدة', 0, ColorManager.secondaryColor),
@@ -38,6 +40,17 @@ class MainController extends GetxController {
   BeauticianUserData emptyBeauticianUserData = BeauticianUserData();
   TextEditingController salonSearchController = TextEditingController();
   TextEditingController beauticianSearchController = TextEditingController();
+  TextEditingController userEmailAddressController = TextEditingController();
+  TextEditingController userContractPercentageController = TextEditingController();
+  bool inviteToContract = false;
+  final GlobalKey<FormState> inviteToContractFormKey = GlobalKey<FormState>();
+
+  //***** Change invite to contract value */
+  void changeInviteToContract() {
+    AppLogs.infoLog('Invite to contract value before ############### $inviteToContract');
+    inviteToContract = !inviteToContract;
+    update();
+  }
 
 //******* handling the values for cities for each salon and bueaty */
   Future<void> getCityData() async {
@@ -102,6 +115,8 @@ class MainController extends GetxController {
       //add catch error
     }
   }
+
+  //******* */ Fetch user for salon or beauticians  *****************/
 
   //******* */ resend contract for salon  *****************/
   Future<void> resendContract(String id, bool isSalon) async {
