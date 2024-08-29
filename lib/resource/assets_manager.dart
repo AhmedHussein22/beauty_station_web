@@ -11,6 +11,9 @@ class ImageAssets {
   static const String logo2 = "$imagePath/Beauty-Station-LOGO-2.png";
   static const String defualtAvtar = "$imagePath/avtar.png";
   static const String logoPing = "$imagePath/ping-logo 1.png";
+
+  //**************  Welcome page / Verify  */
+  static const String welcomeBg = "$imagePath/WELCOME.jpg";
 }
 
 class IconAssets {

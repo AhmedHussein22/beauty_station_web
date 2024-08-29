@@ -1,9 +1,5 @@
-import 'package:beauty_solution_web/features/verify_screen/widgets/verifiy_widget.dart';
-import 'package:beauty_solution_web/resource/font_style_manager.dart';
-import 'package:beauty_solution_web/widgets/custom_text.dart';
+import 'package:beauty_solution_web/resource/assets_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class VerifyScreen extends StatefulWidget {
   const VerifyScreen({super.key});
@@ -16,28 +12,15 @@ class _VerifyScreenState extends State<VerifyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
+      body: Container(
         width: double.infinity,
         height: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Verifywidget(),
-            40.h.verticalSpace,
-            CustomText(
-              title: ' تمت الموافقة على الشروط و الاحكام بنجاح ',
-              textStyle: FontStyleManager.h35BlackB,
-              textAlign: TextAlign.center,
-            ),
-            20.h.verticalSpace,
-            CustomText(
-              title: 'انتظر إرسال صورة من العقد',
-              textStyle: FontStyleManager.h5BlackB,
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ).paddingSymmetric(horizontal: 24.w),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(ImageAssets.welcomeBg),
+            fit: BoxFit.fill,
+          ),
+        ),
       ),
     );
   }

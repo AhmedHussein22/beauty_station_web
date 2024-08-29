@@ -1,14 +1,11 @@
 import 'package:beamer/beamer.dart';
 import 'package:beauty_solution_web/config/theme/app_theme.dart';
 import 'package:beauty_solution_web/features/main_page/controller/controller_bindding.dart';
-import 'package:beauty_solution_web/features/main_page/views/main_page.dart';
-import 'package:beauty_solution_web/features/user_details/view/user_details_view.dart';
+import 'package:beauty_solution_web/features/verify_screen/verify_screen.dart';
 import 'package:beauty_solution_web/utils/app_utils/app_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import 'features/welcome_screen/welcome_screen.dart';
 
 class BeautyStationApp extends StatefulWidget {
   const BeautyStationApp({super.key});
@@ -26,46 +23,46 @@ class BeautyStationAppState extends State<BeautyStationApp> {
   final routerDelegate = BeamerDelegate(
       transitionDelegate: const NoAnimationTransitionDelegate(),
       beamBackTransitionDelegate: const NoAnimationTransitionDelegate(),
-      initialPath: '/Login',
+      initialPath: '/Verified',
       buildListener: (context, beamerDelegate) async {
         AppLogs.infoLog('Beamer buildListener: ${beamerDelegate.currentPages[0].name}');
       },
       locationBuilder: RoutesLocationBuilder(routes: {
-        // '/Verified': (context, state, data) {
+        '/Verified': (context, state, data) {
+          return const BeamPage(
+            title: 'Verified',
+            key: ValueKey('Verified'),
+            name: 'Verified',
+            child: VerifyScreen(),
+          );
+        },
+        // '/Home': (context, state, data) {
         //   return const BeamPage(
-        //     title: 'Verified',
-        //     key: ValueKey('Verified'),
-        //     name: 'Verified',
-        //     child: VerifyScreen(),
+        //     title: 'Home',
+        //     key: ValueKey('home'),
+        //     name: 'home',
+        //     child: MainPage(),
         //   );
         // },
-        '/Home': (context, state, data) {
-          return const BeamPage(
-            title: 'Home',
-            key: ValueKey('home'),
-            name: 'home',
-            child: MainPage(),
-          );
-        },
-        '/UserDetails/:userName': (context, state, data) {
-          final userName = state.pathParameters['userName']!;
-          // final info = (data as Project);
-          return BeamPage(
-            title: userName,
-            name: userName,
-            key: ValueKey('Projects_Page/$userName'),
-            type: BeamPageType.scaleTransition,
-            child: const UserDetailsView(),
-          );
-        },
-        '/Login': (context, state, data) {
-          return const BeamPage(
-            title: 'Login',
-            key: ValueKey('Login'),
-            name: 'Login',
-            child: WelcomeScreen(),
-          );
-        },
+        // '/UserDetails/:userName': (context, state, data) {
+        //   final userName = state.pathParameters['userName']!;
+        //   // final info = (data as Project);
+        //   return BeamPage(
+        //     title: userName,
+        //     name: userName,
+        //     key: ValueKey('Projects_Page/$userName'),
+        //     type: BeamPageType.scaleTransition,
+        //     child: const UserDetailsView(),
+        //   );
+        // },
+        // '/Login': (context, state, data) {
+        //   return const BeamPage(
+        //     title: 'Login',
+        //     key: ValueKey('Login'),
+        //     name: 'Login',
+        //     child: WelcomeScreen(),
+        //   );
+        // },
       }).call);
 
   @override
