@@ -113,9 +113,7 @@ class CustomTextField extends StatelessWidget {
               alignment: AlignmentDirectional.centerStart,
               child: CustomText(
                 title: title ?? '',
-                textStyle: FontStyleManager.subtitle1BlackB
-                    .copyWith(color: ColorManager.neutralWhite)
-                    .copyWith(color: titleColor),
+                textStyle: FontStyleManager.subtitle1BlackB.copyWith(color: ColorManager.neutralWhite).copyWith(color: titleColor),
               ),
             ),
           ),
@@ -125,8 +123,7 @@ class CustomTextField extends StatelessWidget {
           autofocus: isAutofocus ?? false,
           textInputAction: textInputAction ?? TextInputAction.next,
           obscureText: obscureText,
-          onTapOutside:
-              onTapOutside ?? (event) => FocusScope.of(context).unfocus(),
+          onTapOutside: onTapOutside ?? (event) => FocusScope.of(context).unfocus(),
           maxLines: linesNumber,
           enabled: enabled,
           textAlignVertical: TextAlignVertical.center,
@@ -138,13 +135,11 @@ class CustomTextField extends StatelessWidget {
           validator: validator ??
               (value) {
                 if (isRequired) {
-                  return value == "" || value == null
-                      ? "${title ?? hintText} ${'مطلوب'}"
-                      : null;
+                  return value == "" || value == null ? "${title ?? hintText} ${'مطلوب'}" : null;
                 }
                 return null;
               },
-          cursorColor: cursorColor ?? ColorManager.neutralWhite,
+          cursorColor: cursorColor ?? ColorManager.neutral400,
           keyboardType: type ?? TextInputType.text,
           onTap: onTap,
           onChanged: onChange,
@@ -164,8 +159,7 @@ class CustomTextField extends StatelessWidget {
             prefixIcon: prefixWidget ??
                 (prefixIcon != null
                     ? Padding(
-                        padding:
-                            EdgeInsetsDirectional.only(start: 12.w, end: 8.w),
+                        padding: EdgeInsetsDirectional.only(start: 12.w, end: 8.w),
                         child: Icon(
                           prefixIcon,
                           size: 26.r,
@@ -183,15 +177,10 @@ class CustomTextField extends StatelessWidget {
                     ? GestureDetector(
                         onTap: togglePasswordVisibility,
                         child: Padding(
-                          padding:
-                              EdgeInsetsDirectional.only(start: 8.w, end: 12.w),
+                          padding: EdgeInsetsDirectional.only(start: 8.w, end: 12.w),
                           child: Icon(
-                            obscureText
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            color: obscureText
-                                ? ColorManager.neutralWhite
-                                : ColorManager.neutral950,
+                            obscureText ? Icons.visibility_off : Icons.visibility,
+                            color: obscureText ? ColorManager.neutralWhite : ColorManager.neutral950,
                             size: 26.r,
                           ),
                         ),
@@ -204,72 +193,63 @@ class CustomTextField extends StatelessWidget {
             suffixStyle: FontStyleManager.subtitle1BlackB,
             isDense: true,
             hintStyle: FontStyleManager.subtitle1BlackB,
-            contentPadding: contentPadding ??
-                EdgeInsets.only(
-                    left: 12.w, right: 12.w, top: 8.h, bottom: 10.h),
+            contentPadding: contentPadding ?? EdgeInsets.only(left: 15.w, right: 15.w, top: 15.h, bottom: 15.h),
             hintText: hintText,
             fillColor: fillColor ?? Colors.transparent,
             border: OutlineInputBorder(
               // borderRadius: 8.smoothBorderRadius,
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                bottomRight: Radius.circular(8.r),
-                topLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                topRight: Radius.circular(8.r),
+                bottomLeft: Radius.circular(10.r),
+                bottomRight: Radius.circular(10.r),
+                topLeft: Radius.circular(10.r),
+                topRight: Radius.circular(10.r),
               ),
-              borderSide: BorderSide(
-                  color: enabledBorderColor ?? ColorManager.neutralWhite),
+              borderSide: BorderSide(color: enabledBorderColor ?? ColorManager.neutralWhite),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                bottomRight: Radius.circular(8.r),
-                topLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                topRight: Radius.circular(8.r),
+                bottomLeft: Radius.circular(10.r),
+                bottomRight: Radius.circular(10.r),
+                topLeft: Radius.circular(10.r),
+                topRight: Radius.circular(10.r),
               ),
-              borderSide: BorderSide(
-                  color: enabledBorderColor ?? ColorManager.neutralWhite),
+              borderSide: BorderSide(color: enabledBorderColor ?? ColorManager.neutralWhite),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                bottomRight: Radius.circular(8.r),
-                topLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                topRight: Radius.circular(8.r),
+                bottomLeft: Radius.circular(10.r),
+                bottomRight: Radius.circular(10.r),
+                topLeft: Radius.circular(10.r),
+                topRight: Radius.circular(10.r),
               ),
-              borderSide: BorderSide(
-                  color: disableBorderColor ?? ColorManager.neutralWhite),
+              borderSide: BorderSide(color: disableBorderColor ?? ColorManager.neutralWhite),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                bottomRight: Radius.circular(8.r),
-                topLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                topRight: Radius.circular(8.r),
+                bottomLeft: Radius.circular(10.r),
+                bottomRight: Radius.circular(10.r),
+                topLeft: Radius.circular(10.r),
+                topRight: Radius.circular(10.r),
               ),
-              borderSide: const BorderSide(
-                  color: ColorManager.neutralWhite, width: 1),
+              borderSide: const BorderSide(color: ColorManager.neutralWhite, width: 1),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                bottomRight: Radius.circular(8.r),
-                topLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                topRight: Radius.circular(8.r),
+                bottomLeft: Radius.circular(10.r),
+                bottomRight: Radius.circular(10.r),
+                topLeft: Radius.circular(10.r),
+                topRight: Radius.circular(10.r),
               ),
-              borderSide: BorderSide(
-                  color: focusedBorderColor ?? ColorManager.neutralWhite,
-                  width: 1),
+              borderSide: BorderSide(color: focusedBorderColor ?? ColorManager.neutralWhite, width: 1),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                bottomRight: Radius.circular(8.r),
-                topLeft: Radius.circular(isWithoutLeftBorder! ? 0 : 8.r),
-                topRight: Radius.circular(8.r),
+                bottomLeft: Radius.circular(10.r),
+                bottomRight: Radius.circular(10.r),
+                topLeft: Radius.circular(10.r),
+                topRight: Radius.circular(10.r),
               ),
-              borderSide: const BorderSide(
-                  color: ColorManager.neutralWhite, width: 1),
+              borderSide: const BorderSide(color: ColorManager.neutralWhite, width: 1),
             ),
           ),
         ),

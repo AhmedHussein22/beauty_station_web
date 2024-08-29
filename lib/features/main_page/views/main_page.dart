@@ -3,7 +3,6 @@
 import 'package:beauty_solution_web/features/main_page/controller/main_controller.dart';
 import 'package:beauty_solution_web/features/main_page/views/widgets/added_by_widget.dart';
 import 'package:beauty_solution_web/features/main_page/views/widgets/bar_chart_widget.dart';
-import 'package:beauty_solution_web/features/main_page/views/widgets/count_widget.dart';
 import 'package:beauty_solution_web/features/main_page/views/widgets/drawer.dart';
 import 'package:beauty_solution_web/features/main_page/views/widgets/header.dart';
 import 'package:beauty_solution_web/features/main_page/views/widgets/pie_chart_widget.dart';
@@ -19,8 +18,7 @@ class MainPage extends StatelessWidget {
 
   int calculateThePercentage(int theMianValue, int theSecValue) {
     var resultOfPercentage = 0;
-    resultOfPercentage =
-        ((theMianValue / (theMianValue + theSecValue)) * 100).round();
+    resultOfPercentage = ((theMianValue / (theMianValue + theSecValue)) * 100).round();
     return theMianValue == 0 ? 0 : resultOfPercentage;
   }
 
@@ -48,50 +46,40 @@ class MainPage extends StatelessWidget {
                       Header(
                         width: 0.8.sw,
                       ),
-                      26.verticalSpace,
-                      Row(
-                        children: [
-                          50.horizontalSpace,
-                          //************ Count Widgets Salon*/
-                          CountWidget(
-                            totalUsers:
-                                mainController.salonUserData.length.toString(),
-                            usersType: 'نوع صالون',
-                            persintageUsers: mainController
-                                    .salonUserData.isEmpty
-                                ? '0% من العملاء'
-                                : '${calculateThePercentage(mainController.salonUserData.length, mainController.beauticianUserData.length)}% من العملاء',
-                          ),
-                          20.horizontalSpace,
-                          //************ Count Widgets Beauty Expert*/
-                          CountWidget(
-                            totalUsers: mainController.beauticianUserData.length
-                                .toString(),
-                            usersType: 'نوع خبير تجميل',
-                            persintageUsers: mainController
-                                    .beauticianUserData.isEmpty
-                                ? '0% من العملاء'
-                                : '${calculateThePercentage(mainController.beauticianUserData.length, mainController.salonUserData.length)}% من العملاء',
-                          ),
-                        ],
-                      ),
+                      // 26.verticalSpace,
+                      // Row(
+                      //   children: [
+                      //     50.horizontalSpace,
+                      //     //************ Count Widgets Salon*/
+                      //     CountWidget(
+                      //       totalUsers:
+                      //           mainController.salonUserData.length.toString(),
+                      //       usersType: 'نوع صالون',
+                      //       persintageUsers: mainController
+                      //               .salonUserData.isEmpty
+                      //           ? '0% من العملاء'
+                      //           : '${calculateThePercentage(mainController.salonUserData.length, mainController.beauticianUserData.length)}% من العملاء',
+                      //     ),
+                      //     20.horizontalSpace,
+                      //     //************ Count Widgets Beauty Expert*/
+                      //     CountWidget(
+                      //       totalUsers: mainController.beauticianUserData.length
+                      //           .toString(),
+                      //       usersType: 'نوع خبير تجميل',
+                      //       persintageUsers: mainController
+                      //               .beauticianUserData.isEmpty
+                      //           ? '0% من العملاء'
+                      //           : '${calculateThePercentage(mainController.beauticianUserData.length, mainController.salonUserData.length)}% من العملاء',
+                      //     ),
+                      //   ],
+                      // ),
                       26.verticalSpace,
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           PieChartWidget(
-                            salonPercentage: mainController
-                                    .salonUserData.isEmpty
-                                ? 0
-                                : calculateThePercentage(
-                                    mainController.salonUserData.length,
-                                    mainController.beauticianUserData.length),
-                            bueatyPercentage: mainController
-                                    .beauticianUserData.isEmpty
-                                ? 0
-                                : calculateThePercentage(
-                                    mainController.beauticianUserData.length,
-                                    mainController.salonUserData.length),
+                            salonPercentage: mainController.salonUserData.isEmpty ? 0 : calculateThePercentage(mainController.salonUserData.length, mainController.beauticianUserData.length),
+                            bueatyPercentage: mainController.beauticianUserData.isEmpty ? 0 : calculateThePercentage(mainController.beauticianUserData.length, mainController.salonUserData.length),
                           ),
                           30.horizontalSpace,
                           const BarChartWidget(),
@@ -109,19 +97,14 @@ class MainPage extends StatelessWidget {
                               UserTable(
                                 tableName: 'عملاء الصالون',
                                 rPadding: 50,
-                                salonData: mainController.salonUserData.isEmpty
-                                    ? []
-                                    : mainController.salonUserData,
+                                salonData: mainController.salonUserData.isEmpty ? [] : mainController.salonUserData,
                                 isSalon: true,
                               ),
                               //  User Table Beauty Expert*/
                               UserTable(
                                 tableName: 'عملاء خبير التجميل',
                                 rPadding: 50,
-                                beauticianData:
-                                    mainController.beauticianUserData.isEmpty
-                                        ? []
-                                        : mainController.beauticianUserData,
+                                beauticianData: mainController.beauticianUserData.isEmpty ? [] : mainController.beauticianUserData,
                                 isSalon: false,
                               ),
                             ],

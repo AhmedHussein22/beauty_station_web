@@ -36,6 +36,8 @@ class MainController extends GetxController {
   List<AddedByModel> addedBy = [];
   SalonUserData emptySalonUserData = SalonUserData();
   BeauticianUserData emptyBeauticianUserData = BeauticianUserData();
+  TextEditingController salonSearchController = TextEditingController();
+  TextEditingController beauticianSearchController = TextEditingController();
 
 //******* handling the values for cities for each salon and bueaty */
   Future<void> getCityData() async {
@@ -64,9 +66,9 @@ class MainController extends GetxController {
   }
 
 //******* */ fetch salon users from api *****************/
-  Future<void> fetchSalonUsers() async {
+  Future<void> fetchSalonUsers(filter) async {
     try {
-      final response = await MainRepository().getSalonData(pageNumber: 1, pageSize: 100, filter: '', asc: '');
+      final response = await MainRepository().getSalonData(pageNumber: 1, pageSize: 100, filter: filter, asc: '');
       if (response.status == ApiStatus.success) {
         final salonUser = SalonUsers.fromJson(response.data);
         salonUserData = salonUser.data!;
@@ -86,9 +88,9 @@ class MainController extends GetxController {
   }
 
 //******* */ fetch Beauticians users from api *****************/
-  Future<void> fetchBeauticianUsers() async {
+  Future<void> fetchBeauticianUsers(filter) async {
     try {
-      final response = await MainRepository().getBeauticianData(pageNumber: 1, pageSize: 100, filter: '', asc: '');
+      final response = await MainRepository().getBeauticianData(pageNumber: 1, pageSize: 100, filter: filter, asc: '');
       AppLogs.infoLog('Beautician state ******************** ${response.status}');
       if (response.status == ApiStatus.success) {
         final beauticianData = BeauticiansUsers.fromJson(response.data);
@@ -126,8 +128,8 @@ class MainController extends GetxController {
 
   @override
   void onInit() async {
-    await fetchSalonUsers();
-    await fetchBeauticianUsers();
+    await fetchSalonUsers('');
+    await fetchBeauticianUsers('');
     await getCityData();
     await getAddedByData();
     super.onInit();
