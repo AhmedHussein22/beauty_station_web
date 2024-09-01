@@ -5,12 +5,8 @@ class BeauticiansUsers {
     this.data,
   });
 
-  factory BeauticiansUsers.fromJson(Map<String, dynamic> json) =>
-      BeauticiansUsers(
-        data: json["data"] == null
-            ? []
-            : List<BeauticianUserData>.from(
-                json["data"]!.map((x) => BeauticianUserData.fromJson(x))),
+  factory BeauticiansUsers.fromJson(Map<String, dynamic> json) => BeauticiansUsers(
+        data: json["data"] == null ? [] : List<BeauticianUserData>.from(json["data"]!.map((x) => BeauticianUserData.fromJson(x))),
       );
 }
 
@@ -45,7 +41,7 @@ class BeauticianUserData {
   final String? sellerMobile;
   final String? sellerRegistrationDate;
   final double? contractPrecentage;
-  final bool? isAgreeToContract;
+  final bool? isAgreeToContract, contractAgreement;
 
   BeauticianUserData({
     this.id,
@@ -79,10 +75,10 @@ class BeauticianUserData {
     this.sellerRegistrationDate,
     this.contractPrecentage,
     this.isAgreeToContract,
+    this.contractAgreement,
   });
 
-  factory BeauticianUserData.fromJson(Map<String, dynamic> json) =>
-      BeauticianUserData(
+  factory BeauticianUserData.fromJson(Map<String, dynamic> json) => BeauticianUserData(
         id: json["id"],
         beauticianName: json["beauticianName"],
         licenseNumber: json["licenseNumber"],
@@ -90,9 +86,7 @@ class BeauticianUserData {
         nationalId: json["nationalId"],
         nationality: json["nationality"],
         profilePicture: json["profilePicture"],
-        previousWorkImages: json["previousWorkImages"] == null
-            ? []
-            : List<String>.from(json["previousWorkImages"]!.map((x) => x)),
+        previousWorkImages: json["previousWorkImages"] == null ? [] : List<String>.from(json["previousWorkImages"]!.map((x) => x)),
         locationName: json["locationName"],
         city: json["city"],
         latitude: json["latitude"],
@@ -102,13 +96,8 @@ class BeauticianUserData {
         iban: json["iban"],
         bankName: json["bankName"],
         logo: json["logo"],
-        profileImages: json["profileImages"] == null
-            ? []
-            : List<String>.from(json["profileImages"]!.map((x) => x)),
-        workingHours: json["workingHours"] == null
-            ? []
-            : List<WorkingHour>.from(
-                json["workingHours"]!.map((x) => WorkingHour.fromJson(x))),
+        profileImages: json["profileImages"] == null ? [] : List<String>.from(json["profileImages"]!.map((x) => x)),
+        workingHours: json["workingHours"] == null ? [] : List<WorkingHour>.from(json["workingHours"]!.map((x) => WorkingHour.fromJson(x))),
         holidayWorkingHours: json["holidayWorkingHours"],
         festivalWorkingHours: json["festivalWorkingHours"],
         servicesAndPrices: json["servicesAndPrices"],
@@ -121,6 +110,7 @@ class BeauticianUserData {
         sellerRegistrationDate: json["sellerRegistrationDate"],
         contractPrecentage: json["contractPrecentage"],
         isAgreeToContract: json["isAgreeToContract"],
+        contractAgreement: json["contractAgreement"],
       );
 }
 

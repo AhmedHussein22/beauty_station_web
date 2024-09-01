@@ -31,14 +31,18 @@ class UserTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 0.6.sw,
-      height: 0.5.sh,
       decoration: BoxDecoration(
         color: ColorManager.neutralWhite,
         borderRadius: BorderRadius.circular(20),
       ),
+      constraints: BoxConstraints(
+        minHeight: 0.1.sh,
+        minWidth: 0.6.sw,
+        maxHeight: 0.28.sw,
+        maxWidth: 0.6.sw,
+      ),
       child: Column(
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: [
           GetBuilder<MainController>(builder: (mainController) {
             return Row(
@@ -82,31 +86,36 @@ class UserTable extends StatelessWidget {
           ).horizontalPadding(40),
           15.verticalSpace,
           //************ Table Users */
-          Expanded(
-            child: ListView.separated(
-                itemBuilder: (context, index) {
-                  return DataForTable(
-                      isSalon: isSalon,
-                      id: isSalon ? '${salonData?[index].id ?? 'غير معروف'}' : '${beauticianData?[index].id ?? 'غير معروف'}',
-                      name: isSalon ? '${salonData?[index].salonName ?? 'غير معروف'}' : '${beauticianData?[index].beauticianName ?? 'غير معروف'}',
-                      numberId: isSalon ? '${salonData?[index].commercialRecordNumber ?? 'غير معروف'}' : '${beauticianData?[index].licenseNumber ?? 'غير معروف'}',
-                      city: isSalon ? '${salonData?[index].locationName ?? 'غير معروف'}' : '${beauticianData?[index].locationName ?? 'غير معروف'}',
-                      nation: isSalon ? 'لا يوجد' : '${beauticianData?[index].nationality ?? 'غير معروف'}',
-                      emailAddress: isSalon ? '${salonData?[index].email ?? 'غير معروف'}' : '${beauticianData?[index].email ?? 'غير معروف'}',
-                      phoneNumber: isSalon ? '${salonData?[index].mobileNumber ?? 'غير معروف'} ' : '${beauticianData?[index].mobileNumber ?? 'غير معروف'}',
-                      index: index,
-                      website: isSalon ? '${salonData?[index].website ?? 'غير معروف'}' : '${beauticianData?[index].website ?? 'غير معروف'}',
-                      isAgreeToContract: isSalon ? salonData![index].isAgreeToContract ?? false : beauticianData![index].isAgreeToContract ?? false);
-                },
-                itemCount: isSalon ? salonData!.length : beauticianData!.length,
-                shrinkWrap: true,
-                physics: const AlwaysScrollableScrollPhysics(),
-                separatorBuilder: (context, index) {
-                  return const Divider(
-                    color: ColorManager.neutral50,
-                  ).horizontalPadding(40).verticalPadding(10);
-                }),
-          )
+          (isSalon ? salonData!.isEmpty : beauticianData!.isEmpty)
+              ? const CustomText(
+                  title: 'لا يوجد بيانات',
+                  textStyle: TextStyle(color: ColorManager.neutral400, fontSize: 18),
+                ).verticalPadding(45)
+              : Expanded(
+                  child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return DataForTable(
+                            isSalon: isSalon,
+                            id: isSalon ? '${salonData?[index].id ?? 'غير معروف'}' : '${beauticianData?[index].id ?? 'غير معروف'}',
+                            name: isSalon ? '${salonData?[index].salonName ?? 'غير معروف'}' : '${beauticianData?[index].beauticianName ?? 'غير معروف'}',
+                            numberId: isSalon ? '${salonData?[index].commercialRecordNumber ?? 'غير معروف'}' : '${beauticianData?[index].licenseNumber ?? 'غير معروف'}',
+                            city: isSalon ? '${salonData?[index].locationName ?? 'غير معروف'}' : '${beauticianData?[index].locationName ?? 'غير معروف'}',
+                            nation: isSalon ? 'لا يوجد' : '${beauticianData?[index].nationality ?? 'غير معروف'}',
+                            emailAddress: isSalon ? '${salonData?[index].email ?? 'غير معروف'}' : '${beauticianData?[index].email ?? 'غير معروف'}',
+                            phoneNumber: isSalon ? '${salonData?[index].mobileNumber ?? 'غير معروف'} ' : '${beauticianData?[index].mobileNumber ?? 'غير معروف'}',
+                            index: index,
+                            website: isSalon ? '${salonData?[index].website ?? 'غير معروف'}' : '${beauticianData?[index].website ?? 'غير معروف'}',
+                            isAgreeToContract: isSalon ? salonData![index].isAgreeToContract ?? false : beauticianData![index].isAgreeToContract ?? false);
+                      },
+                      itemCount: isSalon ? salonData!.length : beauticianData!.length,
+                      shrinkWrap: true,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      separatorBuilder: (context, index) {
+                        return const Divider(
+                          color: ColorManager.neutral50,
+                        ).horizontalPadding(40).verticalPadding(10);
+                      }),
+                )
         ],
       ).allPadding(20),
     ).onlyPadding(tPadding: 50, rPadding: rPadding);

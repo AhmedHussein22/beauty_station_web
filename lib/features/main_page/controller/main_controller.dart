@@ -63,18 +63,22 @@ class MainController extends GetxController {
 
   //******* handling the values for added by for each salon and bueaty */
   Future<void> getAddedByData() async {
-    List<dynamic> allUserData = [...salonUserData, ...beauticianUserData];
-
-    for (final user in allUserData) {
-      AppLogs.infoLog('Added By Data before ############### $addedBy  $allUserData');
+    // List<dynamic> allUserData = [salonUserData, beauticianUserData];
+    for (final user in salonUserData) {
       final int count = salonUserData.where((element) => element.registeredBy == user.registeredBy).toList().length + beauticianUserData.where((element) => element.registeredBy == user.registeredBy).toList().length;
 
       if (addedBy.where((element) => element.name == user.registeredBy).isEmpty) {
-        addedBy.add(AddedByModel(user.registeredBy, count));
+        addedBy.add(AddedByModel(user.registeredBy!, count));
       }
-      AppLogs.infoLog('Added By Data after ############### $addedBy  $allUserData');
     }
+    for (final user in beauticianUserData) {
+      final int count = beauticianUserData.where((element) => element.registeredBy == user.registeredBy).toList().length + beauticianUserData.where((element) => element.registeredBy == user.registeredBy).toList().length;
 
+      if (addedBy.where((element) => element.name == user.registeredBy).isEmpty) {
+        addedBy.add(AddedByModel(user.registeredBy!, count));
+      }
+    }
+    AppLogs.infoLog('Added By Data after ############### ${addedBy.length}  usersalon ${salonUserData.length} userbeautician ${beauticianUserData.length}');
     update();
   }
 
@@ -86,17 +90,30 @@ class MainController extends GetxController {
         final salonUser = SalonUsers.fromJson(response.data);
         salonUserData = salonUser.data!;
         update();
-      } else {
-        //   Get.showSnackbar(GetSnackBar(
-        //     message: response.message,
-        //     duration: const Duration(seconds: 2),
-        //   ));
-      }
+        await getCityData();
+        await getAddedByData();
+      } else {}
+    } catch (e) {}
+  }
+
+  //******* */ Edit user Date *****************/
+  Future<void> editUserData(String id, bool isSalon) async {
+    try {
+      changeInviteToContract();
+      final response = await MainRepository().editUserData(id, userEmailAddressController.text, double.parse(userContractPercentageController.text), isSalon);
+      AppLogs.infoLog('Edit user state ******************** ${response.status}');
+      if (response.status == ApiStatus.success) {
+        if (isSalon) {
+          await fetchSalonUsers('');
+        } else {
+          await fetchBeauticianUsers('');
+        }
+        userContractPercentageController.clear();
+        userEmailAddressController.clear();
+        update();
+      } else {}
     } catch (e) {
-      // Get.showSnackbar(GetSnackBar(
-      //   message: e.toString(),
-      //   duration: const Duration(seconds: 2),
-      // ));
+      //add catch error
     }
   }
 
@@ -110,13 +127,20 @@ class MainController extends GetxController {
         beauticianUserData = beauticianData.data!;
         AppLogs.infoLog('Beautician Data ############### ${beauticianData.data}');
         update();
+        await getCityData();
+        await getAddedByData();
       } else {}
     } catch (e) {
       //add catch error
     }
   }
 
-  //******* */ Fetch user for salon or beauticians  *****************/
+  @override
+  void onInit() async {
+    await fetchSalonUsers('');
+    await fetchBeauticianUsers('');
+    super.onInit();
+  }
 
   //******* */ resend contract for salon  *****************/
   Future<void> resendContract(String id, bool isSalon) async {
@@ -139,15 +163,6 @@ class MainController extends GetxController {
       //   duration: const Duration(seconds: 2),
       // ));
     }
-  }
-
-  @override
-  void onInit() async {
-    await fetchSalonUsers('');
-    await fetchBeauticianUsers('');
-    await getCityData();
-    await getAddedByData();
-    super.onInit();
   }
 }
 

@@ -8,7 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class InviteToContact extends StatelessWidget {
-  const InviteToContact({super.key});
+  final String id ;
+  final bool isSalon;
+  const InviteToContact({super.key, required this.id, required this.isSalon});
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +62,7 @@ class InviteToContact extends StatelessWidget {
                   onTap: () async {
                     if (mainController.inviteToContractFormKey.currentState!.validate()) {
                       mainController.inviteToContractFormKey.currentState!.save();
-                      mainController.userContractPercentageController.clear();
-                      mainController.userEmailAddressController.clear();
-                      //************ Save the data */
-                      mainController.changeInviteToContract();
+                      await mainController.editUserData(id,isSalon);
                     }
                   },
                 ),

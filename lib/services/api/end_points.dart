@@ -14,4 +14,8 @@ class EndPoints {
   //**************** resend contract *****************/
   static const String resendContractSalon = 'Salons/ResendContractMail?id=';
   static const String resendContractBeautician = 'Beauticians/ResendContractMail?id=';
+
+  //**************** edit user data *****************/
+  static const String editUserDataSalon = 'Salons/UpdateUserData';
+  static const String editUserDataBeautician = 'Beauticians/UpdateUserData';
 }

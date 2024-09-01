@@ -45,7 +45,7 @@ class SalonUserData {
   final String? sellerMobile;
   final String? sellerRegistrationDate;
   final double? contractPrecentage;
-  final bool? isAgreeToContract;
+  final bool? isAgreeToContract , contractAgreement;
 
   SalonUserData({
     this.id,
@@ -76,6 +76,7 @@ class SalonUserData {
     this.sellerRegistrationDate,
     this.contractPrecentage,
     this.isAgreeToContract,
+    this.contractAgreement,
   });
 
   factory SalonUserData.fromJson(Map<String, dynamic> json) => SalonUserData(
@@ -114,6 +115,7 @@ class SalonUserData {
         sellerRegistrationDate: json["sellerRegistrationDate"],
         isAgreeToContract: json["isAgreeToContract"],
         contractPrecentage: json["contractPrecentage"],
+        contractAgreement: json["contractAgreement"],
       );
 
 }

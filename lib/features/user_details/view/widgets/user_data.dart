@@ -31,6 +31,11 @@ class UserData extends StatelessWidget {
     return isValid;
   }
 
+  bool returnValidationfromMail() {
+    bool isValid = isSalon ? salonUserData.contractAgreement ?? false : beauticianUserData.contractAgreement ?? false;
+    return isValid;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(
@@ -92,7 +97,7 @@ class UserData extends StatelessWidget {
                             ),
                           ),
                           5.horizontalSpace,
-                          if (returnValidation())
+                          if (returnValidationfromMail())
                             Icon(
                               Icons.verified,
                               color: ColorManager.mainColor,
@@ -151,23 +156,23 @@ class UserData extends StatelessWidget {
                             ),
                           ),
                         ),
-                      // if (!returnValidation())
-                      //   InkWell(
-                      //     mouseCursor: WidgetStateMouseCursor.clickable,
-                      //     onTap: () {
-                      //       mainController.changeInviteToContract();
-                      //     },
-                      //     child: SizedBox(
-                      //       width: 0.06.sw,
-                      //       height: 0.04.sh,
-                      //       child: const Center(
-                      //         child: CustomText(
-                      //           title: 'دعوه للتعاقد',
-                      //           underLine: true,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
+                      if (!returnValidation())
+                        InkWell(
+                          mouseCursor: WidgetStateMouseCursor.clickable,
+                          onTap: () {
+                            mainController.changeInviteToContract();
+                          },
+                          child: SizedBox(
+                            width: 0.06.sw,
+                            height: 0.04.sh,
+                            child: const Center(
+                              child: CustomText(
+                                title: 'دعوه للتعاقد',
+                                underLine: true,
+                              ),
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                   10.horizontalSpace,
