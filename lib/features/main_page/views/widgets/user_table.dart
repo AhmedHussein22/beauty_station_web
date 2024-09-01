@@ -11,7 +11,7 @@ import 'package:beauty_solution_web/widgets/custom_text.dart';
 import 'package:beauty_solution_web/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get/get.dart';
 
 class UserTable extends StatelessWidget {
   final String tableName;
@@ -38,7 +38,7 @@ class UserTable extends StatelessWidget {
       constraints: BoxConstraints(
         minHeight: 0.1.sh,
         minWidth: 0.6.sw,
-        maxHeight: 0.28.sw,
+        maxHeight: 0.25.sw,
         maxWidth: 0.6.sw,
       ),
       child: Column(
@@ -67,9 +67,9 @@ class UserTable extends StatelessWidget {
                     ).horizontalPadding(20),
                     onChange: (value) {
                       if (isSalon) {
-                        mainController.fetchSalonUsers(value);
+                        mainController.fetchSalonUsers(value, 1);
                       } else {
-                        mainController.fetchBeauticianUsers(value);
+                        mainController.fetchBeauticianUsers(value, 1);
                       }
                     },
                   ),
@@ -91,33 +91,84 @@ class UserTable extends StatelessWidget {
                   title: 'لا يوجد بيانات',
                   textStyle: TextStyle(color: ColorManager.neutral400, fontSize: 18),
                 ).verticalPadding(45)
-              : Expanded(
-                  child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        return DataForTable(
-                            isSalon: isSalon,
-                            id: isSalon ? '${salonData?[index].id ?? 'غير معروف'}' : '${beauticianData?[index].id ?? 'غير معروف'}',
-                            name: isSalon ? '${salonData?[index].salonName ?? 'غير معروف'}' : '${beauticianData?[index].beauticianName ?? 'غير معروف'}',
-                            numberId: isSalon ? '${salonData?[index].commercialRecordNumber ?? 'غير معروف'}' : '${beauticianData?[index].licenseNumber ?? 'غير معروف'}',
-                            city: isSalon ? '${salonData?[index].locationName ?? 'غير معروف'}' : '${beauticianData?[index].locationName ?? 'غير معروف'}',
-                            nation: isSalon ? 'لا يوجد' : '${beauticianData?[index].nationality ?? 'غير معروف'}',
-                            emailAddress: isSalon ? '${salonData?[index].email ?? 'غير معروف'}' : '${beauticianData?[index].email ?? 'غير معروف'}',
-                            phoneNumber: isSalon ? '${salonData?[index].mobileNumber ?? 'غير معروف'} ' : '${beauticianData?[index].mobileNumber ?? 'غير معروف'}',
-                            index: index,
-                            website: isSalon ? '${salonData?[index].website ?? 'غير معروف'}' : '${beauticianData?[index].website ?? 'غير معروف'}',
-                            isAgreeToContract: isSalon ? salonData![index].isAgreeToContract ?? false : beauticianData![index].isAgreeToContract ?? false);
-                      },
-                      itemCount: isSalon ? salonData!.length : beauticianData!.length,
-                      shrinkWrap: true,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      separatorBuilder: (context, index) {
-                        return const Divider(
-                          color: ColorManager.neutral50,
-                        ).horizontalPadding(40).verticalPadding(10);
-                      }),
+              : ListViewForUsers(
+                  isSalon: isSalon,
+                  salonData: salonData,
+                  beauticianData: beauticianData,
                 )
         ],
       ).allPadding(20),
     ).onlyPadding(tPadding: 50, rPadding: rPadding);
+  }
+}
+
+class ListViewForUsers extends StatefulWidget {
+  final bool isSalon;
+  final List<SalonUserData>? salonData;
+  final List<BeauticianUserData>? beauticianData;
+  const ListViewForUsers({super.key, required this.isSalon, this.salonData, this.beauticianData});
+
+  @override
+  State<ListViewForUsers> createState() => _ListViewForUsersState();
+}
+
+class _ListViewForUsersState extends State<ListViewForUsers> {
+  final scrollController = ScrollController();
+  final MainController mainController = Get.find();
+  int page = 2;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(_scrollController);
+  }
+
+  void _scrollController() async {
+    if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+      if (widget.isSalon) {
+        await mainController.fetchSalonUsers(mainController.salonSearchController.text, page);
+        page = page + 1;
+      } else {
+        await mainController.fetchBeauticianUsers(mainController.beauticianSearchController.text, page);
+        page = page + 1;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    // Dispose the controller when the widget is disposed
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.separated(
+          itemBuilder: (context, index) {
+            return DataForTable(
+                isSalon: widget.isSalon,
+                id: widget.isSalon ? '${widget.salonData?[index].id ?? 'غير معروف'}' : '${widget.beauticianData?[index].id ?? 'غير معروف'}',
+                name: widget.isSalon ? '${widget.salonData?[index].salonName ?? 'غير معروف'}' : '${widget.beauticianData?[index].beauticianName ?? 'غير معروف'}',
+                numberId: widget.isSalon ? '${widget.salonData?[index].commercialRecordNumber ?? 'غير معروف'}' : '${widget.beauticianData?[index].licenseNumber ?? 'غير معروف'}',
+                city: widget.isSalon ? '${widget.salonData?[index].locationName ?? 'غير معروف'}' : '${widget.beauticianData?[index].locationName ?? 'غير معروف'}',
+                nation: widget.isSalon ? 'لا يوجد' : '${widget.beauticianData?[index].nationality ?? 'غير معروف'}',
+                emailAddress: widget.isSalon ? '${widget.salonData?[index].email ?? 'غير معروف'}' : '${widget.beauticianData?[index].email ?? 'غير معروف'}',
+                phoneNumber: widget.isSalon ? '${widget.salonData?[index].mobileNumber ?? 'غير معروف'} ' : '${widget.beauticianData?[index].mobileNumber ?? 'غير معروف'}',
+                index: index,
+                website: widget.isSalon ? '${widget.salonData?[index].website ?? 'غير معروف'}' : '${widget.beauticianData?[index].website ?? 'غير معروف'}',
+                isAgreeToContract: widget.isSalon ? widget.salonData![index].isAgreeToContract ?? false : widget.beauticianData![index].isAgreeToContract ?? false);
+          },
+          controller: scrollController,
+          itemCount: widget.isSalon ? widget.salonData!.length : widget.beauticianData!.length,
+          shrinkWrap: true,
+          physics: const AlwaysScrollableScrollPhysics(),
+          separatorBuilder: (context, index) {
+            return const Divider(
+              color: ColorManager.neutral50,
+            ).horizontalPadding(40).verticalPadding(10);
+          }),
+    );
   }
 }

@@ -55,7 +55,7 @@ class UserDetailsView extends StatelessWidget {
                           50.verticalSpace,
                         ],
                       ),
-                      if (!mainController.inviteToContract)
+                      if (mainController.inviteToContract)
                         Center(
                           child: Container(
                             height: 0.4.sh,

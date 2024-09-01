@@ -45,6 +45,10 @@ class MainController extends GetxController {
   bool inviteToContract = false;
   final GlobalKey<FormState> inviteToContractFormKey = GlobalKey<FormState>();
 
+  void printInviteToContract() {
+    AppLogs.infoLog('Invite to contract value before ############### $inviteToContract');
+  }
+
   //***** Change invite to contract value */
   void changeInviteToContract() {
     AppLogs.infoLog('Invite to contract value before ############### $inviteToContract');
@@ -83,12 +87,12 @@ class MainController extends GetxController {
   }
 
 //******* */ fetch salon users from api *****************/
-  Future<void> fetchSalonUsers(filter) async {
+  Future<void> fetchSalonUsers(filter, page) async {
     try {
-      final response = await MainRepository().getSalonData(pageNumber: 1, pageSize: 100, filter: filter, asc: '');
+      final response = await MainRepository().getSalonData(pageNumber: page, pageSize: 7, filter: filter, asc: '');
       if (response.status == ApiStatus.success) {
         final salonUser = SalonUsers.fromJson(response.data);
-        salonUserData = salonUser.data!;
+        salonUserData.addAll(salonUser.data!);
         update();
         await getCityData();
         await getAddedByData();
@@ -103,11 +107,11 @@ class MainController extends GetxController {
       final response = await MainRepository().editUserData(id, userEmailAddressController.text, double.parse(userContractPercentageController.text), isSalon);
       AppLogs.infoLog('Edit user state ******************** ${response.status}');
       if (response.status == ApiStatus.success) {
-        if (isSalon) {
-          await fetchSalonUsers('');
-        } else {
-          await fetchBeauticianUsers('');
-        }
+        // if (isSalon) {
+        //   await fetchSalonUsers('' , 1);
+        // } else {
+        //   await fetchBeauticianUsers('');
+        // }
         userContractPercentageController.clear();
         userEmailAddressController.clear();
         update();
@@ -118,13 +122,13 @@ class MainController extends GetxController {
   }
 
 //******* */ fetch Beauticians users from api *****************/
-  Future<void> fetchBeauticianUsers(filter) async {
+  Future<void> fetchBeauticianUsers(filter, page) async {
     try {
-      final response = await MainRepository().getBeauticianData(pageNumber: 1, pageSize: 100, filter: filter, asc: '');
+      final response = await MainRepository().getBeauticianData(pageNumber: page, pageSize: 7, filter: filter, asc: '');
       AppLogs.infoLog('Beautician state ******************** ${response.status}');
       if (response.status == ApiStatus.success) {
         final beauticianData = BeauticiansUsers.fromJson(response.data);
-        beauticianUserData = beauticianData.data!;
+        beauticianUserData.addAll(beauticianData.data!);
         AppLogs.infoLog('Beautician Data ############### ${beauticianData.data}');
         update();
         await getCityData();
@@ -137,8 +141,8 @@ class MainController extends GetxController {
 
   @override
   void onInit() async {
-    await fetchSalonUsers('');
-    await fetchBeauticianUsers('');
+    await fetchSalonUsers('', 1);
+    await fetchBeauticianUsers('', 1);
     super.onInit();
   }
 
