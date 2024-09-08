@@ -189,7 +189,11 @@ class UserData extends StatelessWidget {
                               mouseCursor: WidgetStateMouseCursor.clickable,
                               onTap: () {
                                 AppLogs.infoLog('****** Call resend Contract');
-                                mainController.resendContract(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon);
+                                mainController.resendContractSMS(
+                                  isSalon ? salonUserData.mobileNumber.toString() : beauticianUserData.mobileNumber.toString(),
+                                  isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(),
+                                  'تم اعاده ارسال الشروط و الاحكام بنجاح',
+                                );
                               },
                               child: const SizedBox(
                                 child: CustomText(

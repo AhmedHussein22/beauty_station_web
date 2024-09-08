@@ -193,6 +193,20 @@ class MainController extends GetxController {
       // ));
     }
   }
+
+  //******* */ resend contract from SMS  *****************/
+  Future<void> resendContractSMS(String phone, String iD, String message) async {
+    try {
+      final response = await MainRepository().resendContractSalonSMS(phone, iD, message);
+      if (response.status == ApiStatus.success) {
+        AppLogs.infoLog('SMS sent successfully');
+      } else {
+        AppLogs.errorLog('SMS not sent');
+      }
+    } catch (e) {
+      AppLogs.errorLog('SMS not sent'); 
+    }
+  }
 }
 
 class AddedByModel {
