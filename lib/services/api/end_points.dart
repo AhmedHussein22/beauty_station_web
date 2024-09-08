@@ -18,4 +18,8 @@ class EndPoints {
   //**************** edit user data *****************/
   static const String editUserDataSalon = 'Salons/UpdateUserData';
   static const String editUserDataBeautician = 'Beauticians/UpdateUserData';
+
+  //**************** delete user *****************/
+  static const String deleteSalon = 'Salons/DeleteSalon?id=';
+  static const String deleteBeautician = 'Beauticians/DeleteBeautican?id=';
 }

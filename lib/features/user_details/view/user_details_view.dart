@@ -58,7 +58,7 @@ class UserDetailsView extends StatelessWidget {
                       if (mainController.inviteToContract)
                         Center(
                           child: Container(
-                            height: 0.4.sh,
+                            height: 0.45.sh,
                             width: 0.5.sw,
                             color: ColorManager.mainColor,
                             child: InviteToContact(

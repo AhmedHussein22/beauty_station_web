@@ -1,3 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:html' as html;
+
+import 'package:beamer/beamer.dart';
 import 'package:beauty_solution_web/features/main_page/data/users_beautician_data.dart';
 import 'package:beauty_solution_web/features/main_page/data/users_salon_data.dart';
 import 'package:beauty_solution_web/features/main_page/repositories/main_repository.dart';
@@ -44,6 +49,7 @@ class MainController extends GetxController {
   TextEditingController userContractPercentageController = TextEditingController();
   bool inviteToContract = false;
   final GlobalKey<FormState> inviteToContractFormKey = GlobalKey<FormState>();
+  bool deletingUser = false;
 
   void printInviteToContract() {
     AppLogs.infoLog('Invite to contract value before ############### $inviteToContract');
@@ -89,7 +95,7 @@ class MainController extends GetxController {
 //******* */ fetch salon users from api *****************/
   Future<void> fetchSalonUsers(filter, page) async {
     try {
-      final response = await MainRepository().getSalonData(pageNumber: page, pageSize: 7, filter: filter, asc: '');
+      final response = await MainRepository().getSalonData(pageNumber: page, pageSize: 10, filter: filter, asc: '');
       if (response.status == ApiStatus.success) {
         final salonUser = SalonUsers.fromJson(response.data);
         salonUserData.addAll(salonUser.data!);
@@ -97,7 +103,29 @@ class MainController extends GetxController {
         await getCityData();
         await getAddedByData();
       } else {}
-    } catch (e) {}
+    } catch (e) {
+      //add catch error
+    }
+  }
+
+  //******************** Delete user *********/
+  Future<void> deleteUser(String id, bool isSalon, BuildContext context) async {
+    try {
+      deletingUser = true;
+      update();
+      final response = await MainRepository().deleteUser(id, isSalon);
+      if (response.status == ApiStatus.success) {
+        Get.delete<MainController>();
+        context.beamToNamed('/Home');
+        deletingUser = false;
+        Get.put(MainController());
+        update();
+      } else {}
+    } catch (e) {
+      deletingUser = false;
+      update();
+      //add catch error
+    }
   }
 
   //******* */ Edit user Date *****************/
@@ -107,13 +135,9 @@ class MainController extends GetxController {
       final response = await MainRepository().editUserData(id, userEmailAddressController.text, double.parse(userContractPercentageController.text), isSalon);
       AppLogs.infoLog('Edit user state ******************** ${response.status}');
       if (response.status == ApiStatus.success) {
-        // if (isSalon) {
-        //   await fetchSalonUsers('' , 1);
-        // } else {
-        //   await fetchBeauticianUsers('');
-        // }
-        userContractPercentageController.clear();
-        userEmailAddressController.clear();
+        AppLogs.infoLog('Edit user state ******************** ${response.status}');
+        html.window.location.reload();
+
         update();
       } else {}
     } catch (e) {
@@ -124,7 +148,7 @@ class MainController extends GetxController {
 //******* */ fetch Beauticians users from api *****************/
   Future<void> fetchBeauticianUsers(filter, page) async {
     try {
-      final response = await MainRepository().getBeauticianData(pageNumber: page, pageSize: 7, filter: filter, asc: '');
+      final response = await MainRepository().getBeauticianData(pageNumber: page, pageSize: 10, filter: filter, asc: '');
       AppLogs.infoLog('Beautician state ******************** ${response.status}');
       if (response.status == ApiStatus.success) {
         final beauticianData = BeauticiansUsers.fromJson(response.data);
@@ -141,6 +165,7 @@ class MainController extends GetxController {
 
   @override
   void onInit() async {
+    AppLogs.infoLog('Main Controller Init called');
     await fetchSalonUsers('', 1);
     await fetchBeauticianUsers('', 1);
     super.onInit();

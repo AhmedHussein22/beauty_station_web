@@ -35,6 +35,11 @@ class MainRepository {
     );
   }
 
+  //******************** Delete user *********/
+  Future<ApiResponseModel> deleteUser(String id, bool isSalon) async {
+    return await ApiService().deleteData(isSalon ? EndPoints.deleteSalon + id : EndPoints.deleteBeautician + id);
+  }
+
   //*************** resend contract for salon *****************/
   Future<ApiResponseModel> editUserData(String id, String email, double contractPercentage, bool isSalon) async {
     final data = {"id": id, "contractPercentage": contractPercentage, "email": email};
@@ -70,36 +75,34 @@ class ApiService extends GetConnect {
     }
   }
 
-  // Function to patch data from an Endpoint
-//   Future<ApiResponseModel> patchData(String endpoint, Map<String, dynamic> data) async {
-// // Use the PATCH method
-//     AppLogs.debugLog(endpoint, 'patch API');
-//     final response = await patch(endpoint, data);
-//     AppLogs.debugLog("${response.statusCode}", 'statusCode');
-//     final String stateCode = response.body['statusCode'].toString();
-//       final data = response.body;
-//       AppLogs.infoLog('${response.statusCode}');
-//       if (response.statusCode == 200 || stateCode.startsWith('2')) {
-//         AppLogs.successLog(data.toString());
-//         return ApiResponseModel(
-//           status: ApiStatus.success,
-//           data: data,
-//         );
-//       } else {
-//         AppLogs.errorLog('error getData');
-//         return ApiResponseModel(
-//           status: ApiStatus.error,
-//           data: data,
-//         );
-//       }
+  //******* Function to delete data to an endpoint */
+  Future<ApiResponseModel> deleteData(String endpoint) async {
+    final response = await delete('${EndPoints.baseUrl}$endpoint');
+    AppLogs.debugLog("${response.statusCode}", 'statusCode');
+    final String stateCode = response.body['statusCode'].toString();
+    final data = response.body;
+    AppLogs.infoLog('${response.statusCode}');
+    if (response.statusCode == 200 || stateCode.startsWith('2')) {
+      AppLogs.successLog(data.toString());
+      return ApiResponseModel(
+        status: ApiStatus.success,
+        data: data,
+      );
+    } else {
+      AppLogs.errorLog('error getData');
+      return ApiResponseModel(
+        status: ApiStatus.error,
+        data: data,
+      );
+    }
+  }
 
-//   }
-
+  //******* Function to patch data from an endpoint */
   Future<ApiResponseModel> patchData(String endpoint, Map<String, dynamic> dataBody) async {
     // Use the PATCH method
     AppLogs.debugLog('${EndPoints.baseUrl}$endpoint', 'patch API');
     final response = await patch('${EndPoints.baseUrl}$endpoint', dataBody);
-    AppLogs.debugLog("${response.status.hashCode}", 'statusCode');
+    AppLogs.debugLog("statusCode ${response.status}");
     final String stateCode = response.body['statusCode'].toString();
     final data = response.body;
     AppLogs.infoLog('${response.statusCode}');

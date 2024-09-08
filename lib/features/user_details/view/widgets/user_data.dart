@@ -13,7 +13,7 @@ import 'package:beauty_solution_web/utils/app_utils/helpers_functions.dart';
 import 'package:beauty_solution_web/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get/get.dart';
 
 class UserData extends StatelessWidget {
   final bool isSalon;
@@ -49,14 +49,36 @@ class UserData extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //************ User Data Title*/
-                CustomText(
-                  title: 'بيانات المستخدم',
-                  color: ColorManager.neutral900,
-                  textStyle: TextStyle(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeightManager.bold,
-                  ),
-                ).horizontalPadding(20).verticalPadding(20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      title: 'بيانات المستخدم',
+                      color: ColorManager.neutral900,
+                      textStyle: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeightManager.bold,
+                      ),
+                    ).horizontalPadding(20).verticalPadding(20),
+                    //************ Delete user *********/
+                    mainController.deletingUser
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : InkWell(
+                            mouseCursor: WidgetStateMouseCursor.clickable,
+                            onTap: () async {
+                              AppLogs.infoLog('****** Call Delete User');
+                              await mainController.deleteUser(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon, context);
+                            },
+                            child: const Icon(
+                              Icons.delete,
+                              color: ColorManager.mainColor,
+                              size: 30,
+                            ),
+                          ).horizontalPadding(20).verticalPadding(20),
+                  ],
+                ),
                 Row(children: [
                   Column(
                     children: [
@@ -97,7 +119,7 @@ class UserData extends StatelessWidget {
                             ),
                           ),
                           5.horizontalSpace,
-                          if (returnValidationfromMail())
+                          if (returnValidation())
                             Icon(
                               Icons.verified,
                               color: ColorManager.mainColor,
@@ -141,20 +163,42 @@ class UserData extends StatelessWidget {
                         ),
                       15.verticalSpace,
                       if (returnValidation())
-                        InkWell(
-                          mouseCursor: WidgetStateMouseCursor.clickable,
-                          onTap: () {
-                            AppLogs.infoLog('****** Call resend Contract');
-                            mainController.resendContract(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon);
-                          },
-                          child: SizedBox(
-                            width: 0.15.sw,
-                            height: 0.04.sh,
-                            child: const CustomText(
-                              title: ' اعاده ارسال الشروط و الاحكام ',
-                              underLine: true,
+                        const CustomText(
+                          title: ' اعاده ارسال الشروط و الاحكام ',
+                          underLine: true,
+                        ),
+                      25.verticalSpace,
+                      if (returnValidation())
+                        Row(
+                          children: [
+                            InkWell(
+                              mouseCursor: WidgetStateMouseCursor.clickable,
+                              onTap: () {
+                                AppLogs.infoLog('****** Call resend Contract');
+                                mainController.resendContract(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon);
+                              },
+                              child: const SizedBox(
+                                child: CustomText(
+                                  title: 'الاميل',
+                                  underLine: true,
+                                ),
+                              ),
                             ),
-                          ),
+                            25.horizontalSpace,
+                            InkWell(
+                              mouseCursor: WidgetStateMouseCursor.clickable,
+                              onTap: () {
+                                AppLogs.infoLog('****** Call resend Contract');
+                                mainController.resendContract(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon);
+                              },
+                              child: const SizedBox(
+                                child: CustomText(
+                                  title: 'رساله نصيه',
+                                  underLine: true,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       if (!returnValidation())
                         InkWell(

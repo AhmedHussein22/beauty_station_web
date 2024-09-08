@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class ControllersBindings implements Bindings {
   @override
   void dependencies() {
-    Get.put<MainController>(MainController(), permanent: true);
+    Get.put<MainController>(MainController());
   }
 }

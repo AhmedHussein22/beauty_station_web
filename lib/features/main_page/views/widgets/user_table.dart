@@ -7,6 +7,7 @@ import 'package:beauty_solution_web/features/main_page/views/widgets/table_title
 import 'package:beauty_solution_web/features/main_page/views/widgets/table_users.dart';
 import 'package:beauty_solution_web/resource/color_manager.dart';
 import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
+import 'package:beauty_solution_web/utils/app_utils/helpers_functions.dart';
 import 'package:beauty_solution_web/widgets/custom_text.dart';
 import 'package:beauty_solution_web/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,23 @@ class UserTable extends StatelessWidget {
                   title: tableName,
                   textStyle: const TextStyle(color: ColorManager.black, fontSize: 22, fontWeight: FontWeight.bold),
                 ),
-                const Spacer(),
+                20.horizontalSpace,
+                //************ Table EXPORT Data */
+                InkWell(
+                  onTap: () {
+                    if (isSalon) {
+                      HelperFunctions.launchURL('https://beautycenter.runasp.net/api/Salons/ExportSalonsToExcel');
+                    } else {
+                      HelperFunctions.launchURL('https://beautycenter.runasp.net/api/Beauticians/ExportBeauticansToExcel');
+                    }
+                  },
+                  child: Icon(
+                    Icons.download,
+                    color: ColorManager.mainColor,
+                    size: 45.r,
+                  ),
+                ),
+                250.horizontalSpace,
                 //************ Search Bar */
                 Flexible(
                   child: CustomTextField(

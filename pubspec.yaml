@@ -24,7 +24,11 @@ dependencies:
   cupertino_icons: ^1.0.8  # for cupertino icons
   
   flutter_screenutil: ^5.9.0  # for responsive ui
-  syncfusion_flutter_charts: ^26.1.40
+  syncfusion_flutter_charts:
+    git:
+      url: https://github.com/Luvti/flutter-widgets
+      path: packages/syncfusion_flutter_charts
+      ref: 15e3c4a95e3cf2e2393755bf5aa11c0206ed6dea #flutter/3.24
   flutter_svg: ^2.0.10+1
 
   # ****** Images *******

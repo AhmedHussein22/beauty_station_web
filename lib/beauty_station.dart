@@ -40,9 +40,9 @@ class BeautyStationAppState extends State<BeautyStationApp> {
         //   );
         // },
         '/Home': (context, state, data) {
-          return const BeamPage(
+          return BeamPage(
             title: 'Home',
-            key: ValueKey('home'),
+            key: const ValueKey('home'),
             name: 'home',
             child: MainPage(),
           );

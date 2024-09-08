@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:beauty_solution_web/resource/assets_manager.dart';
 import 'package:beauty_solution_web/resource/color_manager.dart';
+import 'package:beauty_solution_web/utils/app_utils/app_logs.dart';
 import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,6 +26,7 @@ class Header extends StatelessWidget {
           secPage
               ? InkWell(
                   onTap: () {
+                    AppLogs.infoLog('Main Controller Back to home');
                     context.beamToNamed('/Home');
                   },
                   child: Icon(
