@@ -25,7 +25,7 @@ class BeautyStationAppState extends State<BeautyStationApp> {
   final routerDelegate = BeamerDelegate(
       transitionDelegate: const NoAnimationTransitionDelegate(),
       beamBackTransitionDelegate: const NoAnimationTransitionDelegate(),
-      initialPath: '/Welcome',
+      initialPath: '/Login',
       buildListener: (context, beamerDelegate) async {
         AppLogs.infoLog('Beamer buildListener: ${beamerDelegate.currentPages[0].name}');
       },
