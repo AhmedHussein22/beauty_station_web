@@ -1,11 +1,9 @@
 import 'package:beamer/beamer.dart';
 import 'package:beauty_solution_web/config/theme/app_theme.dart';
-import 'package:beauty_solution_web/features/main_page/controller/controller_bindding.dart';
 import 'package:beauty_solution_web/features/verify_screen/verify_before_screen.dart';
 import 'package:beauty_solution_web/utils/app_utils/app_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class BeautyStationApp extends StatefulWidget {
   const BeautyStationApp({super.key});
@@ -80,21 +78,16 @@ class BeautyStationAppState extends State<BeautyStationApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return GetMaterialApp.router(
+        //************  check the width screen */
+        AppLogs.infoLog('Screen width: ${ScreenUtil().screenWidth}');
+        return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           title: 'My Portfolio',
-          useInheritedMediaQuery: true,
           locale: const Locale("ar"),
-          opaqueRoute: true,
-          popGesture: true,
-          fallbackLocale: const Locale("ar"),
-          initialBinding: ControllersBindings(),
           routeInformationParser: BeamerParser(),
           routerDelegate: routerDelegate,
           backButtonDispatcher: BeamerBackButtonDispatcher(delegate: routerDelegate),
           theme: AppTheme().appLightTheme(),
-          enableLog: true,
-          smartManagement: SmartManagement.full,
         );
       },
     );

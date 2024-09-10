@@ -14,7 +14,9 @@ class ImageAssets {
 
   //**************  Welcome page / Verify  */
   static const String welcomeBg = "$imagePath/WELCOME.jpg";
+  static const String welcomeBgM = "$imagePath/WELCOME-mobile.jpg";
   static const String welcomeBg1 = "$imagePath/WELCOME2.jpg";
+  static const String welcomeBg1M = "$imagePath/WELCOME-mobile2.jpg";
 }
 
 class IconAssets {
