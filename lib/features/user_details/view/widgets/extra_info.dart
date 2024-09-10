@@ -1,5 +1,7 @@
 import 'package:beauty_solution_web/features/main_page/data/users_beautician_data.dart';
 import 'package:beauty_solution_web/features/main_page/data/users_salon_data.dart';
+import 'package:beauty_solution_web/features/user_details/data/beauticalModel.dart';
+import 'package:beauty_solution_web/features/user_details/data/salonModel.dart';
 import 'package:beauty_solution_web/features/user_details/view/widgets/custome_data_view.dart';
 import 'package:beauty_solution_web/resource/color_manager.dart';
 import 'package:beauty_solution_web/resource/font_weight_manger.dart';
@@ -9,10 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExtraInfo extends StatelessWidget {
-  final SalonUserData salonUserData;
   final bool isSalon;
-  final BeauticianUserData beauticianUserData;
-  const ExtraInfo({
+  final SalonsModel salonUserData;
+  final BeauticiansModel beauticianUserData;  const ExtraInfo({
     super.key,
     required this.salonUserData,
     required this.beauticianUserData,

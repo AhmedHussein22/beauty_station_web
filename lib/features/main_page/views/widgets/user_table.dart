@@ -84,9 +84,9 @@ class UserTable extends StatelessWidget {
                     ).horizontalPadding(20),
                     onChange: (value) {
                       if (isSalon) {
-                        mainController.fetchSalonUsers(value, 1);
+                        mainController.fetchSalonUsersForSearch(filter: value);
                       } else {
-                        mainController.fetchBeauticianUsers(value, 1);
+                        mainController.fetchBeauticianUsersForSearch(filter: value);
                       }
                     },
                   ),
@@ -132,7 +132,6 @@ class ListViewForUsers extends StatefulWidget {
 class _ListViewForUsersState extends State<ListViewForUsers> {
   final scrollController = ScrollController();
   final MainController mainController = Get.find();
-  int page = 2;
 
   @override
   void initState() {
@@ -143,11 +142,9 @@ class _ListViewForUsersState extends State<ListViewForUsers> {
   void _scrollController() async {
     if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
       if (widget.isSalon) {
-        await mainController.fetchSalonUsers(mainController.salonSearchController.text, page);
-        page = page + 1;
+        await mainController.fetchBeauticianUsersForSearch(filter: mainController.salonSearchController.text);
       } else {
-        await mainController.fetchBeauticianUsers(mainController.beauticianSearchController.text, page);
-        page = page + 1;
+        await mainController.fetchBeauticianUsers(filter: mainController.beauticianSearchController.text);
       }
     }
   }

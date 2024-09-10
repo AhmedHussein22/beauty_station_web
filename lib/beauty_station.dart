@@ -3,12 +3,11 @@ import 'package:beauty_solution_web/config/theme/app_theme.dart';
 import 'package:beauty_solution_web/features/main_page/controller/controller_bindding.dart';
 import 'package:beauty_solution_web/features/main_page/views/main_page.dart';
 import 'package:beauty_solution_web/features/user_details/view/user_details_view.dart';
+import 'package:beauty_solution_web/features/welcome_screen/welcome_screen.dart';
 import 'package:beauty_solution_web/utils/app_utils/app_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import 'features/welcome_screen/welcome_screen.dart';
 
 class BeautyStationApp extends StatefulWidget {
   const BeautyStationApp({super.key});
@@ -26,7 +25,7 @@ class BeautyStationAppState extends State<BeautyStationApp> {
   final routerDelegate = BeamerDelegate(
       transitionDelegate: const NoAnimationTransitionDelegate(),
       beamBackTransitionDelegate: const NoAnimationTransitionDelegate(),
-      initialPath: '/Login',
+      initialPath: '/Welcome',
       buildListener: (context, beamerDelegate) async {
         AppLogs.infoLog('Beamer buildListener: ${beamerDelegate.currentPages[0].name}');
       },
@@ -39,10 +38,18 @@ class BeautyStationAppState extends State<BeautyStationApp> {
         //     child: VerifyScreen(),
         //   );
         // },
+        // '/VerifiedBefore': (context, state, data) {
+        //   return const BeamPage(
+        //     title: 'Verified',
+        //     key: ValueKey('VerifiedBefore'),
+        //     name: 'VerifiedBefore',
+        //     child: VerifyBeforeScreen(),
+        //   );
+        // },
         '/Home': (context, state, data) {
-          return BeamPage(
+          return const BeamPage(
             title: 'Home',
-            key: const ValueKey('home'),
+            key: ValueKey('home'),
             name: 'home',
             child: MainPage(),
           );

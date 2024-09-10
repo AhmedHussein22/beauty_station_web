@@ -5,8 +5,5 @@ class ApiResponseModel {
   int? stateCode;
   dynamic data;
   String message;
-  int? totalItems;
-  int? pageNumber;
-  int? pageSize;
-  ApiResponseModel({required this.status, this.data, this.message = '', this.stateCode, this.totalItems, this.pageNumber, this.pageSize});
+  ApiResponseModel({required this.status, this.data, this.message = '', this.stateCode});
 }

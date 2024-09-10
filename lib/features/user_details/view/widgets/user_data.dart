@@ -1,8 +1,8 @@
 // ignore_for_file: unnecessary_string_interpolations
 
-import 'package:beauty_solution_web/features/main_page/controller/main_controller.dart';
-import 'package:beauty_solution_web/features/main_page/data/users_beautician_data.dart';
-import 'package:beauty_solution_web/features/main_page/data/users_salon_data.dart';
+import 'package:beauty_solution_web/features/user_details/controller/user_controller.dart';
+import 'package:beauty_solution_web/features/user_details/data/beauticalModel.dart';
+import 'package:beauty_solution_web/features/user_details/data/salonModel.dart';
 import 'package:beauty_solution_web/features/user_details/view/widgets/custome_data_view.dart';
 import 'package:beauty_solution_web/resource/color_manager.dart';
 import 'package:beauty_solution_web/resource/font_weight_manger.dart';
@@ -17,15 +17,14 @@ import 'package:get/get.dart';
 
 class UserData extends StatelessWidget {
   final bool isSalon;
-  final SalonUserData salonUserData;
-  final BeauticianUserData beauticianUserData;
+  final SalonsModel salonUserData;
+  final BeauticiansModel beauticianUserData;
   const UserData({
     super.key,
     required this.salonUserData,
     required this.beauticianUserData,
     required this.isSalon,
   });
-
   bool returnValidation() {
     bool isValid = isSalon ? salonUserData.isAgreeToContract ?? false : beauticianUserData.isAgreeToContract ?? false;
     return isValid;
@@ -38,8 +37,8 @@ class UserData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MainController>(
-      builder: (mainController) {
+    return GetBuilder<UserController>(
+      builder: (userController) {
         return Container(
             decoration: BoxDecoration(
               color: ColorManager.neutralWhite,
@@ -61,7 +60,7 @@ class UserData extends StatelessWidget {
                       ),
                     ).horizontalPadding(20).verticalPadding(20),
                     //************ Delete user *********/
-                    mainController.deletingUser
+                    userController.deletingUser
                         ? const Center(
                             child: CircularProgressIndicator(),
                           )
@@ -69,7 +68,7 @@ class UserData extends StatelessWidget {
                             mouseCursor: WidgetStateMouseCursor.clickable,
                             onTap: () async {
                               AppLogs.infoLog('****** Call Delete User');
-                              await mainController.deleteUser(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon, context);
+                              await userController.deleteUser(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon, context);
                             },
                             child: const Icon(
                               Icons.delete,
@@ -92,7 +91,7 @@ class UserData extends StatelessWidget {
                                 size: 0.03.sw,
                                 color: ColorManager.neutralWhite,
                               )
-                            : beauticianUserData.profileImages!.isEmpty
+                            : beauticianUserData.profileImages == null || beauticianUserData.profileImages!.isEmpty
                                 ? Icon(
                                     Icons.person,
                                     size: 0.03.sw,
@@ -175,7 +174,7 @@ class UserData extends StatelessWidget {
                               mouseCursor: WidgetStateMouseCursor.clickable,
                               onTap: () {
                                 AppLogs.infoLog('****** Call resend Contract');
-                                mainController.resendContract(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon);
+                                userController.resendContract(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon);
                               },
                               child: const SizedBox(
                                 child: CustomText(
@@ -187,13 +186,16 @@ class UserData extends StatelessWidget {
                             25.horizontalSpace,
                             InkWell(
                               mouseCursor: WidgetStateMouseCursor.clickable,
-                              onTap: () {
+                              onTap: () async {
                                 AppLogs.infoLog('****** Call resend Contract');
-                                mainController.resendContractSMS(
+
+                                await userController.resendContractSMS(
                                   isSalon ? salonUserData.mobileNumber.toString() : beauticianUserData.mobileNumber.toString(),
                                   isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(),
-                                  'تم اعاده ارسال الشروط و الاحكام بنجاح',
+                                  'Beauty Station 1 https://ayamohamed99.github.io/SMS-Message-View/%23/Home/${isSalon ? salonUserData.id : beauticianUserData.id}-${isSalon ? salonUserData.mobileNumber : beauticianUserData.mobileNumber} ${isSalon ? salonUserData.salonName : beauticianUserData.beauticianName}',
                                 );
+                                AppLogs.infoLog(
+                                    '********  https://ayamohamed99.github.io/SMS-Message-View/#/Home/${isSalon ? salonUserData.id : beauticianUserData.id}-${isSalon ? salonUserData.mobileNumber : beauticianUserData.mobileNumber} ${isSalon ? salonUserData.salonName : beauticianUserData.beauticianName}');
                               },
                               child: const SizedBox(
                                 child: CustomText(
@@ -208,7 +210,7 @@ class UserData extends StatelessWidget {
                         InkWell(
                           mouseCursor: WidgetStateMouseCursor.clickable,
                           onTap: () {
-                            mainController.changeInviteToContract();
+                            userController.changeInviteToContract();
                           },
                           child: SizedBox(
                             width: 0.06.sw,
@@ -268,49 +270,109 @@ class UserData extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             //************ User Data working hours*/
-                            CustomeDataView(
-                              title: 'مواعيد العمل الرسميه',
-                              data: ' Sunday to Monday From 08:00 AM to 05:00 PM',
-                              icon: Icons.timelapse_sharp,
-                              isLink: false,
-                              isSelectable: false,
-                              isWorkingHours: true,
-                              workingHours: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: isSalon ? salonUserData.workingHours!.length : beauticianUserData.workingHours!.length,
-                                itemBuilder: (context, index) {
-                                  final workingHoursday = isSalon ? '${salonUserData.workingHours?[index].day ?? 'غير معروف'}' : '${beauticianUserData.workingHours?[index].day ?? 'غير معروف'}';
-                                  final workingHoursfrom = isSalon ? '${salonUserData.workingHours?[index].from ?? 'غير معروف'}' : '${beauticianUserData.workingHours?[index].from ?? 'غير معروف'}';
-                                  final workingHoursto = isSalon ? '${salonUserData.workingHours?[index].to ?? 'غير معروف'}' : '${beauticianUserData.workingHours?[index].to ?? 'غير معروف'}';
-                                  return Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomText(
-                                            title: workingHoursday,
-                                            textStyle: TextStyle(
-                                              color: ColorManager.neutral400,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeightManager.bold,
-                                            ),
-                                          ),
-                                          CustomText(
-                                            title: '$workingHoursfrom - $workingHoursto',
-                                            textStyle: TextStyle(
-                                              color: ColorManager.neutral400,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeightManager.bold,
-                                            ),
-                                          ),
-                                        ],
+                            isSalon
+                                ? salonUserData.workingHours == null || salonUserData.workingHours!.isEmpty
+                                    ? CustomeDataView(
+                                        title: 'مواعيد العمل الرسميه',
+                                        data: isSalon ? salonUserData.holidayWorkingHours ?? 'غير معروف' : beauticianUserData.holidayWorkingHours ?? 'غير معروف',
+                                        icon: Icons.more_time_outlined,
+                                        isLink: false,
+                                        isSelectable: false,
+                                      )
+                                    : CustomeDataView(
+                                        title: 'مواعيد العمل الرسميه',
+                                        data: ' Sunday to Monday From 08:00 AM to 05:00 PM',
+                                        icon: Icons.timelapse_sharp,
+                                        isLink: false,
+                                        isSelectable: false,
+                                        isWorkingHours: true,
+                                        workingHours: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: salonUserData.workingHours!.length,
+                                          itemBuilder: (context, index) {
+                                            final workingHoursday = '${salonUserData.workingHours?[index].day ?? 'غير معروف'}';
+                                            final workingHoursfrom = '${salonUserData.workingHours?[index].from ?? 'غير معروف'}';
+                                            final workingHoursto = '${salonUserData.workingHours?[index].to ?? 'غير معروف'}';
+                                            return Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    CustomText(
+                                                      title: workingHoursday,
+                                                      textStyle: TextStyle(
+                                                        color: ColorManager.neutral400,
+                                                        fontSize: 14.sp,
+                                                        fontWeight: FontWeightManager.bold,
+                                                      ),
+                                                    ),
+                                                    CustomText(
+                                                      title: '$workingHoursfrom - $workingHoursto',
+                                                      textStyle: TextStyle(
+                                                        color: ColorManager.neutral400,
+                                                        fontSize: 14.sp,
+                                                        fontWeight: FontWeightManager.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                10.verticalSpace
+                                              ],
+                                            );
+                                          },
+                                        ),
+                                      )
+                                : beauticianUserData.workingHours == null || beauticianUserData.workingHours!.isEmpty
+                                    ? CustomeDataView(
+                                        title: 'مواعيد العمل ايام الاجازات الرسميه',
+                                        data: isSalon ? salonUserData.holidayWorkingHours ?? 'غير معروف' : beauticianUserData.holidayWorkingHours ?? 'غير معروف',
+                                        icon: Icons.more_time_outlined,
+                                        isLink: false,
+                                        isSelectable: false,
+                                      )
+                                    : CustomeDataView(
+                                        title: 'مواعيد العمل الرسميه',
+                                        data: ' Sunday to Monday From 08:00 AM to 05:00 PM',
+                                        icon: Icons.timelapse_sharp,
+                                        isLink: false,
+                                        isSelectable: false,
+                                        isWorkingHours: true,
+                                        workingHours: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: beauticianUserData.workingHours!.length,
+                                          itemBuilder: (context, index) {
+                                            final workingHoursday = '${beauticianUserData.workingHours?[index].day ?? 'غير معروف'}';
+                                            final workingHoursfrom = '${beauticianUserData.workingHours?[index].from ?? 'غير معروف'}';
+                                            final workingHoursto = '${beauticianUserData.workingHours?[index].to ?? 'غير معروف'}';
+                                            return Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    CustomText(
+                                                      title: workingHoursday,
+                                                      textStyle: TextStyle(
+                                                        color: ColorManager.neutral400,
+                                                        fontSize: 14.sp,
+                                                        fontWeight: FontWeightManager.bold,
+                                                      ),
+                                                    ),
+                                                    CustomText(
+                                                      title: '$workingHoursfrom - $workingHoursto',
+                                                      textStyle: TextStyle(
+                                                        color: ColorManager.neutral400,
+                                                        fontSize: 14.sp,
+                                                        fontWeight: FontWeightManager.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                10.verticalSpace
+                                              ],
+                                            );
+                                          },
+                                        ),
                                       ),
-                                      10.verticalSpace
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
 
                             //************ User Data working hours holidays*/
                             CustomeDataView(

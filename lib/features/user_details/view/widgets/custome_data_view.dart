@@ -13,18 +13,7 @@ class CustomeDataView extends StatelessWidget {
   final Widget workingHours;
   final bool isSelectable, isExtraLink, isWorkingHours;
   final double width;
-  const CustomeDataView(
-      {super.key,
-      required this.title,
-      required this.data,
-      required this.icon,
-      required this.isLink,
-      required this.isSelectable,
-      this.extraLink = '',
-      this.width = 0.2,
-      this.isExtraLink = false,
-      this.workingHours = const SizedBox(),
-      this.isWorkingHours = false});
+  const CustomeDataView({super.key, required this.title, required this.data, required this.icon, required this.isLink, required this.isSelectable, this.extraLink = '', this.width = 0.2, this.isExtraLink = false, this.workingHours = const SizedBox(), this.isWorkingHours = false});
 
   @override
   Widget build(BuildContext context) {
@@ -64,18 +53,14 @@ class CustomeDataView extends StatelessWidget {
                         color: ColorManager.mainColor,
                         fontSize: 14.sp,
                         fontWeight: FontWeightManager.bold,
-                        decoration: isLink
-                            ? TextDecoration.underline
-                            : TextDecoration.none,
+                        decoration: isLink ? TextDecoration.underline : TextDecoration.none,
                       ),
                     )
                   : InkWell(
                       onTap: isLink
                           ? () {
                               if (isLink) {
-                                isExtraLink
-                                    ? html.window.open(extraLink, 'new tab')
-                                    : html.window.open(data, 'new tab');
+                                isExtraLink ? html.window.open(extraLink, 'new tab') : html.window.open(data, 'new tab');
                               }
                             }
                           : null,
@@ -87,9 +72,7 @@ class CustomeDataView extends StatelessWidget {
                             color: ColorManager.mainColor,
                             fontSize: 14.sp,
                             fontWeight: FontWeightManager.bold,
-                            decoration: isLink
-                                ? TextDecoration.underline
-                                : TextDecoration.none,
+                            decoration: isLink ? TextDecoration.underline : TextDecoration.none,
                           ),
                         ),
                       ),

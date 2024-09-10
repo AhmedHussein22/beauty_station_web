@@ -14,9 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class MainPage extends StatelessWidget {
-  MainPage({super.key});
-  final MainController mainController = Get.find();
-
+  const MainPage({super.key});
 
   int calculateThePercentage(int theMianValue, int theSecValue) {
     var resultOfPercentage = 0;
@@ -29,76 +27,84 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorManager.offWhite,
       body: SingleChildScrollView(
-        child: GetBuilder<MainController>(builder: (mainController) {
-          return SizedBox(
-            width: double.infinity,
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const DrawerWidget(),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      //************ Header */
-                      Header(
-                        width: 0.8.sw,
-                      ),
-                      26.verticalSpace,
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          PieChartWidget(
-                            salonPercentage: mainController.salonUserData.isEmpty ? 0 : calculateThePercentage(mainController.salonUserData.length, mainController.beauticianUserData.length),
-                            bueatyPercentage: mainController.beauticianUserData.isEmpty ? 0 : calculateThePercentage(mainController.beauticianUserData.length, mainController.salonUserData.length),
-                          ),
-                          30.horizontalSpace,
-                          const BarChartWidget(),
-                        ],
-                      ).horizontalPadding(50),
-                      Row(
+        child: GetBuilder<MainController>(
+            init: MainController(),
+            initState: (_) async {
+              final mainController = Get.find<MainController>();
+              mainController.clearUserData();
+              await mainController.fetchSalonUsers(filter: '', page: 1);
+              await mainController.fetchBeauticianUsers(filter: '', page: 1);
+            },
+            builder: (mainController) {
+              return SizedBox(
+                width: double.infinity,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const DrawerWidget(),
+                    Expanded(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Column(
+                          //************ Header */
+                          Header(
+                            width: 0.8.sw,
+                          ),
+                          26.verticalSpace,
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              PieChartWidget(
+                                salonPercentage: mainController.salonUserData.isEmpty ? 0 : calculateThePercentage(mainController.salonUserData.length, mainController.beauticianUserData.length),
+                                bueatyPercentage: mainController.beauticianUserData.isEmpty ? 0 : calculateThePercentage(mainController.beauticianUserData.length, mainController.salonUserData.length),
+                              ),
+                              30.horizontalSpace,
+                              const BarChartWidget(),
+                            ],
+                          ).horizontalPadding(50),
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              //************ User Table Salon*/
-                              UserTable(
-                                tableName: 'عملاء الصالون',
-                                rPadding: 50,
-                                salonData: mainController.salonUserData.isEmpty ? [] : mainController.salonUserData,
-                                isSalon: true,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  //************ User Table Salon*/
+                                  UserTable(
+                                    tableName: 'عملاء الصالون',
+                                    rPadding: 50,
+                                    salonData: mainController.salonUserData.isEmpty ? [] : mainController.salonUserData,
+                                    isSalon: true,
+                                  ),
+                                  //  User Table Beauty Expert*/
+                                  UserTable(
+                                    tableName: 'عملاء خبير التجميل',
+                                    rPadding: 50,
+                                    beauticianData: mainController.beauticianUserData.isEmpty ? [] : mainController.beauticianUserData,
+                                    isSalon: false,
+                                  ),
+                                ],
                               ),
-                              //  User Table Beauty Expert*/
-                              UserTable(
-                                tableName: 'عملاء خبير التجميل',
-                                rPadding: 50,
-                                beauticianData: mainController.beauticianUserData.isEmpty ? [] : mainController.beauticianUserData,
-                                isSalon: false,
-                              ),
+                              20.horizontalSpace,
+                              //  ************ Added By */
+                              AddedBy(
+                                salonData: mainController.addedBy,
+                              ).onlyPadding(tPadding: 50),
                             ],
                           ),
-                          20.horizontalSpace,
-                          //  ************ Added By */
-                          AddedBy(
-                            salonData: mainController.addedBy,
-                          ).onlyPadding(tPadding: 50),
+                          50.verticalSpace
                         ],
                       ),
-                      50.verticalSpace
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        }),
+              );
+            }),
       ),
     );
   }

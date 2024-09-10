@@ -1,4 +1,5 @@
 import 'package:beauty_solution_web/features/main_page/controller/main_controller.dart';
+import 'package:beauty_solution_web/features/user_details/controller/user_controller.dart';
 import 'package:beauty_solution_web/resource/color_manager.dart';
 import 'package:beauty_solution_web/utils/app_utils/extentions.dart';
 import 'package:beauty_solution_web/widgets/custom_button.dart';
@@ -14,9 +15,9 @@ class InviteToContact extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MainController>(builder: (mainController) {
+    return GetBuilder<UserController>(builder: (userController) {
       return Form(
-        key: mainController.inviteToContractFormKey,
+        key: userController.inviteToContractFormKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +25,7 @@ class InviteToContact extends StatelessWidget {
             //************ Close the POP-UP */
             IconButton(
                 onPressed: () {
-                  mainController.changeInviteToContract();
+                  userController.changeInviteToContract();
                 },
                 icon: Icon(
                   Icons.close,
@@ -36,7 +37,7 @@ class InviteToContact extends StatelessWidget {
               title: 'البريد الإلكتروني',
               hintText: 'البريد الإلكتروني',
               isRequired: false,
-              controller: mainController.userEmailAddressController,
+              controller: userController.userEmailAddressController,
               fillColor: ColorManager.neutral200,
             ).horizontalPadding(50),
             //************ Edit contract percentage */
@@ -44,7 +45,7 @@ class InviteToContact extends StatelessWidget {
               title: 'نسبة العقد',
               hintText: 'نسبة العقد',
               isRequired: true,
-              controller: mainController.userContractPercentageController,
+              controller: userController.userContractPercentageController,
               fillColor: ColorManager.neutral200,
               type: TextInputType.number,
             ).horizontalPadding(50),
@@ -60,9 +61,9 @@ class InviteToContact extends StatelessWidget {
                   loading: false,
                   paddingVertical: 20.w,
                   onTap: () async {
-                    if (mainController.inviteToContractFormKey.currentState!.validate()) {
-                      mainController.inviteToContractFormKey.currentState!.save();
-                      await mainController.editUserData(id,isSalon);
+                    if (userController.inviteToContractFormKey.currentState!.validate()) {
+                      userController.inviteToContractFormKey.currentState!.save();
+                      await userController.editUserData(id,isSalon);
                     }
                   },
                 ),

@@ -4,9 +4,11 @@ class EndPoints {
 
 //**************** salon data *****************/
   static const String getsalonData = 'salons';
+  static const String getSalonDataByID = 'Salons/GetSalon?id=';
 
   //**************** Beautician *****************/
   static const String getBeautician = 'beauticians';
+  static const String getBeauticianById = 'Beauticians/GetBeautician?id=';
 
   //**************** PDF file *****************/
   static const String getPdfFile = 'Pdf/GenerateAgreementPdf';

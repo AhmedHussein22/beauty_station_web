@@ -1,5 +1,5 @@
-import 'package:beauty_solution_web/features/main_page/data/users_beautician_data.dart';
-import 'package:beauty_solution_web/features/main_page/data/users_salon_data.dart';
+import 'package:beauty_solution_web/features/user_details/data/beauticalModel.dart';
+import 'package:beauty_solution_web/features/user_details/data/salonModel.dart';
 import 'package:beauty_solution_web/features/user_details/view/widgets/custome_data_view.dart';
 import 'package:beauty_solution_web/resource/color_manager.dart';
 import 'package:beauty_solution_web/resource/font_weight_manger.dart';
@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddedBy extends StatelessWidget {
-  final SalonUserData salonUserData;
-  final BeauticianUserData beauticianUserData;
+  final SalonsModel salonUserData;
+  final BeauticiansModel beauticianUserData;
   final bool isSalon;
   const AddedBy({
     super.key,
@@ -48,9 +48,7 @@ class AddedBy extends StatelessWidget {
                     //************ Added By Name */
                     CustomeDataView(
                       title: 'اسم المندوب',
-                      data: isSalon
-                          ? salonUserData.registeredBy ?? 'غير معروف'
-                          : beauticianUserData.registeredBy ?? 'غير معروف',
+                      data: isSalon ? salonUserData.registeredBy ?? 'غير معروف' : beauticianUserData.registeredBy ?? 'غير معروف',
                       icon: Icons.person,
                       isLink: false,
                       isSelectable: false,
@@ -58,9 +56,7 @@ class AddedBy extends StatelessWidget {
                     //************ Added By Phone */
                     CustomeDataView(
                       title: 'رقم الجوال',
-                      data: isSalon
-                          ? salonUserData.sellerMobile ?? 'غير معروف'
-                          : beauticianUserData.sellerMobile ?? 'غير معروف',
+                      data: isSalon ? salonUserData.sellerMobile ?? 'غير معروف' : beauticianUserData.sellerMobile ?? 'غير معروف',
                       icon: Icons.phone,
                       isLink: false,
                       isSelectable: false,
@@ -68,10 +64,7 @@ class AddedBy extends StatelessWidget {
                     //************ Added By Date */
                     CustomeDataView(
                       title: 'التاريخ',
-                      data: isSalon
-                          ? salonUserData.sellerRegistrationDate ?? 'غير معروف'
-                          : beauticianUserData.sellerRegistrationDate ??
-                              'غير معروف',
+                      data: isSalon ? salonUserData.sellerRegistrationDate ?? 'غير معروف' : beauticianUserData.sellerRegistrationDate ?? 'غير معروف',
                       icon: Icons.date_range,
                       isLink: false,
                       isSelectable: false,

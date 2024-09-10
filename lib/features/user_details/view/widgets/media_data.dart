@@ -5,6 +5,8 @@ import 'dart:html' as html;
 import 'package:any_link_preview/any_link_preview.dart';
 import 'package:beauty_solution_web/features/main_page/data/users_beautician_data.dart';
 import 'package:beauty_solution_web/features/main_page/data/users_salon_data.dart';
+import 'package:beauty_solution_web/features/user_details/data/beauticalModel.dart';
+import 'package:beauty_solution_web/features/user_details/data/salonModel.dart';
 import 'package:beauty_solution_web/resource/color_manager.dart';
 import 'package:beauty_solution_web/resource/font_weight_manger.dart';
 import 'package:beauty_solution_web/services/api/end_points.dart';
@@ -15,8 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MediaData extends StatelessWidget {
-  final SalonUserData salonUserData;
-  final BeauticianUserData beauticianUserData;
+  final SalonsModel salonUserData;
+  final BeauticiansModel beauticianUserData;
   final bool isSalon;
 
   const MediaData({

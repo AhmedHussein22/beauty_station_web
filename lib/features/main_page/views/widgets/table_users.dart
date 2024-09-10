@@ -44,7 +44,7 @@ class _DataForTableState extends State<DataForTable> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.beamToNamed('/UserDetails/${widget.name}-${widget.index}-${widget.isSalon ? '1' : '0'}');
+        context.beamToNamed('/UserDetails/${widget.name}-${widget.id}-${widget.isSalon ? '1' : '0'}');
       },
       onHover: _onhover,
       child: Row(children: [

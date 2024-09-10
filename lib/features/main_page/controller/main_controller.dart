@@ -1,8 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:html' as html;
-
-import 'package:beamer/beamer.dart';
 import 'package:beauty_solution_web/features/main_page/data/users_beautician_data.dart';
 import 'package:beauty_solution_web/features/main_page/data/users_salon_data.dart';
 import 'package:beauty_solution_web/features/main_page/repositories/main_repository.dart';
@@ -16,8 +13,6 @@ import 'package:get/get.dart';
 class MainController extends GetxController {
   List<SalonUserData> salonUserData = [];
   List<BeauticianUserData> beauticianUserData = [];
-  SalonUserData salonUser = SalonUserData();
-  BeauticianUserData beauticianUser = BeauticianUserData();
   List<ChartData> cities = [
     ChartData(1, 'الرياض', 0, ColorManager.mainColor),
     ChartData(2, 'جدة', 0, ColorManager.secondaryColor),
@@ -41,27 +36,17 @@ class MainController extends GetxController {
     ChartData(20, 'سكاكا', 0, ColorManager.mainColor),
   ];
   List<AddedByModel> addedBy = [];
-  SalonUserData emptySalonUserData = SalonUserData();
-  BeauticianUserData emptyBeauticianUserData = BeauticianUserData();
   TextEditingController salonSearchController = TextEditingController();
   TextEditingController beauticianSearchController = TextEditingController();
-  TextEditingController userEmailAddressController = TextEditingController();
-  TextEditingController userContractPercentageController = TextEditingController();
-  bool inviteToContract = false;
-  final GlobalKey<FormState> inviteToContractFormKey = GlobalKey<FormState>();
-  bool deletingUser = false;
+  int pageforSlaon = 1;
+  int pageforBeauty = 1;
 
-  void printInviteToContract() {
-    AppLogs.infoLog('Invite to contract value before ############### $inviteToContract');
-  }
-
-  //***** Change invite to contract value */
-  void changeInviteToContract() {
-    AppLogs.infoLog('Invite to contract value before ############### $inviteToContract');
-    inviteToContract = !inviteToContract;
+  //********* Empty user data */
+  void clearUserData() {
+    salonUserData.clear();
+    beauticianUserData.clear();
     update();
   }
-
 //******* handling the values for cities for each salon and bueaty */
   Future<void> getCityData() async {
     for (final city in cities) {
@@ -92,13 +77,15 @@ class MainController extends GetxController {
     update();
   }
 
-//******* */ fetch salon users from api *****************/
-  Future<void> fetchSalonUsers(filter, page) async {
+//************ fetch salon users from api after search */
+  Future<void> fetchSalonUsersForSearch({
+    filter,
+  }) async {
     try {
-      final response = await MainRepository().getSalonData(pageNumber: page, pageSize: 10, filter: filter, asc: '');
+      final response = await MainRepository().getSalonData(pageNumber: 1, pageSize: 100, filter: filter, asc: '');
       if (response.status == ApiStatus.success) {
-        final salonUser = SalonUsers.fromJson(response.data);
-        salonUserData.addAll(salonUser.data!);
+        salonUserData = SalonUsers.fromJson(response.data).data!;
+
         update();
         await getCityData();
         await getAddedByData();
@@ -108,37 +95,36 @@ class MainController extends GetxController {
     }
   }
 
-  //******************** Delete user *********/
-  Future<void> deleteUser(String id, bool isSalon, BuildContext context) async {
+//******* */ fetch salon users from api *****************/
+  Future<void> fetchSalonUsers({filter, int? page}) async {
     try {
-      deletingUser = true;
-      update();
-      final response = await MainRepository().deleteUser(id, isSalon);
+      final response = await MainRepository().getSalonData(pageNumber: page ?? pageforSlaon, pageSize: 30, filter: filter, asc: '');
       if (response.status == ApiStatus.success) {
-        Get.delete<MainController>();
-        context.beamToNamed('/Home');
-        deletingUser = false;
-        Get.put(MainController());
+        final salonUser = SalonUsers.fromJson(response.data);
+        salonUserData.addAll(salonUser.data!);
+        AppLogs.infoLog('before pageforSlaon $pageforSlaon');
+        pageforSlaon = pageforSlaon + 1;
+        AppLogs.infoLog('pageforSlaon $pageforSlaon');
         update();
+        await getCityData();
+        await getAddedByData();
       } else {}
     } catch (e) {
-      deletingUser = false;
-      update();
       //add catch error
     }
   }
 
-  //******* */ Edit user Date *****************/
-  Future<void> editUserData(String id, bool isSalon) async {
+//************ fetch Beauticians users from api after search */
+  Future<void> fetchBeauticianUsersForSearch({filter}) async {
     try {
-      changeInviteToContract();
-      final response = await MainRepository().editUserData(id, userEmailAddressController.text, double.parse(userContractPercentageController.text), isSalon);
-      AppLogs.infoLog('Edit user state ******************** ${response.status}');
+      final response = await MainRepository().getBeauticianData(pageNumber: 1, pageSize: 100, filter: filter, asc: '');
+      AppLogs.infoLog('Beautician state ******************** ${response.status}');
       if (response.status == ApiStatus.success) {
-        AppLogs.infoLog('Edit user state ******************** ${response.status}');
-        html.window.location.reload();
-
+        beauticianUserData = BeauticiansUsers.fromJson(response.data).data!;
+        AppLogs.infoLog('Beautician Data ############### $beauticianUserData');
         update();
+        await getCityData();
+        await getAddedByData();
       } else {}
     } catch (e) {
       //add catch error
@@ -146,13 +132,14 @@ class MainController extends GetxController {
   }
 
 //******* */ fetch Beauticians users from api *****************/
-  Future<void> fetchBeauticianUsers(filter, page) async {
+  Future<void> fetchBeauticianUsers({filter, int? page}) async {
     try {
-      final response = await MainRepository().getBeauticianData(pageNumber: page, pageSize: 10, filter: filter, asc: '');
+      final response = await MainRepository().getBeauticianData(pageNumber: page ?? pageforBeauty, pageSize: 30, filter: filter, asc: '');
       AppLogs.infoLog('Beautician state ******************** ${response.status}');
       if (response.status == ApiStatus.success) {
         final beauticianData = BeauticiansUsers.fromJson(response.data);
         beauticianUserData.addAll(beauticianData.data!);
+        pageforBeauty = pageforBeauty + 1;
         AppLogs.infoLog('Beautician Data ############### ${beauticianData.data}');
         update();
         await getCityData();
@@ -160,51 +147,6 @@ class MainController extends GetxController {
       } else {}
     } catch (e) {
       //add catch error
-    }
-  }
-
-  @override
-  void onInit() async {
-    AppLogs.infoLog('Main Controller Init called');
-    await fetchSalonUsers('', 1);
-    await fetchBeauticianUsers('', 1);
-    super.onInit();
-  }
-
-  //******* */ resend contract for salon  *****************/
-  Future<void> resendContract(String id, bool isSalon) async {
-    try {
-      final response = await MainRepository().resendContractSalon(id, isSalon);
-      if (response.status == ApiStatus.success) {
-        Get.showSnackbar(const GetSnackBar(
-          message: 'تم إعادة إرسال بنجاح',
-          duration: Duration(seconds: 2),
-        ));
-      } else {
-        // Get.showSnackbar(GetSnackBar(
-        //   message: response.message,
-        //   duration: const Duration(seconds: 2),
-        // ));
-      }
-    } catch (e) {
-      // Get.showSnackbar(GetSnackBar(
-      //   message: e.toString(),
-      //   duration: const Duration(seconds: 2),
-      // ));
-    }
-  }
-
-  //******* */ resend contract from SMS  *****************/
-  Future<void> resendContractSMS(String phone, String iD, String message) async {
-    try {
-      final response = await MainRepository().resendContractSalonSMS(phone, iD, message);
-      if (response.status == ApiStatus.success) {
-        AppLogs.infoLog('SMS sent successfully');
-      } else {
-        AppLogs.errorLog('SMS not sent');
-      }
-    } catch (e) {
-      AppLogs.errorLog('SMS not sent'); 
     }
   }
 }
