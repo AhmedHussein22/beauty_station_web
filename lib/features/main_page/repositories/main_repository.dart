@@ -36,9 +36,9 @@ class MainRepository {
   }
 
   //*************** resend contract for salon SMS *****************/
-  Future<ApiResponseModel> resendContractSalonSMS(String phone, String iD, String message) async {
+  Future<ApiResponseModel> resendContractSalonSMS(String phone, String iD) async {
     return await ApiService().postData(
-      '${EndPoints.resendContractSalonSMS}$phone&text=$message',
+      '${EndPoints.resendContractSalonSMS}$phone&param=$iD-$phone',
       {},
     );
   }
@@ -72,6 +72,8 @@ class ApiService extends GetConnect {
         );
       } else {
         AppLogs.errorLog('error getData');
+        AppLogs.errorLog(data.toString());
+
         return ApiResponseModel(
           status: ApiStatus.error,
           data: data,
@@ -85,69 +87,89 @@ class ApiService extends GetConnect {
 
   //******* Function to post data from an endpoint */
   Future<ApiResponseModel> postData(String endpoint, Map<String, dynamic> dataBody) async {
-    final response = await post('${EndPoints.baseUrl}$endpoint', dataBody);
-    AppLogs.debugLog("statusCode ${response.statusCode}");
-    final String stateCode = response.body['statusCode'].toString();
-    final data = response.body;
-    AppLogs.infoLog('statusCode ${response.statusCode}');
-    if (response.statusCode == 200 || stateCode.startsWith('2')) {
-      AppLogs.successLog(data.toString());
-      return ApiResponseModel(
-        status: ApiStatus.success,
-        data: data,
-      );
-    } else {
-      AppLogs.errorLog('error getData');
-      return ApiResponseModel(
-        status: ApiStatus.error,
-        data: data,
-      );
+    try {
+      final response = await post('${EndPoints.baseUrl}$endpoint', dataBody);
+      AppLogs.debugLog("statusCode ${response.statusCode}");
+      final String stateCode = response.body['statusCode'].toString();
+      final data = response.body;
+
+      AppLogs.infoLog('statusCode ${response.statusCode}');
+      if (response.statusCode == 200 || stateCode.startsWith('2')) {
+        AppLogs.successLog('Response ${data.toString()}');
+        return ApiResponseModel(
+          status: ApiStatus.success,
+          data: data,
+        );
+      } else {
+        AppLogs.errorLog('error getData');
+        AppLogs.errorLog("Response ${data.toString()}");
+
+        return ApiResponseModel(
+          status: ApiStatus.error,
+          data: data,
+        );
+      }
+    } catch (e) {
+      AppLogs.errorLog('$e');
+      throw Exception('Failed to load data: $e');
     }
   }
 
   //******* Function to delete data to an endpoint */
   Future<ApiResponseModel> deleteData(String endpoint) async {
-    final response = await delete('${EndPoints.baseUrl}$endpoint');
-    AppLogs.debugLog("${response.statusCode}", 'statusCode');
-    final String stateCode = response.body['statusCode'].toString();
-    final data = response.body;
-    AppLogs.infoLog('${response.statusCode}');
-    if (response.statusCode == 200 || stateCode.startsWith('2')) {
-      AppLogs.successLog(data.toString());
-      return ApiResponseModel(
-        status: ApiStatus.success,
-        data: data,
-      );
-    } else {
-      AppLogs.errorLog('error getData');
-      return ApiResponseModel(
-        status: ApiStatus.error,
-        data: data,
-      );
+    try {
+      final response = await delete('${EndPoints.baseUrl}$endpoint');
+      AppLogs.debugLog("${response.statusCode}", 'statusCode');
+      final String stateCode = response.body['statusCode'].toString();
+      final data = response.body;
+      AppLogs.infoLog('${response.statusCode}');
+      if (response.statusCode == 200 || stateCode.startsWith('2')) {
+        AppLogs.successLog(data.toString());
+        return ApiResponseModel(
+          status: ApiStatus.success,
+          data: data,
+        );
+      } else {
+        AppLogs.errorLog('error getData');
+        AppLogs.errorLog(data.toString());
+        return ApiResponseModel(
+          status: ApiStatus.error,
+          data: data,
+        );
+      }
+    } catch (e) {
+      AppLogs.errorLog('$e');
+      throw Exception('Failed to load data: $e');
     }
   }
 
   //******* Function to patch data from an endpoint */
   Future<ApiResponseModel> patchData(String endpoint, Map<String, dynamic> dataBody) async {
     // Use the PATCH method
-    AppLogs.debugLog('patch API  ${EndPoints.baseUrl}$endpoint');
-    final response = await patch('${EndPoints.baseUrl}$endpoint', dataBody);
-    AppLogs.debugLog("statusCode ${response.status}");
-    final String stateCode = response.body['statusCode'].toString();
-    final data = response.body;
-    AppLogs.infoLog('${response.statusCode}');
-    if (response.statusCode == 200 || stateCode.startsWith('2')) {
-      AppLogs.successLog(data.toString());
-      return ApiResponseModel(
-        status: ApiStatus.success,
-        data: data,
-      );
-    } else {
-      AppLogs.errorLog('error getData');
-      return ApiResponseModel(
-        status: ApiStatus.error,
-        data: data,
-      );
+    try {
+      AppLogs.debugLog('patch API  ${EndPoints.baseUrl}$endpoint');
+      final response = await patch('${EndPoints.baseUrl}$endpoint', dataBody);
+      AppLogs.debugLog("statusCode ${response.status}");
+      final String stateCode = response.body['statusCode'].toString();
+      final data = response.body;
+      AppLogs.infoLog('${response.statusCode}');
+      if (response.statusCode == 200 || stateCode.startsWith('2')) {
+        AppLogs.successLog(data.toString());
+        return ApiResponseModel(
+          status: ApiStatus.success,
+          data: data,
+        );
+      } else {
+        AppLogs.errorLog('error getData');
+        AppLogs.errorLog(data.toString());
+        return ApiResponseModel(
+          status: ApiStatus.error,
+          data: data,
+        );
+      }
+    } catch (e) {
+      AppLogs.errorLog('$e');
+      throw Exception('Failed to load data: $e');
     }
   }
 }

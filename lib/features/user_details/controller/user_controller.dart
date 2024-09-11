@@ -22,6 +22,7 @@ class UserController extends GetxController {
   bool inviteToContract = false;
   final GlobalKey<FormState> inviteToContractFormKey = GlobalKey<FormState>();
   bool deletingUser = false;
+  String sendingSMS = 'رساله نصيه', sendingMail = 'ارسال بريد';
 
   //************ Get salon user data */
   Future<void> getSalonUserData(int id) async {
@@ -105,37 +106,70 @@ class UserController extends GetxController {
   //******* */ resend contract for salon  *****************/
   Future<void> resendContract(String id, bool isSalon) async {
     try {
+      sendingMail = 'جاري الارسال';
+      update();
       final response = await MainRepository().resendContractSalon(id, isSalon);
       if (response.status == ApiStatus.success) {
-        Get.showSnackbar(const GetSnackBar(
-          message: 'تم إعادة إرسال بنجاح',
-          duration: Duration(seconds: 2),
-        ));
+        sendingMail = 'تم الارسال';
+        update();
+        Future.delayed(const Duration(seconds: 1), () {
+          sendingMail = 'ارسال بريد';
+          update();
+        });
+        AppLogs.infoLog('SMS sent successfully');
       } else {
-        // Get.showSnackbar(GetSnackBar(
-        //   message: response.message,
-        //   duration: const Duration(seconds: 2),
-        // ));
+        sendingMail = 'حاول مره اخري';
+        update();
+        Future.delayed(const Duration(seconds: 1), () {
+          sendingMail = 'ارسال بريد';
+          update();
+        });
+        AppLogs.errorLog('SMS not sent ${response.message}');
       }
     } catch (e) {
-      // Get.showSnackbar(GetSnackBar(
-      //   message: e.toString(),
-      //   duration: const Duration(seconds: 2),
-      // ));
+      sendingMail = 'حاول مره اخري';
+      update();
+      Future.delayed(const Duration(seconds: 1), () {
+        sendingMail = 'ارسال بريد';
+        update();
+      });
+      update();
+      AppLogs.errorLog('SMS not sent catch ${e.toString()}');
     }
   }
 
   //******* */ resend contract from SMS  *****************/
-  Future<void> resendContractSMS(String phone, String iD, String message) async {
+  Future<void> resendContractSMS(String phone, String iD) async {
     try {
-      final response = await MainRepository().resendContractSalonSMS(phone, iD, message);
+      sendingSMS = 'جاري الارسال';
+      update();
+      final response = await MainRepository().resendContractSalonSMS(phone, iD);
       if (response.status == ApiStatus.success) {
+        sendingSMS = 'تم الارسال';
+        update();
+        Future.delayed(const Duration(seconds: 1), () {
+          sendingSMS = 'رساله نصيه';
+          update();
+        });
         AppLogs.infoLog('SMS sent successfully');
       } else {
-        AppLogs.errorLog('SMS not sent');
+        sendingSMS = 'حاول مره اخري';
+        update();
+        Future.delayed(const Duration(seconds: 1), () {
+          sendingSMS = 'رساله نصيه';
+          update();
+        });
+        AppLogs.errorLog('SMS not sent ${response.message}');
       }
     } catch (e) {
-      AppLogs.errorLog('SMS not sent');
+      sendingSMS = 'حاول مره اخري';
+      update();
+      Future.delayed(const Duration(seconds: 1), () {
+        sendingSMS = 'رساله نصيه';
+        update();
+      });
+      update();
+      AppLogs.errorLog('SMS not sent catch ${e.toString()}');
     }
   }
 }

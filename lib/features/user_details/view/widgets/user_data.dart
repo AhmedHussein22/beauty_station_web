@@ -176,9 +176,9 @@ class UserData extends StatelessWidget {
                                 AppLogs.infoLog('****** Call resend Contract');
                                 userController.resendContract(isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(), isSalon);
                               },
-                              child: const SizedBox(
+                              child: SizedBox(
                                 child: CustomText(
-                                  title: 'الاميل',
+                                  title: userController.sendingMail,
                                   underLine: true,
                                 ),
                               ),
@@ -192,14 +192,11 @@ class UserData extends StatelessWidget {
                                 await userController.resendContractSMS(
                                   isSalon ? salonUserData.mobileNumber.toString() : beauticianUserData.mobileNumber.toString(),
                                   isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(),
-                                  'Beauty Station 1 https://ayamohamed99.github.io/SMS-Message-View/%23/Home/${isSalon ? salonUserData.id : beauticianUserData.id}-${isSalon ? salonUserData.mobileNumber : beauticianUserData.mobileNumber} ${isSalon ? salonUserData.salonName : beauticianUserData.beauticianName}',
                                 );
-                                AppLogs.infoLog(
-                                    '********  https://ayamohamed99.github.io/SMS-Message-View/#/Home/${isSalon ? salonUserData.id : beauticianUserData.id}-${isSalon ? salonUserData.mobileNumber : beauticianUserData.mobileNumber} ${isSalon ? salonUserData.salonName : beauticianUserData.beauticianName}');
                               },
-                              child: const SizedBox(
+                              child: SizedBox(
                                 child: CustomText(
-                                  title: 'رساله نصيه',
+                                  title: userController.sendingSMS,
                                   underLine: true,
                                 ),
                               ),
