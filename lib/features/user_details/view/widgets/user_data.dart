@@ -180,6 +180,10 @@ class UserData extends StatelessWidget {
                                 child: CustomText(
                                   title: userController.sendingMail,
                                   underLine: true,
+                                  textStyle: TextStyle(
+                                    fontSize: 15,
+                                    color: userController.sendingMail == 'تم الارسال' ? ColorManager.otherGreen0 : ColorManager.mainColor,
+                                  ),
                                 ),
                               ),
                             ),
@@ -188,7 +192,6 @@ class UserData extends StatelessWidget {
                               mouseCursor: WidgetStateMouseCursor.clickable,
                               onTap: () async {
                                 AppLogs.infoLog('****** Call resend Contract');
-
                                 await userController.resendContractSMS(
                                   isSalon ? salonUserData.mobileNumber.toString() : beauticianUserData.mobileNumber.toString(),
                                   isSalon ? salonUserData.id.toString() : beauticianUserData.id.toString(),
@@ -198,6 +201,10 @@ class UserData extends StatelessWidget {
                                 child: CustomText(
                                   title: userController.sendingSMS,
                                   underLine: true,
+                                  textStyle: TextStyle(
+                                    fontSize: 15,
+                                    color: userController.sendingSMS == 'تم الارسال' ? ColorManager.otherGreen0 : ColorManager.mainColor,
+                                  ),
                                 ),
                               ),
                             ),

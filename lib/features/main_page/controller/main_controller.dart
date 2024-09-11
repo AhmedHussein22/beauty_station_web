@@ -40,6 +40,8 @@ class MainController extends GetxController {
   TextEditingController beauticianSearchController = TextEditingController();
   int pageforSlaon = 1;
   int pageforBeauty = 1;
+  bool fetchSalon = false;
+  bool fetchBeauty = false;
 
   //********* Empty user data */
   void clearUserData() {
@@ -47,6 +49,7 @@ class MainController extends GetxController {
     beauticianUserData.clear();
     update();
   }
+
 //******* handling the values for cities for each salon and bueaty */
   Future<void> getCityData() async {
     for (final city in cities) {
@@ -86,7 +89,6 @@ class MainController extends GetxController {
       if (response.status == ApiStatus.success) {
         salonUserData = SalonUsers.fromJson(response.data).data!;
 
-        update();
         await getCityData();
         await getAddedByData();
       } else {}
@@ -98,6 +100,8 @@ class MainController extends GetxController {
 //******* */ fetch salon users from api *****************/
   Future<void> fetchSalonUsers({filter, int? page}) async {
     try {
+      fetchSalon = false;
+      update();
       final response = await MainRepository().getSalonData(pageNumber: page ?? pageforSlaon, pageSize: 30, filter: filter, asc: '');
       if (response.status == ApiStatus.success) {
         final salonUser = SalonUsers.fromJson(response.data);
@@ -105,11 +109,19 @@ class MainController extends GetxController {
         AppLogs.infoLog('before pageforSlaon $pageforSlaon');
         pageforSlaon = pageforSlaon + 1;
         AppLogs.infoLog('pageforSlaon $pageforSlaon');
-        update();
         await getCityData();
         await getAddedByData();
-      } else {}
+        fetchSalon = true;
+        AppLogs.infoLog('Salon Data ######### $fetchSalon ###### ');
+
+        update();
+      } else {
+        fetchSalon = true;
+        update();
+      }
     } catch (e) {
+      fetchSalon = true;
+      update();
       //add catch error
     }
   }
@@ -134,18 +146,27 @@ class MainController extends GetxController {
 //******* */ fetch Beauticians users from api *****************/
   Future<void> fetchBeauticianUsers({filter, int? page}) async {
     try {
+      fetchBeauty = false;
+      update();
       final response = await MainRepository().getBeauticianData(pageNumber: page ?? pageforBeauty, pageSize: 30, filter: filter, asc: '');
       AppLogs.infoLog('Beautician state ******************** ${response.status}');
       if (response.status == ApiStatus.success) {
         final beauticianData = BeauticiansUsers.fromJson(response.data);
         beauticianUserData.addAll(beauticianData.data!);
         pageforBeauty = pageforBeauty + 1;
-        AppLogs.infoLog('Beautician Data ############### ${beauticianData.data}');
+        fetchBeauty = true;
+        AppLogs.infoLog('Beautician Data ######### $fetchBeauty ###### ');
+
         update();
         await getCityData();
         await getAddedByData();
-      } else {}
+      } else {
+        fetchBeauty = true;
+        update();
+      }
     } catch (e) {
+      fetchBeauty = true;
+      update();
       //add catch error
     }
   }

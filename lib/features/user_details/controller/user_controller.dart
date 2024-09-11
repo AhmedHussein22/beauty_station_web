@@ -112,29 +112,29 @@ class UserController extends GetxController {
       if (response.status == ApiStatus.success) {
         sendingMail = 'تم الارسال';
         update();
-        Future.delayed(const Duration(seconds: 1), () {
+        Future.delayed(const Duration(seconds: 2), () {
           sendingMail = 'ارسال بريد';
           update();
         });
-        AppLogs.infoLog('SMS sent successfully');
+        AppLogs.infoLog('Mail sent successfully');
       } else {
         sendingMail = 'حاول مره اخري';
         update();
-        Future.delayed(const Duration(seconds: 1), () {
+        Future.delayed(const Duration(seconds: 2), () {
           sendingMail = 'ارسال بريد';
           update();
         });
-        AppLogs.errorLog('SMS not sent ${response.message}');
+        AppLogs.errorLog('Mail not sent ${response.message}');
       }
     } catch (e) {
       sendingMail = 'حاول مره اخري';
       update();
-      Future.delayed(const Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 2), () {
         sendingMail = 'ارسال بريد';
         update();
       });
       update();
-      AppLogs.errorLog('SMS not sent catch ${e.toString()}');
+      AppLogs.errorLog('Mail not sent catch ${e.toString()}');
     }
   }
 
@@ -147,7 +147,7 @@ class UserController extends GetxController {
       if (response.status == ApiStatus.success) {
         sendingSMS = 'تم الارسال';
         update();
-        Future.delayed(const Duration(seconds: 1), () {
+        Future.delayed(const Duration(seconds: 2), () {
           sendingSMS = 'رساله نصيه';
           update();
         });
@@ -155,7 +155,7 @@ class UserController extends GetxController {
       } else {
         sendingSMS = 'حاول مره اخري';
         update();
-        Future.delayed(const Duration(seconds: 1), () {
+        Future.delayed(const Duration(seconds: 2), () {
           sendingSMS = 'رساله نصيه';
           update();
         });
@@ -164,7 +164,7 @@ class UserController extends GetxController {
     } catch (e) {
       sendingSMS = 'حاول مره اخري';
       update();
-      Future.delayed(const Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 2), () {
         sendingSMS = 'رساله نصيه';
         update();
       });
