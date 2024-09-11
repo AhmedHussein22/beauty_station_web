@@ -9,12 +9,12 @@ class VerifyBeforeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: ScreenUtil().screenWidth,
+        //height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(ScreenUtil().screenWidth > 300 && ScreenUtil().screenWidth < 900 ? ImageAssets.welcomeBg1M : ImageAssets.welcomeBg1),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
         ),
       ),

@@ -1,6 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:beauty_solution_web/config/theme/app_theme.dart';
-import 'package:beauty_solution_web/features/verify_screen/verify_before_screen.dart';
+import 'package:beauty_solution_web/features/main_page/views/main_page.dart';
+import 'package:beauty_solution_web/features/user_details/view/user_details_view.dart';
+import 'package:beauty_solution_web/features/welcome_screen/welcome_screen.dart';
 import 'package:beauty_solution_web/utils/app_utils/app_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +23,7 @@ class BeautyStationAppState extends State<BeautyStationApp> {
   final routerDelegate = BeamerDelegate(
       transitionDelegate: const NoAnimationTransitionDelegate(),
       beamBackTransitionDelegate: const NoAnimationTransitionDelegate(),
-      initialPath: '/VerifiedBefore',
+      initialPath: '/Login',
       buildListener: (context, beamerDelegate) async {
         AppLogs.infoLog('Beamer buildListener: ${beamerDelegate.currentPages[0].name}');
       },
@@ -34,41 +36,41 @@ class BeautyStationAppState extends State<BeautyStationApp> {
         //     child: VerifyScreen(),
         //   );
         // },
-        '/VerifiedBefore': (context, state, data) {
+        // '/VerifiedBefore': (context, state, data) {
+        //   return const BeamPage(
+        //     title: 'VerifiedBefore',
+        //     key: ValueKey('VerifiedBefore'),
+        //     name: 'VerifiedBefore',
+        //     child: VerifyBeforeScreen(),
+        //   );
+        // },
+        '/Home': (context, state, data) {
           return const BeamPage(
-            title: 'VerifiedBefore',
-            key: ValueKey('VerifiedBefore'),
-            name: 'VerifiedBefore',
-            child: VerifyBeforeScreen(),
+            title: 'Home',
+            key: ValueKey('home'),
+            name: 'home',
+            child: MainPage(),
           );
         },
-        // '/Home': (context, state, data) {
-        //   return const BeamPage(
-        //     title: 'Home',
-        //     key: ValueKey('home'),
-        //     name: 'home',
-        //     child: MainPage(),
-        //   );
-        // },
-        // '/UserDetails/:userName': (context, state, data) {
-        //   final userName = state.pathParameters['userName']!;
-        //   // final info = (data as Project);
-        //   return BeamPage(
-        //     title: userName,
-        //     name: userName,
-        //     key: ValueKey('Projects_Page/$userName'),
-        //     type: BeamPageType.scaleTransition,
-        //     child: const UserDetailsView(),
-        //   );
-        // },
-        // '/Login': (context, state, data) {
-        //   return const BeamPage(
-        //     title: 'Login',
-        //     key: ValueKey('Login'),
-        //     name: 'Login',
-        //     child: WelcomeScreen(),
-        //   );
-        // },
+        '/UserDetails/:userName': (context, state, data) {
+          final userName = state.pathParameters['userName']!;
+          // final info = (data as Project);
+          return BeamPage(
+            title: userName,
+            name: userName,
+            key: ValueKey('Projects_Page/$userName'),
+            type: BeamPageType.scaleTransition,
+            child: const UserDetailsView(),
+          );
+        },
+        '/Login': (context, state, data) {
+          return const BeamPage(
+            title: 'Login',
+            key: ValueKey('Login'),
+            name: 'Login',
+            child: WelcomeScreen(),
+          );
+        },
       }).call);
 
   @override

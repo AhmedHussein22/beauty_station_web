@@ -1,5 +1,6 @@
 import 'package:beauty_solution_web/resource/assets_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VerifyScreen extends StatelessWidget {
   const VerifyScreen({super.key});
@@ -8,12 +9,14 @@ class VerifyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
+        width: ScreenUtil().screenWidth,
+        //height: 850,
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(ImageAssets.welcomeBg),
-            fit: BoxFit.cover,
+            image: AssetImage(
+              ScreenUtil().screenWidth > 300 && ScreenUtil().screenWidth < 900 ? ImageAssets.welcomeBgM : ImageAssets.welcomeBg,
+            ),
+            fit: BoxFit.fill,
           ),
         ),
       ),
